@@ -27,6 +27,9 @@ namespace Geometry_Bash
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            
+
+
 
             base.Initialize();
         }
@@ -41,6 +44,9 @@ namespace Geometry_Bash
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+
+
+
         }
 
         /// <summary>
@@ -50,6 +56,10 @@ namespace Geometry_Bash
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
+
+
+
+
         }
 
         /// <summary>
@@ -64,6 +74,9 @@ namespace Geometry_Bash
 
             // TODO: Add your update logic here
 
+
+
+
             base.Update(gameTime);
         }
 
@@ -76,7 +89,12 @@ namespace Geometry_Bash
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Add your drawing code here
+            spriteBatch.Begin();
 
+
+
+
+            spriteBatch.End();
             base.Draw(gameTime);
         }
     }
