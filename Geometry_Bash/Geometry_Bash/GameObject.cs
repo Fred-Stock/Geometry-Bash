@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Geometry_Bash
 {
-    class GameObject
-    {
+    class GameObject   //Inherited by Player, Enemy, Collectable
+    {  
+
     }
 }
