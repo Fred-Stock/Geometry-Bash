@@ -24,6 +24,9 @@ namespace Geometry_Bash
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        GameState gamestate = GameState.Menu;
+
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -86,6 +89,41 @@ namespace Geometry_Bash
 
             // TODO: Add your update logic here
 
+            // Menu
+            if (gamestate == GameState.Menu)
+            {
+
+            }
+
+            // Instructions
+            if (gamestate == GameState.Instructions)
+            {
+
+            }
+
+            // Player Selection Screen
+            if (gamestate == GameState.PlayerSelect)
+            {
+
+            }
+
+            // Actual Gameplay
+            if (gamestate == GameState.Game)
+            {
+
+            }
+
+            // Options
+            if (gamestate == GameState.Options)
+            {
+
+            }
+
+            // End Game, when someone wins
+            if (gamestate == GameState.EndGame)
+            {
+
+            }
 
 
 
@@ -103,7 +141,41 @@ namespace Geometry_Bash
             // TODO: Add your drawing code here
             spriteBatch.Begin();
 
+            // Menu
+            if (gamestate == GameState.Menu)
+            {
 
+            }
+
+            // Instructions
+            if (gamestate == GameState.Instructions)
+            {
+
+            }
+
+            // Player Selection Screen
+            if (gamestate == GameState.PlayerSelect)
+            {
+
+            }
+
+            // Actual Gameplay
+            if (gamestate == GameState.Game)
+            {
+
+            }
+
+            // Options
+            if (gamestate == GameState.Options)
+            {
+
+            }
+
+            // End Game, when someone wins
+            if (gamestate == GameState.EndGame)
+            {
+
+            }
 
 
             spriteBatch.End();
