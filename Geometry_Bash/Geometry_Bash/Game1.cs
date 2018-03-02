@@ -4,6 +4,18 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Geometry_Bash
 {
+    // enums for finite state machine
+    enum GameState
+    {
+        Menu,
+        Instructions,
+        PlayerSelect,
+        Game,
+        Options,
+        EndGame
+    }
+
+
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
