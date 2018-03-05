@@ -8,15 +8,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 namespace Geometry_Bash
 {
-    class Geometry
+    class Square //: Player
     {
-        //For creating levels
-
-        private Rectangle size;
-
         
-
-
 
     }
 }
