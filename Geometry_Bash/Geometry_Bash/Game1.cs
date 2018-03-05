@@ -66,9 +66,9 @@ namespace Geometry_Bash
             // TODO: use this.Content to load your game content here
 
             // load character textures
-            squareTexture = Content.Load<Texture2D>("square");
-            circleTexture = Content.Load<Texture2D>("circle");
-            diamondTexture = Content.Load<Texture2D>("diamond");
+            squareTexture = Content.Load<Texture2D>("tempCharSprites//square-diamond");
+            circleTexture = Content.Load<Texture2D>("tempCharSprites//circle");
+            diamondTexture = Content.Load<Texture2D>("tempCharSprites//square-diamond");
 
 
         }

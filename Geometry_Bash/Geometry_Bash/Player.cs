@@ -18,6 +18,12 @@ namespace Geometry_Bash
         protected bool keyAttack1;
         protected bool keyAttack2;
 
+        protected Texture2D sprite;
+        protected Rectangle hitBox;
 
+        public Player(Texture2D texture,  Rectangle sAP) : base(texture, sAP)
+        {
+            
+        }
     }
 }
