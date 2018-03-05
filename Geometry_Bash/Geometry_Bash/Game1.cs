@@ -92,37 +92,58 @@ namespace Geometry_Bash
             // Menu
             if (gamestate == GameState.Menu)
             {
+                // all other code for this state goes here
 
+
+                //if (buttonpressed) { gamestate = GameState.PlayerSelect; }
+                //if (buttonpressed) { gamestate = GameState.Instructions; }
+                //if (buttonpressed) { gamestate = GameState.Options; }
             }
 
             // Instructions
             if (gamestate == GameState.Instructions)
             {
+                // all other code for this state goes here
+                
 
+                //if (buttonpressed) { gamestate = GameState.Menu; }
             }
 
             // Player Selection Screen
             if (gamestate == GameState.PlayerSelect)
             {
+                // All other code for this state goes here
 
+
+                //if (buttonpressed) { gamestate = GameState.Menu; }
+                //if (buttonpressed) { gamestate = GameState.Game; }
             }
 
             // Actual Gameplay
             if (gamestate == GameState.Game)
             {
+                // all other code for this state goes here
 
+
+                //if (character health == 0) { gamestate = GameState.EndGame; }
             }
 
             // Options
             if (gamestate == GameState.Options)
             {
+                // all other code for this state goes here
 
+
+                //if (buttonpressed) { gamestate = GameState.Menu; }
             }
 
             // End Game, when someone wins
             if (gamestate == GameState.EndGame)
             {
+                // all other code for this state goes here
 
+
+                //if (buttonpressed) { gamestate = GameState.Menu; }
             }
 
 
