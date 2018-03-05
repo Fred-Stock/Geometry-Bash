@@ -24,6 +24,11 @@ namespace Geometry_Bash
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
+        // character textures
+        Texture2D squareTexture;
+        Texture2D circleTexture;
+        Texture2D diamondTexture;
+
         GameState gamestate = GameState.Menu;
 
 
@@ -60,6 +65,10 @@ namespace Geometry_Bash
 
             // TODO: use this.Content to load your game content here
 
+            // load character textures
+            squareTexture = Content.Load<Texture2D>("square");
+            circleTexture = Content.Load<Texture2D>("circle");
+            diamondTexture = Content.Load<Texture2D>("diamond");
 
 
         }
