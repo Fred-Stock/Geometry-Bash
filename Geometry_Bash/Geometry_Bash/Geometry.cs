@@ -10,5 +10,13 @@ namespace Geometry_Bash
 {
     class Geometry
     {
+        //For creating levels
+
+        private Rectangle size;
+
+
+
+
+
     }
 }

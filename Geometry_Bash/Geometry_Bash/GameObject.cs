@@ -10,8 +10,8 @@ namespace Geometry_Bash
 {
     class GameObject   //Inherited by Player, Enemy, Collectable
     {
-       private Texture2D texture;
-       private Rectangle sizeAndPosition;
+      protected Texture2D texture;
+      protected Rectangle sizeAndPosition;
 
         public GameObject(Texture2D texture, Rectangle sAP)
         {

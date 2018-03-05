@@ -10,5 +10,18 @@ namespace Geometry_Bash
 {
     class Enemy
     {
+        //For enemies, as well as controlling the diamond's homing shards
+
+
+
+
+
+
+
+
+
+
+
+
     }
 }
