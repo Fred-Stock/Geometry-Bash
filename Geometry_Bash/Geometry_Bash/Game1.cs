@@ -33,6 +33,7 @@ namespace Geometry_Bash
         
         // button textures
         Texture2D yellowButton;
+        Texture2D play;
         Texture2D back;
         Texture2D instructions;
         Texture2D options;
@@ -52,7 +53,7 @@ namespace Geometry_Bash
         Rectangle playButton;
         Rectangle instructionsButton;
         Rectangle optionsButton;
-        Rectangle backButton = new Rectangle(new Point(10, 10), new Point(100, 50));
+        Rectangle backButton;
         #endregion
 
 
@@ -105,6 +106,10 @@ namespace Geometry_Bash
 
             // load button textures
             yellowButton = Content.Load<Texture2D>("Button Sprites//button_yellow");
+            play = Content.Load<Texture2D>("Button Sprites//play_hover");
+            back = Content.Load<Texture2D>("Button Sprites//instructionsBack_hover");
+            instructions = Content.Load<Texture2D>("Button Sprites//instructions_hover");
+            options = Content.Load<Texture2D>("Button Sprites//options_hover");
 
             // screen loads
             mainMenu = Content.Load<Texture2D>("Screens//Main Menu");
@@ -249,6 +254,10 @@ namespace Geometry_Bash
         {
             GraphicsDevice.Clear(Color.DarkViolet);
 
+            MouseState ms;
+            ms = Mouse.GetState();
+            Rectangle mouseLocation = new Rectangle(ms.Position, new Point(5, 5));
+
             // TODO: Add your drawing code here
             spriteBatch.Begin();
 
@@ -268,6 +277,14 @@ namespace Geometry_Bash
                 instructionsButton = new Rectangle(new Point(windowWidth / 2 - standardButtonSize.X / 2, 530), standardButtonSize);
                 optionsButton = new Rectangle(new Point(windowWidth / 2 - standardButtonSize.X / 2, 628), standardButtonSize);
                 backButton = new Rectangle(new Point(33, 628), new Point(186, 60));
+
+                // changes button color if mouse hovers over button
+                if (mouseLocation.Intersects(playButton))
+                { spriteBatch.Draw(play, playButton, Color.White); }
+                if (mouseLocation.Intersects(instructionsButton))
+                { spriteBatch.Draw(instructions, instructionsButton, Color.White); }
+                if (mouseLocation.Intersects(optionsButton))
+                { spriteBatch.Draw(options, optionsButton, Color.White); }
             }
 
             // Instructions
@@ -275,6 +292,10 @@ namespace Geometry_Bash
             {
                 //instructions menu screen
                 spriteBatch.Draw(instructionsMenu, new Rectangle(new Point(0,0), new Point(windowWidth, windowHeight)), Color.White);
+                
+                // changes back button if mouse hovers over
+                if (mouseLocation.Intersects(backButton))
+                { spriteBatch.Draw(back, backButton, Color.White); }
             }
 
             // Player Selection Screen
