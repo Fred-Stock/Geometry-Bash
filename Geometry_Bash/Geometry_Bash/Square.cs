@@ -11,12 +11,21 @@ namespace Geometry_Bash
     class Square : Player
     {
         
-        public Square()
+        public Square(int player, Texture2D texture)
         {
-            keyUp = Keyboard.GetState().IsKeyDown(Keys.W);
-            keyDown = Keyboard.GetState().IsKeyDown(Keys.S);
-            keyLeft = Keyboard.GetState().IsKeyDown(Keys.A);
-            keyRight = Keyboard.GetState().IsKeyDown(Keys.D);
+            if (player == 1)
+            {
+                keyUp = Keyboard.GetState().IsKeyDown(Keys.W);
+                keyDown = Keyboard.GetState().IsKeyDown(Keys.S);
+                keyLeft = Keyboard.GetState().IsKeyDown(Keys.A);
+                keyRight = Keyboard.GetState().IsKeyDown(Keys.D);
+
+                keyAttack1 = Keyboard.GetState().IsKeyDown(Keys.Q);
+                keyAttack2 = Keyboard.GetState().IsKeyDown(Keys.E);
+
+                sprite = 
+                
+            }
 
             //keyAttack1 = Keyboard.GetState().IsKeyDown()
         }
