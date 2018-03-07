@@ -8,15 +8,15 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 namespace Geometry_Bash
 {
-    class Square : Player
+    class Square //: Player
     {
         
         public Square()
         {
-            keyUp = Keyboard.GetState().IsKeyDown(Keys.W);
-            keyDown = Keyboard.GetState().IsKeyDown(Keys.S);
-            keyLeft = Keyboard.GetState().IsKeyDown(Keys.A);
-            keyRight = Keyboard.GetState().IsKeyDown(Keys.D);
+            //keyUp = Keyboard.GetState().IsKeyDown(Keys.W);
+            //keyDown = Keyboard.GetState().IsKeyDown(Keys.S);
+            //keyLeft = Keyboard.GetState().IsKeyDown(Keys.A);
+            //keyRight = Keyboard.GetState().IsKeyDown(Keys.D);
 
             //keyAttack1 = Keyboard.GetState().IsKeyDown()
         }
