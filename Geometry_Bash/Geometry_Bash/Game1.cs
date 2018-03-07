@@ -32,6 +32,12 @@ namespace Geometry_Bash
         
         // button textures
         Texture2D yellowButton;
+        Texture2D back;
+        Texture2D instructions;
+        Texture2D options;
+
+        // character select tiles
+
         #endregion
 
         #region Button Rectangles
@@ -160,8 +166,6 @@ namespace Geometry_Bash
                         gamestate = GameState.Menu;
                     }
                 }
-
-                //if (buttonpressed) { gamestate = GameState.Menu; }
             }
 
             // Player Selection Screen
@@ -177,7 +181,6 @@ namespace Geometry_Bash
                     }
                 }
 
-                //if (buttonpressed) { gamestate = GameState.Menu; }
                 //if (buttonpressed) { gamestate = GameState.Game; }
             }
 
@@ -202,8 +205,6 @@ namespace Geometry_Bash
                         gamestate = GameState.Menu;
                     }
                 }
-
-                //if (buttonpressed) { gamestate = GameState.Menu; }
             }
 
             // End Game, when someone wins
