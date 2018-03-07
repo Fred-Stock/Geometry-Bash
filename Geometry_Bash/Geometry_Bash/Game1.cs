@@ -25,13 +25,17 @@ namespace Geometry_Bash
         SpriteBatch spriteBatch;
 
         #region Textures
-
+        //Character Textures
         Texture2D squareTexture;
         Texture2D circleTexture;
         Texture2D diamondTexture;
-
+        
         // button textures
         Texture2D yellowButton;
+       
+
+        #endregion
+
 
         // button rectangles
         Rectangle playButton = new Rectangle(new Point(280, 260), new Point(250, 60));

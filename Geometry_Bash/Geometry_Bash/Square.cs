@@ -18,6 +18,7 @@ namespace Geometry_Bash
             keyLeft = Keyboard.GetState().IsKeyDown(Keys.A);
             keyRight = Keyboard.GetState().IsKeyDown(Keys.D);
 
+            //keyAttack1 = Keyboard.GetState().IsKeyDown()
         }
 
 
