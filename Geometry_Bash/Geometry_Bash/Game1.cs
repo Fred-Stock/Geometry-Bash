@@ -38,7 +38,9 @@ namespace Geometry_Bash
         Texture2D options;
 
         // character select tiles
-
+        Texture2D squareTile;
+        Texture2D circleTile;
+        Texture2D diamondTile;
         #endregion
 
         #region Button Rectangles
@@ -57,6 +59,9 @@ namespace Geometry_Bash
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            graphics.PreferredBackBufferWidth = 1280;  // set this value to the desired width of your window
+            graphics.PreferredBackBufferHeight = 720;   // set this value to the desired height of your window
+            graphics.ApplyChanges();
         }
 
         /// <summary>
@@ -96,7 +101,6 @@ namespace Geometry_Bash
 
             // load button textures
             yellowButton = Content.Load<Texture2D>("Button Sprites//button_yellow");
-
         }
 
         /// <summary>
@@ -135,7 +139,7 @@ namespace Geometry_Bash
             {
                 // all other code for this state goes here
 
-                // handles button pressing for game states
+                // handles button pressing for game state
                 if (mouseLocation.Intersects(playButton))
                 {
                     if (ms.LeftButton == ButtonState.Pressed)
@@ -164,6 +168,7 @@ namespace Geometry_Bash
             {
                 // all other code for this state goes here
 
+                // handles button pressing for game state
                 if (mouseLocation.Intersects(backButton))
                 {
                     if (ms.LeftButton == ButtonState.Pressed)
@@ -178,6 +183,7 @@ namespace Geometry_Bash
             {
                 // All other code for this state goes here
 
+                // handles button pressing for game state
                 if (mouseLocation.Intersects(backButton))
                 {
                     if (ms.LeftButton == ButtonState.Pressed)
@@ -203,6 +209,7 @@ namespace Geometry_Bash
             {
                 // all other code for this state goes here
 
+                // handles button pressing for game state
                 if (mouseLocation.Intersects(backButton))
                 {
                     if (ms.LeftButton == ButtonState.Pressed)
@@ -236,6 +243,16 @@ namespace Geometry_Bash
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
+
+            // sets stardard values for the window to help with drawing
+            int windowWidth = GraphicsDevice.Viewport.Width;
+            int windowHeight = GraphicsDevice.Viewport.Height;
+            Point standardButtonSize = new Point(250, 60);
+
+            // fixes button locations
+            playButton = new Rectangle(new Point(windowWidth / 2 - 250 / 2, 450), standardButtonSize);
+            instructionsButton = new Rectangle(new Point(windowWidth / 2 - 250 / 2, 520), standardButtonSize);
+            optionsButton = new Rectangle(new Point(windowWidth / 2 - 250 / 2, 590), standardButtonSize);
 
             // Menu
             if (gamestate == GameState.Menu)
