@@ -21,6 +21,8 @@ namespace Geometry_Bash
         protected Texture2D sprite;
         protected Rectangle hitBox;
 
+        protected double health;
+
         public Player(Texture2D texture,  Rectangle sAP) : base(texture, sAP)
         {
             
