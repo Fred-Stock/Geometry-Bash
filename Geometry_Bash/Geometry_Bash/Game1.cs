@@ -49,9 +49,9 @@ namespace Geometry_Bash
 
         #region Button Rectangles
         // button rectangles
-        Rectangle playButton = new Rectangle(new Point(280, 260), new Point(250, 60));
-        Rectangle instructionsButton = new Rectangle(new Point(280, 330), new Point(250, 60));
-        Rectangle optionsButton = new Rectangle(new Point(280, 400), new Point(250, 60));
+        Rectangle playButton;
+        Rectangle instructionsButton;
+        Rectangle optionsButton;
         Rectangle backButton = new Rectangle(new Point(10, 10), new Point(100, 50));
         #endregion
 
@@ -267,6 +267,7 @@ namespace Geometry_Bash
                 playButton = new Rectangle(new Point(windowWidth / 2 - standardButtonSize.X / 2, 432), standardButtonSize);
                 instructionsButton = new Rectangle(new Point(windowWidth / 2 - standardButtonSize.X / 2, 530), standardButtonSize);
                 optionsButton = new Rectangle(new Point(windowWidth / 2 - standardButtonSize.X / 2, 628), standardButtonSize);
+                backButton = new Rectangle(new Point(33, 628), new Point(186, 60));
             }
 
             // Instructions
@@ -274,12 +275,6 @@ namespace Geometry_Bash
             {
                 //instructions menu screen
                 spriteBatch.Draw(instructionsMenu, new Rectangle(new Point(0,0), new Point(windowWidth, windowHeight)), Color.White);
-
-                //implement rectangle collison with the back button here
-                
-                //spriteBatch.Draw(yellowButton, backButton, Color.White);
-                //spriteBatch.DrawString(text, "back", new Vector2(25, 25), Color.Black);
-                //removed ^^ because back button is in a new spot
             }
 
             // Player Selection Screen
