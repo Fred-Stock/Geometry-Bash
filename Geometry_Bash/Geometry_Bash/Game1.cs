@@ -23,6 +23,7 @@ namespace Geometry_Bash
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SpriteFont text;
 
         #region Textures
         //Character Textures
@@ -32,16 +33,22 @@ namespace Geometry_Bash
         
         // button textures
         Texture2D yellowButton;
-       
+        Texture2D back;
+        Texture2D instructions;
+        Texture2D options;
+
+        // character select tiles
 
         #endregion
 
-
+        #region Button Rectangles
         // button rectangles
         Rectangle playButton = new Rectangle(new Point(280, 260), new Point(250, 60));
         Rectangle instructionsButton = new Rectangle(new Point(280, 330), new Point(250, 60));
         Rectangle optionsButton = new Rectangle(new Point(280, 400), new Point(250, 60));
         Rectangle backButton = new Rectangle(new Point(10, 10), new Point(100, 50));
+        #endregion
+
 
         GameState gamestate = GameState.Menu;
 
@@ -78,6 +85,9 @@ namespace Geometry_Bash
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+
+            // sprite font load
+            text = Content.Load<SpriteFont>("text");
 
             // load character textures
             squareTexture = Content.Load<Texture2D>("tempCharSprites//square-diamond");
@@ -118,13 +128,12 @@ namespace Geometry_Bash
             this.IsMouseVisible = true;
             MouseState ms;
             ms = Mouse.GetState();
+            Rectangle mouseLocation = new Rectangle(ms.Position, new Point(5, 5));
 
             // Menu
             if (gamestate == GameState.Menu)
             {
                 // all other code for this state goes here
-
-                Rectangle mouseLocation = new Rectangle(ms.Position, new Point(5, 5));
 
                 // handles button pressing for game states
                 if (mouseLocation.Intersects(playButton))
@@ -154,9 +163,14 @@ namespace Geometry_Bash
             if (gamestate == GameState.Instructions)
             {
                 // all other code for this state goes here
-                
 
-                //if (buttonpressed) { gamestate = GameState.Menu; }
+                if (mouseLocation.Intersects(backButton))
+                {
+                    if (ms.LeftButton == ButtonState.Pressed)
+                    {
+                        gamestate = GameState.Menu;
+                    }
+                }
             }
 
             // Player Selection Screen
@@ -164,8 +178,14 @@ namespace Geometry_Bash
             {
                 // All other code for this state goes here
 
+                if (mouseLocation.Intersects(backButton))
+                {
+                    if (ms.LeftButton == ButtonState.Pressed)
+                    {
+                        gamestate = GameState.Menu;
+                    }
+                }
 
-                //if (buttonpressed) { gamestate = GameState.Menu; }
                 //if (buttonpressed) { gamestate = GameState.Game; }
             }
 
@@ -183,8 +203,13 @@ namespace Geometry_Bash
             {
                 // all other code for this state goes here
 
-
-                //if (buttonpressed) { gamestate = GameState.Menu; }
+                if (mouseLocation.Intersects(backButton))
+                {
+                    if (ms.LeftButton == ButtonState.Pressed)
+                    {
+                        gamestate = GameState.Menu;
+                    }
+                }
             }
 
             // End Game, when someone wins
@@ -219,18 +244,21 @@ namespace Geometry_Bash
                 spriteBatch.Draw(yellowButton, playButton, Color.White);
                 spriteBatch.Draw(yellowButton, instructionsButton, Color.White);
                 spriteBatch.Draw(yellowButton, optionsButton, Color.White);
+
+                // button text
+                spriteBatch.DrawString(text, "play", new Vector2(320, 280), Color.Black);
             }
 
             // Instructions
             if (gamestate == GameState.Instructions)
             {
-
+                spriteBatch.Draw(yellowButton, backButton, Color.White);
             }
 
             // Player Selection Screen
             if (gamestate == GameState.PlayerSelect)
             {
-                
+                spriteBatch.Draw(yellowButton, backButton, Color.White);
             }
 
             // Actual Gameplay
@@ -242,7 +270,7 @@ namespace Geometry_Bash
             // Options
             if (gamestate == GameState.Options)
             {
-
+                spriteBatch.Draw(yellowButton, backButton, Color.White);
             }
 
             // End Game, when someone wins
