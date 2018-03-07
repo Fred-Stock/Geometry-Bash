@@ -61,3 +61,10 @@
 /processorParam:TextureFormat=Color
 /build:Button Sprites/button_yellow.png
 
+#begin text.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:text.spritefont
+

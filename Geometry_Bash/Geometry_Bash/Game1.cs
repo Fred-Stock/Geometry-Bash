@@ -23,6 +23,7 @@ namespace Geometry_Bash
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        SpriteFont text;
 
         #region Textures
         //Character Textures
@@ -47,6 +48,7 @@ namespace Geometry_Bash
         Rectangle optionsButton = new Rectangle(new Point(280, 400), new Point(250, 60));
         Rectangle backButton = new Rectangle(new Point(10, 10), new Point(100, 50));
         #endregion
+
 
         GameState gamestate = GameState.Menu;
 
@@ -83,6 +85,9 @@ namespace Geometry_Bash
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+
+            // sprite font load
+            text = Content.Load<SpriteFont>("text");
 
             // load character textures
             squareTexture = Content.Load<Texture2D>("tempCharSprites//square-diamond");
@@ -239,6 +244,9 @@ namespace Geometry_Bash
                 spriteBatch.Draw(yellowButton, playButton, Color.White);
                 spriteBatch.Draw(yellowButton, instructionsButton, Color.White);
                 spriteBatch.Draw(yellowButton, optionsButton, Color.White);
+
+                // button text
+                spriteBatch.DrawString(text, "play", new Vector2(320, 280), Color.Black);
             }
 
             // Instructions
