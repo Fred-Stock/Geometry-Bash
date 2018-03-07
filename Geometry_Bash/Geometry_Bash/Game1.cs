@@ -247,18 +247,22 @@ namespace Geometry_Bash
 
                 // button text
                 spriteBatch.DrawString(text, "play", new Vector2(320, 280), Color.Black);
+                spriteBatch.DrawString(text, "instructions", new Vector2(320, 350), Color.Black);
+                spriteBatch.DrawString(text, "options", new Vector2(320, 420), Color.Black);
             }
 
             // Instructions
             if (gamestate == GameState.Instructions)
             {
                 spriteBatch.Draw(yellowButton, backButton, Color.White);
+                spriteBatch.DrawString(text, "back", new Vector2(25, 25), Color.Black);
             }
 
             // Player Selection Screen
             if (gamestate == GameState.PlayerSelect)
             {
                 spriteBatch.Draw(yellowButton, backButton, Color.White);
+                spriteBatch.DrawString(text, "back", new Vector2(25, 25), Color.Black);
             }
 
             // Actual Gameplay
@@ -271,6 +275,7 @@ namespace Geometry_Bash
             if (gamestate == GameState.Options)
             {
                 spriteBatch.Draw(yellowButton, backButton, Color.White);
+                spriteBatch.DrawString(text, "back", new Vector2(25, 25), Color.Black);
             }
 
             // End Game, when someone wins
