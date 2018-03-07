@@ -41,6 +41,9 @@ namespace Geometry_Bash
         Texture2D squareTile;
         Texture2D circleTile;
         Texture2D diamondTile;
+
+        // screens
+        Texture2D mainMenu;
         #endregion
 
         #region Button Rectangles
@@ -101,6 +104,9 @@ namespace Geometry_Bash
 
             // load button textures
             yellowButton = Content.Load<Texture2D>("Button Sprites//button_yellow");
+
+            // screen loads
+            mainMenu = Content.Load<Texture2D>("Screens//Main Menu");
         }
 
         /// <summary>
@@ -247,25 +253,18 @@ namespace Geometry_Bash
             // sets stardard values for the window to help with drawing
             int windowWidth = GraphicsDevice.Viewport.Width;
             int windowHeight = GraphicsDevice.Viewport.Height;
-            Point standardButtonSize = new Point(250, 60);
-
-            // fixes button locations
-            playButton = new Rectangle(new Point(windowWidth / 2 - 250 / 2, 450), standardButtonSize);
-            instructionsButton = new Rectangle(new Point(windowWidth / 2 - 250 / 2, 520), standardButtonSize);
-            optionsButton = new Rectangle(new Point(windowWidth / 2 - 250 / 2, 590), standardButtonSize);
+            Point standardButtonSize = new Point(330, 60);
 
             // Menu
             if (gamestate == GameState.Menu)
             {
-                // buttons for different options
-                spriteBatch.Draw(yellowButton, playButton, Color.White);
-                spriteBatch.Draw(yellowButton, instructionsButton, Color.White);
-                spriteBatch.Draw(yellowButton, optionsButton, Color.White);
+                // main menu screen
+                spriteBatch.Draw(mainMenu, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
-                // button text
-                spriteBatch.DrawString(text, "play", new Vector2(320, 280), Color.Black);
-                spriteBatch.DrawString(text, "instructions", new Vector2(320, 350), Color.Black);
-                spriteBatch.DrawString(text, "options", new Vector2(320, 420), Color.Black);
+                // fixes button locations (the rectangles)
+                playButton = new Rectangle(new Point(windowWidth / 2 - standardButtonSize.X / 2, 432), standardButtonSize);
+                instructionsButton = new Rectangle(new Point(windowWidth / 2 - standardButtonSize.X / 2, 530), standardButtonSize);
+                optionsButton = new Rectangle(new Point(windowWidth / 2 - standardButtonSize.X / 2, 628), standardButtonSize);
             }
 
             // Instructions
