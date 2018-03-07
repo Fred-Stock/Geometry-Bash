@@ -24,14 +24,17 @@ namespace Geometry_Bash
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        // character textures
+        #region Textures
+
         Texture2D squareTexture;
         Texture2D circleTexture;
         Texture2D diamondTexture;
 
+
+        #endregion
         GameState gamestate = GameState.Menu;
 
-
+         
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
