@@ -103,7 +103,7 @@ namespace Geometry_Bash
             {
                 // all other code for this state goes here
 
-
+                
                 //if (buttonpressed) { gamestate = GameState.PlayerSelect; }
                 //if (buttonpressed) { gamestate = GameState.Instructions; }
                 //if (buttonpressed) { gamestate = GameState.Options; }
