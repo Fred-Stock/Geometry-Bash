@@ -44,6 +44,7 @@ namespace Geometry_Bash
 
         // screens
         Texture2D mainMenu;
+        Texture2D instructionsMenu;
         #endregion
 
         #region Button Rectangles
@@ -107,6 +108,7 @@ namespace Geometry_Bash
 
             // screen loads
             mainMenu = Content.Load<Texture2D>("Screens//Main Menu");
+            instructionsMenu = Content.Load<Texture2D>("Screens//Instructions");
         }
 
         /// <summary>
@@ -270,8 +272,14 @@ namespace Geometry_Bash
             // Instructions
             if (gamestate == GameState.Instructions)
             {
-                spriteBatch.Draw(yellowButton, backButton, Color.White);
-                spriteBatch.DrawString(text, "back", new Vector2(25, 25), Color.Black);
+                //instructions menu screen
+                spriteBatch.Draw(instructionsMenu, new Rectangle(new Point(0,0), new Point(windowWidth, windowHeight)), Color.White);
+
+                //implement rectangle collison with the back button here
+                
+                //spriteBatch.Draw(yellowButton, backButton, Color.White);
+                //spriteBatch.DrawString(text, "back", new Vector2(25, 25), Color.Black);
+                //removed ^^ because back button is in a new spot
             }
 
             // Player Selection Screen
