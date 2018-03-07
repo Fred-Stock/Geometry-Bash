@@ -29,6 +29,15 @@ namespace Geometry_Bash
         Texture2D circleTexture;
         Texture2D diamondTexture;
 
+        // button textures
+        Texture2D yellowButton;
+
+        // button rectangles
+        Rectangle playButton = new Rectangle(new Point(280, 260), new Point(250, 60));
+        Rectangle instructionsButton = new Rectangle(new Point(280, 330), new Point(250, 60));
+        Rectangle optionsButton = new Rectangle(new Point(280, 400), new Point(250, 60));
+        Rectangle backButton = new Rectangle(new Point(10, 10), new Point(100, 50));
+
         GameState gamestate = GameState.Menu;
 
 
@@ -70,6 +79,8 @@ namespace Geometry_Bash
             circleTexture = Content.Load<Texture2D>("tempCharSprites//circle");
             diamondTexture = Content.Load<Texture2D>("tempCharSprites//square-diamond");
 
+            // load button textures
+            yellowButton = Content.Load<Texture2D>("Button Sprites//button_yellow");
 
         }
 
@@ -98,15 +109,40 @@ namespace Geometry_Bash
 
             // TODO: Add your update logic here
 
+            // makes sure mouse is visible
+            this.IsMouseVisible = true;
+            MouseState ms;
+            ms = Mouse.GetState();
+
             // Menu
             if (gamestate == GameState.Menu)
             {
                 // all other code for this state goes here
 
-                
-                //if (buttonpressed) { gamestate = GameState.PlayerSelect; }
-                //if (buttonpressed) { gamestate = GameState.Instructions; }
-                //if (buttonpressed) { gamestate = GameState.Options; }
+                Rectangle mouseLocation = new Rectangle(ms.Position, new Point(5, 5));
+
+                // handles button pressing for game states
+                if (mouseLocation.Intersects(playButton))
+                {
+                    if (ms.LeftButton == ButtonState.Pressed)
+                    {
+                        gamestate = GameState.PlayerSelect;
+                    }
+                }
+                if (mouseLocation.Intersects(instructionsButton))
+                {
+                    if (ms.LeftButton == ButtonState.Pressed)
+                    {
+                        gamestate = GameState.Instructions;
+                    }
+                }
+                if (mouseLocation.Intersects(optionsButton))
+                {
+                    if (ms.LeftButton == ButtonState.Pressed)
+                    {
+                        gamestate = GameState.Options;
+                    }
+                }
             }
 
             // Instructions
@@ -166,7 +202,7 @@ namespace Geometry_Bash
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Tomato);
+            GraphicsDevice.Clear(Color.DarkViolet);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
@@ -174,7 +210,10 @@ namespace Geometry_Bash
             // Menu
             if (gamestate == GameState.Menu)
             {
-
+                // buttons for different options
+                spriteBatch.Draw(yellowButton, playButton, Color.White);
+                spriteBatch.Draw(yellowButton, instructionsButton, Color.White);
+                spriteBatch.Draw(yellowButton, optionsButton, Color.White);
             }
 
             // Instructions
@@ -186,7 +225,7 @@ namespace Geometry_Bash
             // Player Selection Screen
             if (gamestate == GameState.PlayerSelect)
             {
-
+                
             }
 
             // Actual Gameplay
