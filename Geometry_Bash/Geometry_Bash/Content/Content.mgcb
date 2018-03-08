@@ -25,30 +25,6 @@
 /processorParam:TextureFormat=Color
 /build:B.jpg
 
-#begin tempCharSprites/circle.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:tempCharSprites/circle.png
-
-#begin tempCharSprites/square-diamond.jpg
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:tempCharSprites/square-diamond.jpg
-
 #begin Button Sprites/button_yellow.png
 /importer:TextureImporter
 /processor:TextureProcessor

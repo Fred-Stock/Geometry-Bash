@@ -28,9 +28,12 @@ namespace Geometry_Bash
 
         #region Textures
         //Character Textures
-        Texture2D squareTexture;
-        Texture2D circleTexture;
-        Texture2D diamondTexture;
+        Texture2D redSquareTexture;
+        Texture2D redCircleTexture;
+        Texture2D redDiamondTexture;
+        Texture2D blueSquareTexture;
+        Texture2D blueCircleTexture;
+        Texture2D blueDiamondTexture;
         
         // button textures
         Texture2D yellowButton;
@@ -115,9 +118,12 @@ namespace Geometry_Bash
             text = Content.Load<SpriteFont>("text");
 
             // load character textures
-            squareTexture = Content.Load<Texture2D>("tempCharSprites//square-diamond");
-            circleTexture = Content.Load<Texture2D>("tempCharSprites//circle");
-            diamondTexture = Content.Load<Texture2D>("tempCharSprites//square-diamond");
+            redSquareTexture = Content.Load<Texture2D>("CharSprites//square");
+            redCircleTexture = Content.Load<Texture2D>("CharSprites//circle");
+            redDiamondTexture = Content.Load<Texture2D>("CharSprites//diamond");
+            blueSquareTexture = Content.Load<Texture2D>("CharSprites//square_blue");
+            blueCircleTexture = Content.Load<Texture2D>("CharSprites//circle_blue");
+            blueDiamondTexture = Content.Load<Texture2D>("CharSprites//diamond_blue");
 
             // load button textures
             yellowButton = Content.Load<Texture2D>("Button Sprites//button_yellow");
