@@ -54,6 +54,7 @@ namespace Geometry_Bash
         Texture2D mainMenu;
         Texture2D instructionsMenu;
         Texture2D playerSelect;
+        Texture2D optionsScreen;
         #endregion
 
         #region Button Rectangles
@@ -151,6 +152,7 @@ namespace Geometry_Bash
             mainMenu = Content.Load<Texture2D>("Screens//Main Menu");
             instructionsMenu = Content.Load<Texture2D>("Screens//Instructions");
             playerSelect = Content.Load<Texture2D>("Screens//Player Selection");
+            optionsScreen = Content.Load<Texture2D>("Screens//Options_temp");
 
         }
 
@@ -452,7 +454,8 @@ namespace Geometry_Bash
             // Options
             if (gamestate == GameState.Options)
             {
-                spriteBatch.Draw(yellowButton, backButton, Color.White);
+                // options menu screen
+                spriteBatch.Draw(optionsScreen, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
                 // changes back button if mouse hovers over
                 if (mouseLocation.Intersects(backButton))

@@ -272,3 +272,15 @@
 /processorParam:TextureFormat=Color
 /build:CharSprites/square_blue.png
 
+#begin Screens/Options_temp.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Screens/Options_temp.jpg
+
