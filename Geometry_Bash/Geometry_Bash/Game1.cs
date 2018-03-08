@@ -76,6 +76,7 @@ namespace Geometry_Bash
         GameState gamestate = GameState.Menu;
 
         MouseState ms;
+        MouseState previousMs;
         KeyboardState kbState;
         KeyboardState previousKbState;
 
@@ -180,6 +181,7 @@ namespace Geometry_Bash
 
             // set current kb state
             kbState = Keyboard.GetState();
+            ms = Mouse.GetState();
 
             // makes sure mouse is visible
             this.IsMouseVisible = true;
@@ -223,7 +225,7 @@ namespace Geometry_Bash
                 // handles button pressing for game state
                 if (mouseLocation.Intersects(backButton))
                 {
-                    if (ms.LeftButton == ButtonState.Pressed)
+                    if (SingleLeftMousePress())
                     {
                         gamestate = GameState.Menu;
                     }
@@ -268,12 +270,16 @@ namespace Geometry_Bash
                 // handles button pressing for game state
                 if (mouseLocation.Intersects(backButton))
                 {
-                    if (ms.LeftButton == ButtonState.Pressed)
+                    if (SingleLeftMousePress())
                     {
                         redPlayerTileHighlight = 0;
                         bluePlayerTileHighlight = 0;
                         gamestate = GameState.Menu;
                     }
+                }
+                if (SingleKeyPress(Keys.Enter))
+                {
+                    gamestate = GameState.LevelSelect;
                 }
             }
 
@@ -285,7 +291,7 @@ namespace Geometry_Bash
                 // handles button pressing for game state
                 if (mouseLocation.Intersects(backButton))
                 {
-                    if (ms.LeftButton == ButtonState.Pressed)
+                    if (SingleLeftMousePress())
                     {
                         gamestate = GameState.PlayerSelect;
                     }
@@ -311,7 +317,7 @@ namespace Geometry_Bash
                 // handles button pressing for game state
                 if (mouseLocation.Intersects(backButton))
                 {
-                    if (ms.LeftButton == ButtonState.Pressed)
+                    if (SingleLeftMousePress())
                     {
                         gamestate = GameState.Menu;
                     }
@@ -329,6 +335,7 @@ namespace Geometry_Bash
 
             // save old kb state in prev.kb
             previousKbState = kbState;
+            previousMs = ms;
 
             base.Update(gameTime);
         }
@@ -471,6 +478,19 @@ namespace Geometry_Bash
         public bool SingleKeyPress(Keys key)
         {
             if (kbState.IsKeyDown(key) && previousKbState.IsKeyUp(key))
+            { return true; }
+            else
+            { return false; }
+        }
+
+        /// <summary>
+        /// checks if the right mouse button was pressed once (last frame != current)
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public bool SingleLeftMousePress()
+        {
+            if (ms.LeftButton == ButtonState.Pressed && previousMs.LeftButton == ButtonState.Released)
             { return true; }
             else
             { return false; }
