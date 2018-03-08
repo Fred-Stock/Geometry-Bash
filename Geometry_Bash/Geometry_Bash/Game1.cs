@@ -311,7 +311,13 @@ namespace Geometry_Bash
             // Actual Gameplay
             if (gamestate == GameState.Game)
             {
+                // CHARACTER SPRITE STUFF HERE
 
+                // HEALTH BAR
+
+                // SUPER METER
+
+                // PAUSE BUTTON
             }
 
             // Options
