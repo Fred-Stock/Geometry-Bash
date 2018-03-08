@@ -10,6 +10,7 @@ namespace Geometry_Bash
         Menu,
         Instructions,
         PlayerSelect,
+        LevelSelect,
         Game,
         Options,
         EndGame
@@ -207,6 +208,21 @@ namespace Geometry_Bash
                         gamestate = GameState.Menu;
                     }
                 }
+            }
+
+            // Level Selection Screen
+            if (gamestate == GameState.LevelSelect)
+            {
+                // All other code for this state goes here
+
+                // handles button pressing for game state
+                if (mouseLocation.Intersects(backButton))
+                {
+                    if (ms.LeftButton == ButtonState.Pressed)
+                    {
+                        gamestate = GameState.PlayerSelect;
+                    }
+                }
 
                 //if (buttonpressed) { gamestate = GameState.Game; }
             }
@@ -308,6 +324,18 @@ namespace Geometry_Bash
                 // changes back button if mouse hovers over
                 if (mouseLocation.Intersects(backButton))
                 { spriteBatch.Draw(back, backButton, Color.White); }
+            }
+
+            // Level Selection Screen
+            if (gamestate == GameState.LevelSelect)
+            {
+                spriteBatch.Draw(yellowButton, backButton, Color.White);
+
+                // changes back button if mouse hovers over
+                if (mouseLocation.Intersects(backButton))
+                { spriteBatch.Draw(back, backButton, Color.White); }
+
+                // ADD: transition to gameplay needed
             }
 
             // Actual Gameplay
