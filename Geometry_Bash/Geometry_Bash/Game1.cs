@@ -76,7 +76,11 @@ namespace Geometry_Bash
         GameState gamestate = GameState.Menu;
 
         MouseState ms;
+        KeyboardState kb;
 
+        // used for player select tiles
+        int redPlayerTileHighlight = 0;
+        int bluePlayerTileHighlight = 0;
 
         public Game1()
         {
@@ -230,6 +234,36 @@ namespace Geometry_Bash
             {
                 // All other code for this state goes here
 
+                // handles player tile choice
+                if (Keyboard.GetState().IsKeyDown(Keys.D))
+                {
+                    redPlayerTileHighlight++;
+
+                    if (redPlayerTileHighlight > 2)
+                    { redPlayerTileHighlight = 0; }
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.A))
+                {
+                    redPlayerTileHighlight--;
+
+                    if (redPlayerTileHighlight < 0)
+                    { redPlayerTileHighlight = 2; }
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.L))
+                {
+                    bluePlayerTileHighlight++;
+
+                    if (bluePlayerTileHighlight > 2)
+                    { bluePlayerTileHighlight = 0; }
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.J))
+                {
+                    bluePlayerTileHighlight--;
+
+                    if (bluePlayerTileHighlight < 0)
+                    { bluePlayerTileHighlight = 2; }
+                }
+
                 // handles button pressing for game state
                 if (mouseLocation.Intersects(backButton))
                 {
@@ -303,6 +337,7 @@ namespace Geometry_Bash
         {
             GraphicsDevice.Clear(Color.DarkViolet);
             
+            // mouseState for hovering
             ms = Mouse.GetState();
             Rectangle mouseLocation = new Rectangle(ms.Position, new Point(5, 5));
 
@@ -360,19 +395,28 @@ namespace Geometry_Bash
                 redCircle = new Rectangle(new Point(640, 178), new Point(251, 193));
                 redDiamond = new Rectangle(new Point(990, 178), new Point(251, 193));
 
-                // changes player tiles if mouse hovers over
-                if (mouseLocation.Intersects(blueSquare))
-                { spriteBatch.Draw(blueSquareTile, blueSquare, Color.White); }
-                if (mouseLocation.Intersects(blueCircle))
-                { spriteBatch.Draw(blueCircleTile, blueCircle, Color.White); }
-                if (mouseLocation.Intersects(blueDiamond))
-                { spriteBatch.Draw(blueDiamondTile, blueDiamond, Color.White); }
-                if (mouseLocation.Intersects(redSquare))
+                // handles player tile choice
+                if (Keyboard.GetState().IsKeyDown(Keys.D))
+                {
+                    redPlayerTileHighlight++;
+
+                    if (redPlayerTileHighlight > 2)
+                    { redPlayerTileHighlight = 0; }
+                }
+
+                // player select tiles
+                if (redPlayerTileHighlight == 0)
                 { spriteBatch.Draw(redSquareTile, redSquare, Color.White); }
-                if (mouseLocation.Intersects(redCircle))
+                else if (redPlayerTileHighlight == 1)
                 { spriteBatch.Draw(redCircleTile, redCircle, Color.White); }
-                if (mouseLocation.Intersects(redDiamond))
+                else if (redPlayerTileHighlight == 2)
                 { spriteBatch.Draw(redDiamondTile, redDiamond, Color.White); }
+                if (bluePlayerTileHighlight == 0)
+                { spriteBatch.Draw(blueSquareTile, blueSquare, Color.White); }
+                else if (bluePlayerTileHighlight == 1)
+                { spriteBatch.Draw(blueCircleTile, blueCircle, Color.White); }
+                else if (bluePlayerTileHighlight == 2)
+                { spriteBatch.Draw(blueDiamondTile, blueDiamond, Color.White); }
 
                 // changes back button if mouse hovers over
                 if (mouseLocation.Intersects(backButton))
