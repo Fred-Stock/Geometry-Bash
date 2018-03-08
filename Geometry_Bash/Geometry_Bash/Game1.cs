@@ -118,6 +118,7 @@ namespace Geometry_Bash
             text = Content.Load<SpriteFont>("text");
 
             // load character textures
+            //please work
             redSquareTexture = Content.Load<Texture2D>("CharSprites//square");
             redCircleTexture = Content.Load<Texture2D>("CharSprites//circle");
             redDiamondTexture = Content.Load<Texture2D>("CharSprites//diamond");
