@@ -76,7 +76,8 @@ namespace Geometry_Bash
         GameState gamestate = GameState.Menu;
 
         MouseState ms;
-        KeyboardState kb;
+        KeyboardState kbState;
+        KeyboardState previousKbState;
 
         // used for player select tiles
         int redPlayerTileHighlight = 0;
@@ -122,7 +123,6 @@ namespace Geometry_Bash
             text = Content.Load<SpriteFont>("text");
 
             // load character textures
-            //please work
             redSquareTexture = Content.Load<Texture2D>("CharSprites//square");
             redCircleTexture = Content.Load<Texture2D>("CharSprites//circle");
             redDiamondTexture = Content.Load<Texture2D>("CharSprites//diamond");
@@ -178,7 +178,8 @@ namespace Geometry_Bash
 
             // TODO: Add your update logic here
 
-
+            // set current kb state
+            kbState = Keyboard.GetState();
 
             // makes sure mouse is visible
             this.IsMouseVisible = true;
@@ -235,28 +236,28 @@ namespace Geometry_Bash
                 // All other code for this state goes here
 
                 // handles player tile choice
-                if (Keyboard.GetState().IsKeyDown(Keys.D))
+                if (SingleKeyPress(Keys.D))
                 {
                     redPlayerTileHighlight++;
 
                     if (redPlayerTileHighlight > 2)
                     { redPlayerTileHighlight = 0; }
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.A))
+                if (SingleKeyPress(Keys.A))
                 {
                     redPlayerTileHighlight--;
 
                     if (redPlayerTileHighlight < 0)
                     { redPlayerTileHighlight = 2; }
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.L))
+                if (SingleKeyPress(Keys.L))
                 {
                     bluePlayerTileHighlight++;
 
                     if (bluePlayerTileHighlight > 2)
                     { bluePlayerTileHighlight = 0; }
                 }
-                if (Keyboard.GetState().IsKeyDown(Keys.J))
+                if (SingleKeyPress(Keys.J))
                 {
                     bluePlayerTileHighlight--;
 
@@ -269,6 +270,8 @@ namespace Geometry_Bash
                 {
                     if (ms.LeftButton == ButtonState.Pressed)
                     {
+                        redPlayerTileHighlight = 0;
+                        bluePlayerTileHighlight = 0;
                         gamestate = GameState.Menu;
                     }
                 }
@@ -324,7 +327,8 @@ namespace Geometry_Bash
                 //if (buttonpressed) { gamestate = GameState.Menu; }
             }
 
-
+            // save old kb state in prev.kb
+            previousKbState = kbState;
 
             base.Update(gameTime);
         }
@@ -395,15 +399,6 @@ namespace Geometry_Bash
                 redCircle = new Rectangle(new Point(640, 178), new Point(251, 193));
                 redDiamond = new Rectangle(new Point(990, 178), new Point(251, 193));
 
-                // handles player tile choice
-                if (Keyboard.GetState().IsKeyDown(Keys.D))
-                {
-                    redPlayerTileHighlight++;
-
-                    if (redPlayerTileHighlight > 2)
-                    { redPlayerTileHighlight = 0; }
-                }
-
                 // player select tiles
                 if (redPlayerTileHighlight == 0)
                 { spriteBatch.Draw(redSquareTile, redSquare, Color.White); }
@@ -466,6 +461,19 @@ namespace Geometry_Bash
 
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        /// <summary>
+        /// checks if a key was pressed once (last frame != current)
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public bool SingleKeyPress(Keys key)
+        {
+            if (kbState.IsKeyDown(key) && previousKbState.IsKeyUp(key))
+            { return true; }
+            else
+            { return false; }
         }
     }
 }
