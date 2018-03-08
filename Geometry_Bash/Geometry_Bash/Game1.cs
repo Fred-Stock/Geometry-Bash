@@ -302,7 +302,10 @@ namespace Geometry_Bash
             if (gamestate == GameState.PlayerSelect)
             {
                 spriteBatch.Draw(yellowButton, backButton, Color.White);
-                spriteBatch.DrawString(text, "back", new Vector2(25, 25), Color.Black);
+
+                // changes back button if mouse hovers over
+                if (mouseLocation.Intersects(backButton))
+                { spriteBatch.Draw(back, backButton, Color.White); }
             }
 
             // Actual Gameplay
@@ -315,7 +318,10 @@ namespace Geometry_Bash
             if (gamestate == GameState.Options)
             {
                 spriteBatch.Draw(yellowButton, backButton, Color.White);
-                spriteBatch.DrawString(text, "back", new Vector2(25, 25), Color.Black);
+
+                // changes back button if mouse hovers over
+                if (mouseLocation.Intersects(backButton))
+                { spriteBatch.Draw(back, backButton, Color.White); }
             }
 
             // End Game, when someone wins
