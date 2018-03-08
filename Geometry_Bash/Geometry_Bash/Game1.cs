@@ -47,6 +47,7 @@ namespace Geometry_Bash
         // screens
         Texture2D mainMenu;
         Texture2D instructionsMenu;
+        Texture2D playerSelect;
         #endregion
 
         #region Button Rectangles
@@ -117,6 +118,8 @@ namespace Geometry_Bash
             // screen loads
             mainMenu = Content.Load<Texture2D>("Screens//Main Menu");
             instructionsMenu = Content.Load<Texture2D>("Screens//Instructions");
+            playerSelect = Content.Load<Texture2D>("Screens//Player Selection");
+
         }
 
         /// <summary>
@@ -319,7 +322,8 @@ namespace Geometry_Bash
             // Player Selection Screen
             if (gamestate == GameState.PlayerSelect)
             {
-                spriteBatch.Draw(yellowButton, backButton, Color.White);
+                // draws background first
+                spriteBatch.Draw(playerSelect, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
                 // changes back button if mouse hovers over
                 if (mouseLocation.Intersects(backButton))
