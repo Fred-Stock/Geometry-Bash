@@ -40,9 +40,12 @@ namespace Geometry_Bash
         Texture2D options;
 
         // character select tiles
-        Texture2D squareTile;
-        Texture2D circleTile;
-        Texture2D diamondTile;
+        Texture2D blueSquareTile;
+        Texture2D blueCircleTile;
+        Texture2D blueDiamondTile;
+        Texture2D redSquareTile;
+        Texture2D redCircleTile;
+        Texture2D redDiamondTile;
 
         // screens
         Texture2D mainMenu;
@@ -56,6 +59,14 @@ namespace Geometry_Bash
         Rectangle instructionsButton;
         Rectangle optionsButton;
         Rectangle backButton;
+
+        // tile rectangles
+        Rectangle blueSquare;
+        Rectangle blueCircle;
+        Rectangle blueDiamond;
+        Rectangle redSquare;
+        Rectangle redCircle;
+        Rectangle redDiamond;
         #endregion
 
 
@@ -114,6 +125,15 @@ namespace Geometry_Bash
             back = Content.Load<Texture2D>("Button Sprites//instructionsBack_hover");
             instructions = Content.Load<Texture2D>("Button Sprites//instructions_hover");
             options = Content.Load<Texture2D>("Button Sprites//options_hover");
+
+            // player select tiles
+            blueSquareTile = Content.Load<Texture2D>("Button Sprites//bluesquare_hover");
+            blueCircleTile = Content.Load<Texture2D>("Button Sprites//bluecircle_hover");
+            blueDiamondTile = Content.Load<Texture2D>("Button Sprites//bluediamond_hover");
+            redSquareTile = Content.Load<Texture2D>("Button Sprites//redsquare_hover");
+            redCircleTile = Content.Load<Texture2D>("Button Sprites//redcircle_hover");
+            redDiamondTile = Content.Load<Texture2D>("Button Sprites//reddiamond_hover");
+
 
             // screen loads
             mainMenu = Content.Load<Texture2D>("Screens//Main Menu");
@@ -324,6 +344,28 @@ namespace Geometry_Bash
             {
                 // draws background first
                 spriteBatch.Draw(playerSelect, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
+
+                // adds actual rectangles for player tiles
+                blueSquare = new Rectangle(new Point(290, 484), new Point(251, 193));
+                blueCircle = new Rectangle(new Point(640, 484), new Point(251, 193));
+                blueDiamond = new Rectangle(new Point(990, 484), new Point(251, 193));
+                redSquare = new Rectangle(new Point(290, 178), new Point(251, 193));
+                redCircle = new Rectangle(new Point(640, 178), new Point(251, 193));
+                redDiamond = new Rectangle(new Point(990, 178), new Point(251, 193));
+
+                // changes player tiles if mouse hovers over
+                if (mouseLocation.Intersects(blueSquare))
+                { spriteBatch.Draw(blueSquareTile, blueSquare, Color.White); }
+                if (mouseLocation.Intersects(blueCircle))
+                { spriteBatch.Draw(blueCircleTile, blueCircle, Color.White); }
+                if (mouseLocation.Intersects(blueDiamond))
+                { spriteBatch.Draw(blueDiamondTile, blueDiamond, Color.White); }
+                if (mouseLocation.Intersects(redSquare))
+                { spriteBatch.Draw(redSquareTile, redSquare, Color.White); }
+                if (mouseLocation.Intersects(redCircle))
+                { spriteBatch.Draw(redCircleTile, redCircle, Color.White); }
+                if (mouseLocation.Intersects(redDiamond))
+                { spriteBatch.Draw(redDiamondTile, redDiamond, Color.White); }
 
                 // changes back button if mouse hovers over
                 if (mouseLocation.Intersects(backButton))
