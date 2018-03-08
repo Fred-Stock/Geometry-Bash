@@ -118,12 +118,12 @@ namespace Geometry_Bash
             text = Content.Load<SpriteFont>("text");
 
             // load character textures
-            redSquareTexture = Content.Load<Texture2D>("CharSprites//square");
-            redCircleTexture = Content.Load<Texture2D>("CharSprites//circle");
-            redDiamondTexture = Content.Load<Texture2D>("CharSprites//diamond");
-            blueSquareTexture = Content.Load<Texture2D>("CharSprites//square_blue");
-            blueCircleTexture = Content.Load<Texture2D>("CharSprites//circle_blue");
-            blueDiamondTexture = Content.Load<Texture2D>("CharSprites//diamond_blue");
+            //redSquareTexture = Content.Load<Texture2D>("CharSprites//square");
+            //redCircleTexture = Content.Load<Texture2D>("CharSprites//circle");
+            //redDiamondTexture = Content.Load<Texture2D>("CharSprites//diamond");
+            //blueSquareTexture = Content.Load<Texture2D>("CharSprites//square_blue");
+            //blueCircleTexture = Content.Load<Texture2D>("CharSprites//circle_blue");
+            //blueDiamondTexture = Content.Load<Texture2D>("CharSprites//diamond_blue");
 
             // load button textures
             yellowButton = Content.Load<Texture2D>("Button Sprites//button_yellow");
