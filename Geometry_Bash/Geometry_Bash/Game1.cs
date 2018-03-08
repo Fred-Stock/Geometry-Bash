@@ -59,7 +59,9 @@ namespace Geometry_Bash
 
         GameState gamestate = GameState.Menu;
 
-         
+        MouseState ms;
+
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -141,9 +143,10 @@ namespace Geometry_Bash
 
             // TODO: Add your update logic here
 
+
+
             // makes sure mouse is visible
             this.IsMouseVisible = true;
-            MouseState ms;
             ms = Mouse.GetState();
             Rectangle mouseLocation = new Rectangle(ms.Position, new Point(5, 5));
 
@@ -253,8 +256,7 @@ namespace Geometry_Bash
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.DarkViolet);
-
-            MouseState ms;
+            
             ms = Mouse.GetState();
             Rectangle mouseLocation = new Rectangle(ms.Position, new Point(5, 5));
 
