@@ -340,8 +340,15 @@ namespace Geometry_Bash
             {
                 // all other code for this state goes here
 
+                // makes sure mouse is invisible during game
+                this.IsMouseVisible = false;
 
-                //if (character health == 0) { gamestate = GameState.EndGame; }
+                // pauses game
+                if (SingleKeyPress(Keys.P))
+                { }
+
+                //if (character health == 0) 
+                //  { gamestate = GameState.EndGame; }
             }
 
             // Options
