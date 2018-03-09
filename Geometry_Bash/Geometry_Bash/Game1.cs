@@ -50,6 +50,8 @@ namespace Geometry_Bash
         Texture2D redCircleTile;
         Texture2D redDiamondTile;
 
+        Texture2D readyBanner;
+
         // screens
         Texture2D mainMenu;
         Texture2D instructionsMenu;
@@ -57,7 +59,7 @@ namespace Geometry_Bash
         Texture2D optionsScreen;
         #endregion
 
-        #region Button Rectangles
+        #region Rectangles
         // button rectangles
         Rectangle playButton;
         Rectangle instructionsButton;
@@ -71,6 +73,9 @@ namespace Geometry_Bash
         Rectangle redSquare;
         Rectangle redCircle;
         Rectangle redDiamond;
+
+        Rectangle redReadyBanner;
+        Rectangle blueReadyBanner;
         #endregion
 
 
@@ -84,6 +89,8 @@ namespace Geometry_Bash
         // used for player select tiles
         int redPlayerTileHighlight = 0;
         int bluePlayerTileHighlight = 0;
+        bool redReady = false;
+        bool blueReady = false;
 
         public Game1()
         {
@@ -146,6 +153,8 @@ namespace Geometry_Bash
             redSquareTile = Content.Load<Texture2D>("Button Sprites//redsquare_hover");
             redCircleTile = Content.Load<Texture2D>("Button Sprites//redcircle_hover");
             redDiamondTile = Content.Load<Texture2D>("Button Sprites//reddiamond_hover");
+
+            readyBanner = Content.Load<Texture2D>("ReadyBanner");
 
 
             // screen loads
@@ -239,35 +248,51 @@ namespace Geometry_Bash
             {
                 // All other code for this state goes here
 
-                // handles player tile choice
-                if (SingleKeyPress(Keys.D))
+                // red player's player select
+                if (!redReady)
                 {
-                    redPlayerTileHighlight++;
+                    if (SingleKeyPress(Keys.D))
+                    {
+                        redPlayerTileHighlight++;
 
-                    if (redPlayerTileHighlight > 2)
-                    { redPlayerTileHighlight = 0; }
+                        if (redPlayerTileHighlight > 2)
+                        { redPlayerTileHighlight = 0; }
+                    }
+                    if (SingleKeyPress(Keys.A))
+                    {
+                        redPlayerTileHighlight--;
+
+                        if (redPlayerTileHighlight < 0)
+                        { redPlayerTileHighlight = 2; }
+                    }
                 }
-                if (SingleKeyPress(Keys.A))
+                if (SingleKeyPress(Keys.E))
+                    redReady = true;
+                if (SingleKeyPress(Keys.Q))
+                    redReady = false;
+
+                // blue player's player select
+                if (!blueReady)
                 {
-                    redPlayerTileHighlight--;
+                    if (SingleKeyPress(Keys.L))
+                    {
+                        bluePlayerTileHighlight++;
 
-                    if (redPlayerTileHighlight < 0)
-                    { redPlayerTileHighlight = 2; }
-                }
-                if (SingleKeyPress(Keys.L))
-                {
-                    bluePlayerTileHighlight++;
+                        if (bluePlayerTileHighlight > 2)
+                        { bluePlayerTileHighlight = 0; }
+                    }
+                    if (SingleKeyPress(Keys.J))
+                    {
+                        bluePlayerTileHighlight--;
 
-                    if (bluePlayerTileHighlight > 2)
-                    { bluePlayerTileHighlight = 0; }
+                        if (bluePlayerTileHighlight < 0)
+                        { bluePlayerTileHighlight = 2; }
+                    }
                 }
-                if (SingleKeyPress(Keys.J))
-                {
-                    bluePlayerTileHighlight--;
-
-                    if (bluePlayerTileHighlight < 0)
-                    { bluePlayerTileHighlight = 2; }
-                }
+                if (SingleKeyPress(Keys.O))
+                    blueReady = true;
+                if (SingleKeyPress(Keys.U))
+                    blueReady = false;
 
                 // handles button pressing for game state
                 if (mouseLocation.Intersects(backButton))
@@ -276,12 +301,19 @@ namespace Geometry_Bash
                     {
                         redPlayerTileHighlight = 0;
                         bluePlayerTileHighlight = 0;
+                        redReady = false;
+                        blueReady = false;
                         gamestate = GameState.Menu;
                     }
                 }
-                if (SingleKeyPress(Keys.Enter))
+                if (redReady && blueReady)
                 {
-                    gamestate = GameState.LevelSelect;
+                    if (SingleKeyPress(Keys.Enter))
+                    {
+                        redReady = false;
+                        blueReady = false;
+                        gamestate = GameState.LevelSelect;
+                    }
                 }
             }
 
@@ -421,6 +453,14 @@ namespace Geometry_Bash
                 { spriteBatch.Draw(blueCircleTile, blueCircle, Color.White); }
                 else if (bluePlayerTileHighlight == 2)
                 { spriteBatch.Draw(blueDiamondTile, blueDiamond, Color.White); }
+
+                // handles ready banner
+                redReadyBanner = new Rectangle(new Point(315, 115), new Point(900, 320));
+                blueReadyBanner = new Rectangle(new Point(315, 420), new Point(900, 320));
+                if (redReady)
+                { spriteBatch.Draw(readyBanner, redReadyBanner, Color.White); }
+                if (blueReady)
+                { spriteBatch.Draw(readyBanner, blueReadyBanner, Color.White); }
 
                 // changes back button if mouse hovers over
                 if (mouseLocation.Intersects(backButton))
