@@ -13,6 +13,14 @@ namespace Geometry_Bash
       protected Texture2D texture;
       protected Rectangle sizeAndPosition;
 
+
+        public Texture2D Texture
+        {
+            get { return texture; }
+            set { texture = value; }
+        }
+
+
         public GameObject(Texture2D texture, Rectangle sAP)
         {
             this.texture = texture;

@@ -8,10 +8,10 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 namespace Geometry_Bash
 {
-    class Square //: Player
+    class Square : Player
     {
         
-        public Square(int player)
+        public Square(int player, Rectangle sAP, Texture2D texture) : base(texture, sAP)
         {
             if (player == 1)
             {

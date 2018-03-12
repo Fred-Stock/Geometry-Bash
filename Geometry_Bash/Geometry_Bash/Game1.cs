@@ -80,6 +80,10 @@ namespace Geometry_Bash
         #endregion
 
 
+        ////////////////test player object/////////////////////
+        Player testPlayer;
+
+
         GameState gamestate = GameState.Menu;
 
         MouseState ms;
@@ -111,8 +115,8 @@ namespace Geometry_Bash
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            
 
+           
 
 
             base.Initialize();
@@ -163,6 +167,10 @@ namespace Geometry_Bash
             instructionsMenu = Content.Load<Texture2D>("Screens//Instructions");
             playerSelect = Content.Load<Texture2D>("Screens//Player Selection");
             optionsScreen = Content.Load<Texture2D>("Screens//Options_temp");
+
+
+            //////////////////////initilize test player//////////////////////
+            testPlayer = new Square(1, new Rectangle(50, 50, 50, 50), blueSquareTexture);
 
         }
 
@@ -321,6 +329,9 @@ namespace Geometry_Bash
             // Level Selection Screen
             if (gamestate == GameState.LevelSelect)
             {
+                //goes straight to gameplay currently for testing
+                gamestate = GameState.Game;
+                
                 // All other code for this state goes here
 
                 // handles button pressing for game state
@@ -332,6 +343,7 @@ namespace Geometry_Bash
                     }
                 }
 
+                
                 //if (buttonpressed) { gamestate = GameState.Game; }
             }
 
@@ -339,6 +351,8 @@ namespace Geometry_Bash
             if (gamestate == GameState.Game)
             {
                 // all other code for this state goes here
+                testPlayer.Move(kbState);
+
 
                 // makes sure mouse is invisible during game
                 this.IsMouseVisible = false;
@@ -388,6 +402,7 @@ namespace Geometry_Bash
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+
             GraphicsDevice.Clear(Color.DarkViolet);
             
             // mouseState for hovering
@@ -490,7 +505,10 @@ namespace Geometry_Bash
             // Actual Gameplay
             if (gamestate == GameState.Game)
             {
+
+                
                 // CHARACTER SPRITE STUFF HERE
+                spriteBatch.Draw(testPlayer.Texture, testPlayer.HitBox, Color.White);
 
                 // HEALTH BAR
 
