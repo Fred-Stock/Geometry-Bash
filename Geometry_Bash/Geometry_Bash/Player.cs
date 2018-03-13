@@ -10,13 +10,13 @@ namespace Geometry_Bash
 {
     abstract class Player : GameObject 
     {
-        protected bool keyUp;      //key bindings
-        protected bool keyDown;
-        protected bool keyLeft;
-        protected bool keyRight;
+        protected Keys keyUp;      //key bindings
+        protected Keys keyDown;
+        protected Keys keyLeft;
+        protected Keys keyRight;
 
-        protected bool keyAttack1;
-        protected bool keyAttack2;
+        protected Keys keyAttack1;
+        protected Keys keyAttack2;
 
         protected Texture2D sprite;
         protected Rectangle hitBox;
@@ -44,21 +44,21 @@ namespace Geometry_Bash
 
             keys = Keyboard.GetState();
 
-            if (keys.IsKeyDown(Keys.D))
+            if (keys.IsKeyDown(keyRight))
             {
                 temp.X += 5;
             }
-            if (keys.IsKeyDown(Keys.A))
+            if (keys.IsKeyDown(keyLeft))
             {
                 temp.X -= 5;
             }
 
-            if (keys.IsKeyDown(Keys.W))
+            if (keys.IsKeyDown(keyUp))
             {
                 temp.Y -= 5;
             }
 
-            if (keys.IsKeyDown(Keys.S))
+            if (keys.IsKeyDown(keyDown))
             {
                 temp.Y += 5;
             }

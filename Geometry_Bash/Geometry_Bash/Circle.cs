@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+
 namespace Geometry_Bash
 {
-    class Square : Player
+    class Circle : Player
     {
-        
-        public Square(int player, Rectangle sAP, Texture2D texture) : base(texture, sAP)
+        public Circle(int player, Rectangle sAP, Texture2D texture) : base(texture, sAP)
         {
             if (player == 1)
             {
@@ -19,15 +19,15 @@ namespace Geometry_Bash
                 keyDown = Keys.S;
                 keyLeft = Keys.A;
                 keyRight = Keys.D;
-                
+
                 keyAttack1 = Keys.Q;
                 keyAttack2 = Keys.E;
 
 
-                
+
             }
 
-           if (player == 2)
+            if (player == 2)
             {
                 keyUp = Keys.I;
                 keyDown = Keys.K;
@@ -38,7 +38,5 @@ namespace Geometry_Bash
                 keyAttack2 = Keys.O;
             }
         }
-
-
     }
 }

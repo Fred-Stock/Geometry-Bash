@@ -17,6 +17,14 @@ namespace Geometry_Bash
         EndGame
     }
 
+    //enums for chracter choice
+    enum Character
+    {
+        Square,
+        Circle,
+        Diamond
+    }
+
 
     /// <summary>
     /// This is the main type for your game.
@@ -80,9 +88,13 @@ namespace Geometry_Bash
         #endregion
 
 
-        ////////////////test player object/////////////////////
-        Player testPlayer;
+        //player objects
+        Player player1;
+        Player player2;
 
+        //create character enum refrences for the two players
+        Character p1Char;
+        Character p2Char;
 
         GameState gamestate = GameState.Menu;
 
@@ -169,8 +181,6 @@ namespace Geometry_Bash
             optionsScreen = Content.Load<Texture2D>("Screens//Options_temp");
 
 
-            //////////////////////initilize test player//////////////////////
-            testPlayer = new Square(1, new Rectangle(50, 50, 50, 50), blueSquareTexture);
 
         }
 
@@ -276,9 +286,28 @@ namespace Geometry_Bash
                     }
                 }
                 if (SingleKeyPress(Keys.E))
+                {
+                    //when the player readys up save what their character selection was
+                    if (redPlayerTileHighlight == 0)
+                    {
+                        p1Char = Character.Square;
+                    }
+                    else if (redPlayerTileHighlight == 1)
+                    {
+                        p1Char = Character.Circle;
+                    }
+                    else if (redPlayerTileHighlight == 2)
+                    {
+                        p1Char = Character.Diamond;
+                    }
                     redReady = true;
+
+                }
                 if (SingleKeyPress(Keys.Q))
+                {
                     redReady = false;
+
+                }
 
                 // blue player's player select
                 if (!blueReady)
@@ -299,9 +328,28 @@ namespace Geometry_Bash
                     }
                 }
                 if (SingleKeyPress(Keys.O))
+                {
+                    //when the player readys up save what their character selection was
+                    if (bluePlayerTileHighlight == 0)
+                    {
+                        p2Char = Character.Square;
+                    }
+                    else if (bluePlayerTileHighlight == 1)
+                    {
+                        p2Char = Character.Circle;
+                    }
+                    else if(bluePlayerTileHighlight == 2)
+                    {
+                        p2Char = Character.Diamond;
+                    }
                     blueReady = true;
+
+                }
                 if (SingleKeyPress(Keys.U))
+                {
                     blueReady = false;
+
+                }
 
                 // handles button pressing for game state
                 if (mouseLocation.Intersects(backButton))
@@ -322,6 +370,38 @@ namespace Geometry_Bash
                         redReady = false;
                         blueReady = false;
                         gamestate = GameState.LevelSelect;
+
+                        //create each player and make them the correct shape based off of their character enum
+                        if(p1Char == Character.Square)
+                        {
+                            player1 = new Square(1, new Rectangle(50, 50, 50, 50), redSquareTexture);
+                        }
+                        else if (p1Char == Character.Circle)
+                        {
+                            player1 = new Circle(1, new Rectangle(50, 50, 50, 50), redCircleTexture);
+
+                        }
+                        else if (p1Char == Character.Diamond)
+                        {
+                            player1 = new Diamond(1, new Rectangle(50, 50, 50, 50), redDiamondTexture);
+
+                        }
+
+                        if (p2Char == Character.Square)
+                        {
+                            player2 = new Square(2, new Rectangle(50, 550, 50, 50), blueSquareTexture);
+                        }                                                          
+                        else if (p2Char == Character.Circle)                       
+                        {                                                          
+                            player2 = new Circle(2, new Rectangle(50, 550, 50, 50), blueCircleTexture);
+
+                        }
+                        else if (p2Char == Character.Diamond)
+                        {
+                            player2 = new Diamond(2, new Rectangle(50, 550, 50, 50), blueDiamondTexture);
+
+                        }
+
                     }
                 }
             }
@@ -351,7 +431,8 @@ namespace Geometry_Bash
             if (gamestate == GameState.Game)
             {
                 // all other code for this state goes here
-                testPlayer.Move(kbState);
+                player1.Move(kbState);
+                player2.Move(kbState);
 
 
                 // makes sure mouse is invisible during game
@@ -508,7 +589,8 @@ namespace Geometry_Bash
 
                 
                 // CHARACTER SPRITE STUFF HERE
-                spriteBatch.Draw(testPlayer.Texture, testPlayer.HitBox, Color.White);
+                spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White);
+                spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White);
 
                 // HEALTH BAR
 
