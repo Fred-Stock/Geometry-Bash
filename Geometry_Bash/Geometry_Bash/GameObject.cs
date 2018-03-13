@@ -26,5 +26,9 @@ namespace Geometry_Bash
             this.texture = texture;
             sizeAndPosition = sAP;
         }
+
+
+
+
     }
 }

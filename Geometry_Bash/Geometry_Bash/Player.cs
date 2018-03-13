@@ -64,5 +64,30 @@ namespace Geometry_Bash
             }
             hitBox = temp;
         }
+
+        //method to check collision of players
+        public bool Collision(Player player1, Player player2)
+        {
+            //check if object1's x collides with object2's
+            if (player1.HitBox.X + player1.HitBox.Width > player2.HitBox.X &&
+               player1.HitBox.X < player2.HitBox.X + player2.HitBox.Width)
+            {
+                //check if object1's y collided with object2's
+                if (player1.HitBox.Y + player1.HitBox.Height > player2.HitBox.Y &&
+                   player1.HitBox.Y < player2.HitBox.Y + player2.HitBox.Height)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 }

@@ -589,8 +589,17 @@ namespace Geometry_Bash
 
                 
                 // CHARACTER SPRITE STUFF HERE
-                spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White);
-                spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White);
+                if(player1.Collision(player1, player2))
+                {
+                    spriteBatch.Draw(player1.Texture, player1.HitBox, Color.Black);
+                    spriteBatch.Draw(player2.Texture, player2.HitBox, Color.Black);
+                }                                                           
+                else
+                {
+                    spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White);
+                    spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White);
+                }
+
 
                 // HEALTH BAR
 
