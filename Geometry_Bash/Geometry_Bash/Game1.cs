@@ -370,6 +370,7 @@ namespace Geometry_Bash
                         redReady = false;
                         blueReady = false;
                         gamestate = GameState.LevelSelect;
+                        //test
 
                         //create each player and make them the correct shape based off of their character enum
                         if(p1Char == Character.Square)
