@@ -440,11 +440,11 @@ namespace Geometry_Bash
                 player1.Attack(player1, player2, kbState);
                 player2.Attack(player2, player1, kbState);
 
-                if(player1.Health == 0)
+                if(player1.Health <= 0)
                 {
                     gamestate = GameState.Menu;
                 }
-                else if (player2.Health == 0)
+                else if (player2.Health <= 0)
                 {
                     gamestate = GameState.Menu;
                 }
@@ -505,7 +505,7 @@ namespace Geometry_Bash
             Rectangle mouseLocation = new Rectangle(ms.Position, new Point(5, 5));
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
 
             // sets stardard values for the window to help with drawing
             int windowWidth = GraphicsDevice.Viewport.Width;
@@ -600,12 +600,16 @@ namespace Geometry_Bash
             // Actual Gameplay
             if (gamestate == GameState.Game)
             {
-                spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White);
-                spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White);
+                float transparency1 = (float)player1.Health/10;
+                float transparency2 = (float)player2.Health/10;
+                spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
+                spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
 
                
 
                 // HEALTH BAR
+                
+
 
                 // SUPER METER
 
