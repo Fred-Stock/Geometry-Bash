@@ -643,6 +643,10 @@ namespace Geometry_Bash
 
             }
 
+            //Debug Drawing
+            spriteBatch.DrawString(text, Mouse.GetState().X + "," + Mouse.GetState().Y, new Vector2(5,5), Color.Wheat);
+
+
 
             spriteBatch.End();
             base.Draw(gameTime);
