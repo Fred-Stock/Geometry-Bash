@@ -376,29 +376,29 @@ namespace Geometry_Bash
                         //create each player and make them the correct shape based off of their character enum
                         if(p1Char == Character.Square)
                         {
-                            player1 = new Square(1, new Rectangle(50, 50, 50, 50), redSquareTexture);
+                            player1 = new Square(1, new Rectangle(50, 50, 50, 50), redSquareTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
                         }
                         else if (p1Char == Character.Circle)
                         {
-                            player1 = new Circle(1, new Rectangle(50, 50, 50, 50), redCircleTexture);
+                            player1 = new Circle(1, new Rectangle(50, 50, 50, 50), redCircleTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
                         }
                         else if (p1Char == Character.Diamond)
                         {
-                            player1 = new Diamond(1, new Rectangle(50, 50, 50, 50), redDiamondTexture);
+                            player1 = new Diamond(1, new Rectangle(50, 50, 50, 50), redDiamondTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
                         }
 
                         if (p2Char == Character.Square)
                         {
-                            player2 = new Square(2, new Rectangle(50, 550, 50, 50), blueSquareTexture);
+                            player2 = new Square(2, new Rectangle(50, 550, 50, 50), blueSquareTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
 
                         }                                                          
                         else if (p2Char == Character.Circle)                       
                         {                                                          
-                            player2 = new Circle(2, new Rectangle(50, 550, 50, 50), blueCircleTexture);
+                            player2 = new Circle(2, new Rectangle(50, 550, 50, 50), blueCircleTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
                         }
                         else if (p2Char == Character.Diamond)
                         {
-                            player2 = new Diamond(2, new Rectangle(50, 550, 50, 50), blueDiamondTexture);
+                            player2 = new Diamond(2, new Rectangle(50, 550, 50, 50), blueDiamondTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
                         }
 
                     }
@@ -436,6 +436,9 @@ namespace Geometry_Bash
                 player1.Move(kbState);
                 player2.Move(kbState);
 
+                player1.OutsideCollision(player1);
+                player2.OutsideCollision(player2);
+
                 player1.Attack(player1, player2, kbState);
                 player2.Attack(player2, player1, kbState);
 
@@ -451,6 +454,8 @@ namespace Geometry_Bash
                 // makes sure mouse is invisible during game
                 this.IsMouseVisible = false;
 
+
+                
                 // pauses game
                 if (SingleKeyPress(Keys.P))
                 { }

@@ -13,7 +13,7 @@ namespace Geometry_Bash
     {
 
 
-        public Diamond(int player, Rectangle sAP, Texture2D texture) : base(texture, sAP)
+        public Diamond(int player, Rectangle sAP, Texture2D texture, int windowWidth, int windowHeight) : base(texture, sAP, windowWidth, windowHeight)
         {
             //set health
             health = 10;
