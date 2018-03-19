@@ -66,6 +66,7 @@ namespace Geometry_Bash
         Texture2D instructionsMenu;
         Texture2D playerSelect;
         Texture2D optionsScreen;
+        Texture2D levelSelect;
         #endregion
 
         #region Rectangles
@@ -179,7 +180,7 @@ namespace Geometry_Bash
             instructionsMenu = Content.Load<Texture2D>("Screens//Instructions");
             playerSelect = Content.Load<Texture2D>("Screens//Player Selection");
             optionsScreen = Content.Load<Texture2D>("Screens//Options_temp");
-
+            levelSelect = Content.Load<Texture2D>("Screens//Level_Selection");
 
 
         }
@@ -571,7 +572,11 @@ namespace Geometry_Bash
             // Level Selection Screen
             if (gamestate == GameState.LevelSelect)
             {
-                spriteBatch.Draw(yellowButton, backButton, Color.White);
+                // draws background first
+                spriteBatch.Draw(playerSelect, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
+
+                
+                //spriteBatch.Draw(yellowButton, backButton, Color.White);
 
                 // changes back button if mouse hovers over
                 if (mouseLocation.Intersects(backButton))
