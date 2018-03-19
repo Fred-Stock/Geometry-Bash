@@ -156,6 +156,9 @@ namespace Geometry_Bash
             blueCircleTexture = Content.Load<Texture2D>("CharSprites//circle_blue");
             blueDiamondTexture = Content.Load<Texture2D>("CharSprites//diamond_blue");
 
+
+
+
             // load button textures
             yellowButton = Content.Load<Texture2D>("Button Sprites//button_yellow");
             play = Content.Load<Texture2D>("Button Sprites//play_hover");
@@ -390,6 +393,7 @@ namespace Geometry_Bash
                         if (p2Char == Character.Square)
                         {
                             player2 = new Square(2, new Rectangle(50, 550, 50, 50), blueSquareTexture);
+
                         }                                                          
                         else if (p2Char == Character.Circle)                       
                         {                                                          
@@ -409,6 +413,8 @@ namespace Geometry_Bash
             // Level Selection Screen
             if (gamestate == GameState.LevelSelect)
             {
+
+
                 //goes straight to gameplay currently for testing
                 gamestate = GameState.Game;
                 
@@ -434,6 +440,17 @@ namespace Geometry_Bash
                 player1.Move(kbState);
                 player2.Move(kbState);
 
+                player1.Attack(player1, player2, kbState);
+                player2.Attack(player2, player1, kbState);
+
+                if(player1.Health == 0)
+                {
+                    gamestate = GameState.Menu;
+                }
+                else if (player2.Health == 0)
+                {
+                    gamestate = GameState.Menu;
+                }
 
                 // makes sure mouse is invisible during game
                 this.IsMouseVisible = false;
@@ -586,20 +603,10 @@ namespace Geometry_Bash
             // Actual Gameplay
             if (gamestate == GameState.Game)
             {
+                spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White);
+                spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White);
 
-                
-                // CHARACTER SPRITE STUFF HERE
-                if(player1.Collision(player1, player2))
-                {
-                    spriteBatch.Draw(player1.Texture, player1.HitBox, Color.Black);
-                    spriteBatch.Draw(player2.Texture, player2.HitBox, Color.Black);
-                }                                                           
-                else
-                {
-                    spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White);
-                    spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White);
-                }
-
+               
 
                 // HEALTH BAR
 
