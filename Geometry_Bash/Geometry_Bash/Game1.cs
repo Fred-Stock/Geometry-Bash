@@ -345,8 +345,8 @@ namespace Geometry_Bash
                     {
                         p2Char = Character.Diamond;
                     }
-                    blueReady = true;
 
+                    blueReady = true;
                 }
                 if (SingleKeyPress(Keys.U))
                 {
@@ -404,15 +404,13 @@ namespace Geometry_Bash
 
                     }
                 }
+
+                previousKbState = kbState;
             }
 
             // Level Selection Screen
             if (gamestate == GameState.LevelSelect)
             {
-
-
-
-                
                 // All other code for this state goes here
 
                 // handles button pressing for game state
@@ -425,9 +423,7 @@ namespace Geometry_Bash
                     if (SingleLeftMousePress())
                     { gamestate = GameState.PlayerSelect; }
                 }
-
                 
-                //if (buttonpressed) { gamestate = GameState.Game; }
             }
 
             // Actual Gameplay
@@ -589,10 +585,9 @@ namespace Geometry_Bash
             if (gamestate == GameState.LevelSelect)
             {
                 // draws background first
-                spriteBatch.Draw(playerSelect, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
-
+                spriteBatch.Draw(levelSelect, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
                 
-                //spriteBatch.Draw(yellowButton, backButton, Color.White);
+                spriteBatch.Draw(yellowButton, backButton, Color.White);
 
                 // changes back button if mouse hovers over
                 if (mouseLocation.Intersects(backButton))
