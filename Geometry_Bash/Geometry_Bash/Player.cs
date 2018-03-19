@@ -8,8 +8,11 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 namespace Geometry_Bash
 {
-    abstract class Player : GameObject 
+    abstract class Player : GameObject
     {
+        //add a keyboard state refrence so key presses can be monitored
+        KeyboardState prevKbState;
+
         protected Keys keyUp;      //key bindings
         protected Keys keyDown;
         protected Keys keyLeft;
@@ -23,7 +26,10 @@ namespace Geometry_Bash
 
         protected double health;
 
-        
+        public double Health
+        {
+            get { return health; }
+        }
 
         public Rectangle HitBox
         {
@@ -89,5 +95,20 @@ namespace Geometry_Bash
             }
         }
 
+
+        public void Attack(Player player1, Player player2, KeyboardState kbState)
+        {
+           
+            if (kbState.IsKeyDown(player1.keyAttack1) && prevKbState.IsKeyUp(player1.keyAttack1))
+            {
+                if(player1.Collision(player1, player2))
+                {
+                    player2.health--;
+                }
+            }
+
+            prevKbState = kbState;
+        }
+        
     }
 }
