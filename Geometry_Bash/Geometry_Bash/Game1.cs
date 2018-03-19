@@ -309,7 +309,6 @@ namespace Geometry_Bash
                 if (SingleKeyPress(Keys.Q))
                 {
                     redReady = false;
-
                 }
 
                 // blue player's player select
@@ -382,12 +381,10 @@ namespace Geometry_Bash
                         else if (p1Char == Character.Circle)
                         {
                             player1 = new Circle(1, new Rectangle(50, 50, 50, 50), redCircleTexture);
-
                         }
                         else if (p1Char == Character.Diamond)
                         {
                             player1 = new Diamond(1, new Rectangle(50, 50, 50, 50), redDiamondTexture);
-
                         }
 
                         if (p2Char == Character.Square)
@@ -398,12 +395,10 @@ namespace Geometry_Bash
                         else if (p2Char == Character.Circle)                       
                         {                                                          
                             player2 = new Circle(2, new Rectangle(50, 550, 50, 50), blueCircleTexture);
-
                         }
                         else if (p2Char == Character.Diamond)
                         {
                             player2 = new Diamond(2, new Rectangle(50, 550, 50, 50), blueDiamondTexture);
-
                         }
 
                     }
@@ -421,12 +416,14 @@ namespace Geometry_Bash
                 // All other code for this state goes here
 
                 // handles button pressing for game state
+                // press enter to go to Game state
+                if (SingleKeyPress(Keys.Enter))
+                { gamestate = GameState.Game; }
+                // press back button to go to player select
                 if (mouseLocation.Intersects(backButton))
                 {
                     if (SingleLeftMousePress())
-                    {
-                        gamestate = GameState.PlayerSelect;
-                    }
+                    { gamestate = GameState.PlayerSelect; }
                 }
 
                 
