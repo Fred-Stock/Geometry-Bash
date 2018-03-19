@@ -111,6 +111,7 @@ namespace Geometry_Bash
             {
                 if(player1.Collision(player1, player2))
                 {
+                    
                     player2.health--;
                 }
             }
