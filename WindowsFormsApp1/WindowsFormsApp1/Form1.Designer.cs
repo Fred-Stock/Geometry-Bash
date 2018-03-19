@@ -98,7 +98,6 @@
             this.SquareTextBox.Name = "SquareTextBox";
             this.SquareTextBox.Size = new System.Drawing.Size(200, 20);
             this.SquareTextBox.TabIndex = 3;
-            this.SquareTextBox.Text = "Enter Value";
             this.SquareTextBox.TextChanged += new System.EventHandler(this.SquareTextBox_TextChanged);
             // 
             // CircleTextBox
@@ -107,7 +106,6 @@
             this.CircleTextBox.Name = "CircleTextBox";
             this.CircleTextBox.Size = new System.Drawing.Size(200, 20);
             this.CircleTextBox.TabIndex = 4;
-            this.CircleTextBox.Text = "Enter Value";
             this.CircleTextBox.TextChanged += new System.EventHandler(this.CircleTextBox_TextChanged);
             // 
             // DiamondTextBox
@@ -116,7 +114,6 @@
             this.DiamondTextBox.Name = "DiamondTextBox";
             this.DiamondTextBox.Size = new System.Drawing.Size(200, 20);
             this.DiamondTextBox.TabIndex = 5;
-            this.DiamondTextBox.Text = "Enter Value";
             this.DiamondTextBox.TextChanged += new System.EventHandler(this.DiamondTextBox_TextChanged);
             // 
             // SquareDamage
@@ -167,7 +164,6 @@
             this.SquareDamageText.Name = "SquareDamageText";
             this.SquareDamageText.Size = new System.Drawing.Size(200, 20);
             this.SquareDamageText.TabIndex = 9;
-            this.SquareDamageText.Text = "Enter Value";
             this.SquareDamageText.TextChanged += new System.EventHandler(this.SquareDamageText_TextChanged);
             // 
             // CircleDamageText
@@ -176,7 +172,6 @@
             this.CircleDamageText.Name = "CircleDamageText";
             this.CircleDamageText.Size = new System.Drawing.Size(200, 20);
             this.CircleDamageText.TabIndex = 10;
-            this.CircleDamageText.Text = "Enter Value";
             this.CircleDamageText.TextChanged += new System.EventHandler(this.CircleDamageText_TextChanged);
             // 
             // DiamondDamageText
@@ -185,7 +180,6 @@
             this.DiamondDamageText.Name = "DiamondDamageText";
             this.DiamondDamageText.Size = new System.Drawing.Size(200, 20);
             this.DiamondDamageText.TabIndex = 11;
-            this.DiamondDamageText.Text = "Enter Value";
             this.DiamondDamageText.TextChanged += new System.EventHandler(this.DiamondDamageText_TextChanged);
             // 
             // DiamondSpeed
@@ -236,7 +230,6 @@
             this.DiamondSpeedText.Name = "DiamondSpeedText";
             this.DiamondSpeedText.Size = new System.Drawing.Size(200, 20);
             this.DiamondSpeedText.TabIndex = 17;
-            this.DiamondSpeedText.Text = "Enter Value";
             this.DiamondSpeedText.TextChanged += new System.EventHandler(this.DiamondSpeedText_TextChanged);
             // 
             // CircleSpeedText
@@ -245,7 +238,6 @@
             this.CircleSpeedText.Name = "CircleSpeedText";
             this.CircleSpeedText.Size = new System.Drawing.Size(200, 20);
             this.CircleSpeedText.TabIndex = 16;
-            this.CircleSpeedText.Text = "Enter Value";
             this.CircleSpeedText.TextChanged += new System.EventHandler(this.CircleSpeedText_TextChanged);
             // 
             // SquareSpeedText
@@ -254,7 +246,6 @@
             this.SquareSpeedText.Name = "SquareSpeedText";
             this.SquareSpeedText.Size = new System.Drawing.Size(200, 20);
             this.SquareSpeedText.TabIndex = 15;
-            this.SquareSpeedText.Text = "Enter Value";
             this.SquareSpeedText.TextChanged += new System.EventHandler(this.SquareSpeedText_TextChanged);
             // 
             // SaveButton
