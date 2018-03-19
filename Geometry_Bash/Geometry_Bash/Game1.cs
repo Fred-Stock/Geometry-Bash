@@ -271,6 +271,7 @@ namespace Geometry_Bash
             {
                 // All other code for this state goes here
 
+                #region Selection Process
                 // red player's player select
                 if (!redReady)
                 {
@@ -353,6 +354,7 @@ namespace Geometry_Bash
                     blueReady = false;
 
                 }
+                #endregion
 
                 // handles button pressing for game state
                 if (mouseLocation.Intersects(backButton))
