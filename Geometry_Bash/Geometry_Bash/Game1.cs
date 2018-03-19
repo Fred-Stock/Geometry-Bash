@@ -84,8 +84,13 @@ namespace Geometry_Bash
         Rectangle redCircle;
         Rectangle redDiamond;
 
+        // ready banners
         Rectangle redReadyBanner;
         Rectangle blueReadyBanner;
+
+        // base rectangles for actual game
+        Rectangle p1rec;
+        Rectangle p2rec;
         #endregion
 
 
@@ -376,34 +381,38 @@ namespace Geometry_Bash
                         blueReady = false;
                         gamestate = GameState.LevelSelect;
 
+                        #region Player Initialization
                         //create each player and make them the correct shape based off of their character enum
+                        p1rec = new Rectangle(50, 50, 50, 50);
+                        p2rec = new Rectangle(50, 550, 50, 50);
+                        // player 1
                         if(p1Char == Character.Square)
                         {
-                            player1 = new Square(1, new Rectangle(50, 50, 50, 50), redSquareTexture);
+                            player1 = new Square(1, p1rec, redSquareTexture);
                         }
                         else if (p1Char == Character.Circle)
                         {
-                            player1 = new Circle(1, new Rectangle(50, 50, 50, 50), redCircleTexture);
+                            player1 = new Circle(1, p1rec, redCircleTexture);
                         }
                         else if (p1Char == Character.Diamond)
                         {
-                            player1 = new Diamond(1, new Rectangle(50, 50, 50, 50), redDiamondTexture);
+                            player1 = new Diamond(1, p1rec, redDiamondTexture);
                         }
-
+                        // player 2
                         if (p2Char == Character.Square)
                         {
-                            player2 = new Square(2, new Rectangle(50, 550, 50, 50), blueSquareTexture);
+                            player2 = new Square(2, p2rec, blueSquareTexture);
 
                         }                                                          
                         else if (p2Char == Character.Circle)                       
                         {                                                          
-                            player2 = new Circle(2, new Rectangle(50, 550, 50, 50), blueCircleTexture);
+                            player2 = new Circle(2, p2rec, blueCircleTexture);
                         }
                         else if (p2Char == Character.Diamond)
                         {
-                            player2 = new Diamond(2, new Rectangle(50, 550, 50, 50), blueDiamondTexture);
+                            player2 = new Diamond(2, p2rec, blueDiamondTexture);
                         }
-
+                        #endregion
                     }
                 }
 
@@ -516,7 +525,7 @@ namespace Geometry_Bash
                 // main menu screen
                 spriteBatch.Draw(mainMenu, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
-                // fixes button locations (the rectangles)
+                // button locations (the rectangles)
                 playButton = new Rectangle(new Point(windowWidth / 2 - standardButtonSize.X / 2, 432), standardButtonSize);
                 instructionsButton = new Rectangle(new Point(windowWidth / 2 - standardButtonSize.X / 2, 530), standardButtonSize);
                 optionsButton = new Rectangle(new Point(windowWidth / 2 - standardButtonSize.X / 2, 628), standardButtonSize);
@@ -599,10 +608,10 @@ namespace Geometry_Bash
             // Actual Gameplay
             if (gamestate == GameState.Game)
             {
+
+
                 spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White);
                 spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White);
-
-               
 
                 // HEALTH BAR
 
