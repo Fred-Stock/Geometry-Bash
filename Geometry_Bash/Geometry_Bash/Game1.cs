@@ -586,8 +586,6 @@ namespace Geometry_Bash
             {
                 // draws background first
                 spriteBatch.Draw(levelSelect, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
-                
-                spriteBatch.Draw(yellowButton, backButton, Color.White);
 
                 // changes back button if mouse hovers over
                 if (mouseLocation.Intersects(backButton))
