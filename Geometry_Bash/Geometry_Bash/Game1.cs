@@ -629,6 +629,15 @@ namespace Geometry_Bash
                 spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
                 spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
 
+
+                if(player1.Health <= 0)
+                {
+                    gamestate = GameState.Menu;
+                }
+                if(player2.Health <= 0)
+                {
+                    gamestate = GameState.Menu;
+                }
                 // HEALTH BAR
                 
 

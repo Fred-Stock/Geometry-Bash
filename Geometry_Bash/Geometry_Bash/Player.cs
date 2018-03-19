@@ -13,7 +13,7 @@ namespace Geometry_Bash
 
 
         //add a keyboard state refrence so key presses can be monitored
-        KeyboardState prevKbState;
+        protected KeyboardState prevKbState;
 
         protected Keys keyUp;      //key bindings
         protected Keys keyDown;
@@ -34,6 +34,7 @@ namespace Geometry_Bash
         public double Health
         {
             get { return health; }
+            set { health = value; }
         }
 
         public Rectangle HitBox
@@ -103,7 +104,7 @@ namespace Geometry_Bash
         }
 
 
-        public void Attack(Player player1, Player player2, KeyboardState kbState)
+        public virtual void Attack(Player player1, Player player2, KeyboardState kbState)
         {
            
             if (kbState.IsKeyDown(player1.keyAttack1) && prevKbState.IsKeyUp(player1.keyAttack1))
@@ -118,12 +119,13 @@ namespace Geometry_Bash
             prevKbState = kbState;
         }
 
+
+
         public void OutsideCollision(Player player)
         {
             Rectangle temp = player.HitBox;
             if (player.HitBox.X > windowWidth - player.HitBox.Width)
             {
-                
                 temp.X -= 4;
                 player.HitBox = temp;
             }

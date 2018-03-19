@@ -14,15 +14,15 @@ namespace GameTool
     public partial class Form1 : Form
     {
         //fields
-        int squareHealth;
-        int circleHealth;
-        int diamondHealth;
-        int squareDamage;
-        int circleDamage;
-        int diamondDamage;
-        int squareSpeed;
-        int circleSpeed;
-        int diamondSpeed;
+        int squareHealth=1;
+        int circleHealth = 1;
+        int diamondHealth = 1;
+        int squareDamage = 1;
+        int circleDamage = 1;
+        int diamondDamage = 1;
+        int squareSpeed = 1;
+        int circleSpeed = 1;
+        int diamondSpeed = 1;
         public Form1()
         {
             InitializeComponent();
@@ -92,5 +92,6 @@ namespace GameTool
                 Console.WriteLine("Error:" + ex);
             }
         }
+
     }
 }
