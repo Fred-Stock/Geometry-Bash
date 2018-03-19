@@ -13,7 +13,7 @@ namespace Geometry_Bash
     {
 
         
-        public Square(int player, Rectangle sAP, Texture2D texture) : base(texture, sAP)
+        public Square(int player, Rectangle sAP, Texture2D texture, int windowWidth, int windowHeight) : base(texture, sAP, windowWidth, windowHeight)
         {
             //set health
             health = 10;

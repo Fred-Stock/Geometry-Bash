@@ -10,6 +10,8 @@ namespace Geometry_Bash
 {
     abstract class Player : GameObject
     {
+
+
         //add a keyboard state refrence so key presses can be monitored
         KeyboardState prevKbState;
 
@@ -26,6 +28,9 @@ namespace Geometry_Bash
 
         protected double health;
 
+        protected int windowWidth;
+        protected int windowHeight;
+
         public double Health
         {
             get { return health; }
@@ -34,12 +39,14 @@ namespace Geometry_Bash
         public Rectangle HitBox
         {
             get { return hitBox; }
+            set { hitBox = value; }
         }
 
-        public Player(Texture2D texture,  Rectangle sAP) : base(texture, sAP)
+        public Player(Texture2D texture,  Rectangle sAP, int windowWidth, int windowHeight) : base(texture, sAP)
         {
             hitBox = sAP;
-
+            this.windowWidth = windowWidth;
+            this.windowHeight = windowHeight;
         }
 
         public void Move(KeyboardState keys)
@@ -109,6 +116,32 @@ namespace Geometry_Bash
             }
 
             prevKbState = kbState;
+        }
+
+        public void OutsideCollision(Player player)
+        {
+            Rectangle temp = player.HitBox;
+            if (player.HitBox.X > windowWidth - player.HitBox.Width)
+            {
+                
+                temp.X -= 4;
+                player.HitBox = temp;
+            }
+            if(player.HitBox.Y > windowHeight - player.HitBox.Height)
+            {
+                temp.Y -= 4;
+                player.HitBox = temp;
+            }
+            if (player.HitBox.X < 0)
+            {
+                temp.X += 4;
+                player.HitBox = temp;
+            }
+            if (player.HitBox.Y < 0)
+            {
+                temp.Y += 4;
+                player.HitBox = temp;
+            }
         }
         
     }
