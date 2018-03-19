@@ -410,8 +410,7 @@ namespace Geometry_Bash
             {
 
 
-                //goes straight to gameplay currently for testing
-                gamestate = GameState.Game;
+
                 
                 // All other code for this state goes here
 
