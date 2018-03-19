@@ -84,6 +84,10 @@ namespace Geometry_Bash
         Rectangle redCircle;
         Rectangle redDiamond;
 
+        // level select tiles
+        Rectangle level1;
+        Rectangle level2;
+
         // ready banners
         Rectangle redReadyBanner;
         Rectangle blueReadyBanner;
@@ -603,7 +607,12 @@ namespace Geometry_Bash
                 spriteBatch.Draw(levelSelect, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
                 // buttons for each level
-                spriteBatch.Draw(yellowButton, new Rectangle(new Point(280, 260), new Point(200, 200)), Color.White);
+                level1 = new Rectangle(new Point(278, 262), new Point(251, 193));
+                level2 = new Rectangle(new Point(753, 262), new Point(251, 193));
+                if (mouseLocation.Intersects(level1))
+                { spriteBatch.Draw(yellowButton, level1, Color.White); }
+                if (mouseLocation.Intersects(level2))
+                { spriteBatch.Draw(yellowButton, level2, Color.White); }
 
                 // changes back button if mouse hovers over
                 if (mouseLocation.Intersects(backButton))
