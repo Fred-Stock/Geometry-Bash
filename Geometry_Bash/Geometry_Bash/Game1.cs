@@ -388,29 +388,28 @@ namespace Geometry_Bash
                         // player 1
                         if(p1Char == Character.Square)
                         {
-                            player1 = new Square(1, new Rectangle(50, 50, 50, 50), redSquareTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                            player1 = new Square(1, p1rec, redSquareTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
                         }
                         else if (p1Char == Character.Circle)
                         {
-                            player1 = new Circle(1, new Rectangle(50, 50, 50, 50), redCircleTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                            player1 = new Circle(1, p1rec, redCircleTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
                         }
                         else if (p1Char == Character.Diamond)
                         {
-                            player1 = new Diamond(1, new Rectangle(50, 50, 50, 50), redDiamondTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                            player1 = new Diamond(1, p1rec, redDiamondTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
                         }
                         // player 2
                         if (p2Char == Character.Square)
                         {
-                            player2 = new Square(2, new Rectangle(50, 550, 50, 50), blueSquareTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
-
+                            player2 = new Square(2, p2rec, blueSquareTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
                         }                                                          
                         else if (p2Char == Character.Circle)                       
                         {                                                          
-                            player2 = new Circle(2, new Rectangle(50, 550, 50, 50), blueCircleTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                            player2 = new Circle(2, p2rec, blueCircleTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
                         }
                         else if (p2Char == Character.Diamond)
                         {
-                            player2 = new Diamond(2, new Rectangle(50, 550, 50, 50), blueDiamondTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                            player2 = new Diamond(2, p2rec, blueDiamondTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
                         }
                         #endregion
                     }
