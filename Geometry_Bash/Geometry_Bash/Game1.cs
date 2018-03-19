@@ -602,6 +602,9 @@ namespace Geometry_Bash
                 // draws background first
                 spriteBatch.Draw(levelSelect, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
+                // buttons for each level
+                spriteBatch.Draw(yellowButton, new Rectangle(new Point(300, 300), new Point(200, 200)), Color.White);
+
                 // changes back button if mouse hovers over
                 if (mouseLocation.Intersects(backButton))
                 { spriteBatch.Draw(back, backButton, Color.White); }
