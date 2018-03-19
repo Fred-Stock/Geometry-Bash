@@ -66,6 +66,7 @@ namespace Geometry_Bash
         Texture2D instructionsMenu;
         Texture2D playerSelect;
         Texture2D optionsScreen;
+        Texture2D levelSelect;
         #endregion
 
         #region Rectangles
@@ -182,7 +183,7 @@ namespace Geometry_Bash
             instructionsMenu = Content.Load<Texture2D>("Screens//Instructions");
             playerSelect = Content.Load<Texture2D>("Screens//Player Selection");
             optionsScreen = Content.Load<Texture2D>("Screens//Options_temp");
-
+            levelSelect = Content.Load<Texture2D>("Screens//Level_Selection");
 
 
         }
@@ -344,8 +345,8 @@ namespace Geometry_Bash
                     {
                         p2Char = Character.Diamond;
                     }
-                    blueReady = true;
 
+                    blueReady = true;
                 }
                 if (SingleKeyPress(Keys.U))
                 {
@@ -403,15 +404,13 @@ namespace Geometry_Bash
 
                     }
                 }
+
+                previousKbState = kbState;
             }
 
             // Level Selection Screen
             if (gamestate == GameState.LevelSelect)
             {
-
-
-
-                
                 // All other code for this state goes here
 
                 // handles button pressing for game state
@@ -424,9 +423,7 @@ namespace Geometry_Bash
                     if (SingleLeftMousePress())
                     { gamestate = GameState.PlayerSelect; }
                 }
-
                 
-                //if (buttonpressed) { gamestate = GameState.Game; }
             }
 
             // Actual Gameplay
@@ -592,7 +589,8 @@ namespace Geometry_Bash
             // Level Selection Screen
             if (gamestate == GameState.LevelSelect)
             {
-                spriteBatch.Draw(yellowButton, backButton, Color.White);
+                // draws background first
+                spriteBatch.Draw(levelSelect, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
                 // changes back button if mouse hovers over
                 if (mouseLocation.Intersects(backButton))
