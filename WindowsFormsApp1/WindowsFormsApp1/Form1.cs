@@ -75,7 +75,7 @@ namespace GameTool
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-            //outout is "sh,ch,dh,sd,cd,dd,ss,cs,ds"
+            //outout is "squareHealth,circleHealth,diamondHealth,squareDamage,circleDamage,diamondDiamond,squareSpeed,circleSpeed,diamondSpeed"
 
             string output = squareHealth + "," + circleHealth + "," + diamondHealth + "," +
                             squareDamage + "," + circleDamage + "," + diamondDamage + "," +
@@ -83,7 +83,7 @@ namespace GameTool
 
             try
             {
-                StreamWriter fileOut = new StreamWriter("D:\\Docs\\test.txt");
+                StreamWriter fileOut = new StreamWriter("stats.txt");
                 fileOut.Write(output);
                 fileOut.Close();
             }
