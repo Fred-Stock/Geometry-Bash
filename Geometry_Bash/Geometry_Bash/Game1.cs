@@ -71,6 +71,8 @@ namespace Geometry_Bash
         Texture2D levelSelect;
         Texture2D gameScreen;
         Texture2D gameOver;
+
+        Texture2D wall;
         #endregion
 
         #region Rectangles
@@ -146,6 +148,57 @@ namespace Geometry_Bash
         {
             // TODO: Add your initialization logic here
 
+            // load level 1
+            /*
+            try
+            {
+                reader = new StreamReader("Level1.txt");
+                string line = "";
+                int rows1 = 0;
+                int cols1 = 0;
+                List<string> level1CompleteRows = null;
+                int firstLineCheck = 0;
+
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (firstLineCheck == 0)
+                    {
+                        // get rows/cols
+                        string[] rowscols = line.Split(',');
+                        rows1 = int.Parse(rowscols[0]);
+                        cols1 = int.Parse(rowscols[1]);
+                        firstLineCheck++;
+                    }
+
+                    else
+                    {
+                        // puts all rows into list
+                        level1CompleteRows.Add(line);
+                    }
+                }
+
+                level1 = new char[rows1, cols1];
+
+                for (int i = 0; i < rows1; i++)
+                {
+                    for (int j = 0; j < cols1; j++)
+                    {
+                        level1[i, j] = level1CompleteRows[j][i];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+            }
+            */
 
             base.Initialize();
         }
@@ -198,55 +251,8 @@ namespace Geometry_Bash
             gameScreen = Content.Load<Texture2D>("Screens//LevelBackground");
             gameOver = Content.Load<Texture2D>("Screens//GameOver");
 
-            // load level 1
-            try
-            {
-                reader = new StreamReader("Level1.txt");
-                string line= "";
-                int rows1 = 0;
-                int cols1 = 0;
-                List<string> level1CompleteRows = null;
-                int firstLineCheck = 0;
-
-                while ((line = reader.ReadLine()) != null)
-                {
-                    if (firstLineCheck == 0)
-                    {
-                        // get rows/cols
-                        string[] rowscols = line.Split(',');
-                        rows1 = int.Parse(rowscols[0]);
-                        cols1 = int.Parse(rowscols[1]);
-                        firstLineCheck++;
-                    }
-
-                    else
-                    {
-                        // puts all rows into list
-                        level1CompleteRows.Add(line);
-                    }
-                }
-
-                level1 = new char[rows1, cols1];
-                
-                for (int i = 0; i < rows1; i++)
-                {
-                    for (int j = 0; j < cols1; j++)
-                    {
-                        level1[i, j] = level1CompleteRows[j][i];
-                    }
-                }
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-            finally
-            {
-                if (reader != null)
-                {
-                    reader.Close();
-                }
-            }
+            // walls
+            wall = Content.Load<Texture2D>("TopBarrier");
         }
 
         /// <summary>
@@ -677,7 +683,22 @@ namespace Geometry_Bash
             // Actual Gameplay
             if (gamestate == GameState.Game)
             {
+                // background
                 spriteBatch.Draw(gameScreen, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
+
+                // walls
+                /*
+                for (int i = 0; i < level1.GetLength(0); i++)
+                {
+                    for (int j = 0; j < level1.GetLength(1); j++)
+                    {
+                        if (level1[i,j] == 'x')
+                        {
+                            spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
+                        }
+                    }
+                }
+                */
 
                 float transparency1 = (float)player1.Health/10;
                 float transparency2 = (float)player2.Health/10;
