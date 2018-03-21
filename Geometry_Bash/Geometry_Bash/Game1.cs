@@ -69,6 +69,7 @@ namespace Geometry_Bash
         Texture2D playerSelect;
         Texture2D optionsScreen;
         Texture2D levelSelect;
+        Texture2D gameScreen;
         #endregion
 
         #region Rectangles
@@ -193,6 +194,7 @@ namespace Geometry_Bash
             playerSelect = Content.Load<Texture2D>("Screens//Player Selection");
             optionsScreen = Content.Load<Texture2D>("Screens//Options_temp");
             levelSelect = Content.Load<Texture2D>("Screens//Level_Selection");
+            gameScreen = Content.Load<Texture2D>("Screens//LevelBackground");
 
             // load level 1
             try
@@ -672,6 +674,8 @@ namespace Geometry_Bash
             // Actual Gameplay
             if (gamestate == GameState.Game)
             {
+                spriteBatch.Draw(gameScreen, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
+
                 float transparency1 = (float)player1.Health/10;
                 float transparency2 = (float)player2.Health/10;
                 spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
