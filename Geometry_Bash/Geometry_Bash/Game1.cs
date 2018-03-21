@@ -52,6 +52,8 @@ namespace Geometry_Bash
         Texture2D back;
         Texture2D instructions;
         Texture2D options;
+        Texture2D player1_wins;
+        Texture2D player2_wins;
 
         // character select tiles
         Texture2D blueSquareTile;
@@ -188,6 +190,8 @@ namespace Geometry_Bash
             redDiamondTile = Content.Load<Texture2D>("Button Sprites//reddiamond_hover");
 
             readyBanner = Content.Load<Texture2D>("ReadyBanner");
+            player1_wins = Content.Load<Texture2D>("Screens//player1_wins");
+            player2_wins = Content.Load<Texture2D>("Screens//player2_wins");
 
             // screen loads
             mainMenu = Content.Load<Texture2D>("Screens//Main Menu");
