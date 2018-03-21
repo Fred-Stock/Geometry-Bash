@@ -105,8 +105,7 @@ namespace Geometry_Bash
         Rectangle p2rec;
         #endregion
 
-
-        // level loading fields
+        #region Level Loading Fields
         StreamReader reader = null;
         char[,] level1;
         char[,] level2;
@@ -118,6 +117,7 @@ namespace Geometry_Bash
         List<string> level1CompleteRows = new List<string>();
         List<string> level2CompleteRows = new List<string>();
         int levelChoice = 0;
+        #endregion
 
         //player objects
         Player player1;
@@ -352,6 +352,8 @@ namespace Geometry_Bash
                 {
                     if (ms.LeftButton == ButtonState.Pressed)
                     {
+                        bluePlayerTileHighlight = 0;
+                        redPlayerTileHighlight = 0;
                         gamestate = GameState.PlayerSelect;
                     }
                 }
@@ -543,7 +545,11 @@ namespace Geometry_Bash
                 if (mouseLocation.Intersects(backButton))
                 {
                     if (SingleLeftMousePress())
-                    { gamestate = GameState.PlayerSelect; }
+                    {
+                        bluePlayerTileHighlight = 0;
+                        redPlayerTileHighlight = 0;
+                        gamestate = GameState.PlayerSelect;
+                    }
                 }
                 // click your level choice and goes to game with that level
                 if (mouseLocation.Intersects(level1hover))
