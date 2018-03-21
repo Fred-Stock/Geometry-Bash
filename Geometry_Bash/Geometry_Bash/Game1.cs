@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
+using System.Collections.Generic;
+using System;
 
 namespace Geometry_Bash
 {
@@ -50,6 +52,8 @@ namespace Geometry_Bash
         Texture2D back;
         Texture2D instructions;
         Texture2D options;
+        Texture2D player1_wins;
+        Texture2D player2_wins;
 
         // character select tiles
         Texture2D blueSquareTile;
@@ -58,7 +62,7 @@ namespace Geometry_Bash
         Texture2D redSquareTile;
         Texture2D redCircleTile;
         Texture2D redDiamondTile;
-
+        Texture2D levelTile;
         Texture2D readyBanner;
 
         // screens
@@ -66,6 +70,11 @@ namespace Geometry_Bash
         Texture2D instructionsMenu;
         Texture2D playerSelect;
         Texture2D optionsScreen;
+        Texture2D levelSelect;
+        Texture2D gameScreen;
+        Texture2D gameOver;
+
+        Texture2D wall;
         #endregion
 
         #region Rectangles
@@ -83,10 +92,27 @@ namespace Geometry_Bash
         Rectangle redCircle;
         Rectangle redDiamond;
 
+        // level select tiles
+        Rectangle level1hover;
+        Rectangle level2hover;
+
+        // ready banners
         Rectangle redReadyBanner;
         Rectangle blueReadyBanner;
+
+        // base rectangles for actual game
+        Rectangle p1rec;
+        Rectangle p2rec;
         #endregion
 
+
+        // level loading fields
+        StreamReader reader = null;
+        char[,] level1;
+        string line = "";
+        int rows1 = 0;
+        int cols1 = 0;
+        List<string> level1CompleteRows = new List<string>();
 
         //player objects
         Player player1;
@@ -95,9 +121,9 @@ namespace Geometry_Bash
         //create character enum refrences for the two players
         Character p1Char;
         Character p2Char;
-
         GameState gamestate = GameState.Menu;
 
+        // keyboard and mouse states for "one click"
         MouseState ms;
         MouseState previousMs;
         KeyboardState kbState;
@@ -128,8 +154,53 @@ namespace Geometry_Bash
         {
             // TODO: Add your initialization logic here
 
-           
+            // load level 1
+            
+            try
+            {
+                reader = new StreamReader("Level1.txt");
+                int firstLineCheck = 0;
 
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (firstLineCheck == 0)
+                    {
+                        // get rows/cols
+                        string[] rowscols = line.Split(',');
+                        rows1 = int.Parse(rowscols[0]);
+                        cols1 = int.Parse(rowscols[1]);
+                        firstLineCheck++;
+                    }
+
+                    else
+                    {
+                        // puts all rows into list
+                        level1CompleteRows.Add(line);
+                    }
+                }
+
+                level1 = new char[rows1, cols1];
+
+                for (int i = 0; i < rows1; i++)
+                {
+                    for (int j = 0; j < cols1; j++)
+                    {
+                        level1[i, j] = level1CompleteRows[j][i];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+            }
+            
 
             base.Initialize();
         }
@@ -170,18 +241,22 @@ namespace Geometry_Bash
             redSquareTile = Content.Load<Texture2D>("Button Sprites//redsquare_hover");
             redCircleTile = Content.Load<Texture2D>("Button Sprites//redcircle_hover");
             redDiamondTile = Content.Load<Texture2D>("Button Sprites//reddiamond_hover");
-
+            levelTile = Content.Load<Texture2D>("Button Sprites//levelSelectHover");
             readyBanner = Content.Load<Texture2D>("ReadyBanner");
-
+            player1_wins = Content.Load<Texture2D>("Screens//player1_wins");
+            player2_wins = Content.Load<Texture2D>("Screens//player2_wins");
 
             // screen loads
             mainMenu = Content.Load<Texture2D>("Screens//Main Menu");
             instructionsMenu = Content.Load<Texture2D>("Screens//Instructions");
             playerSelect = Content.Load<Texture2D>("Screens//Player Selection");
             optionsScreen = Content.Load<Texture2D>("Screens//Options_temp");
+            levelSelect = Content.Load<Texture2D>("Screens//Level_Selection");
+            gameScreen = Content.Load<Texture2D>("Screens//LevelBackground");
+            gameOver = Content.Load<Texture2D>("Screens//GameOver");
 
-
-
+            // walls
+            wall = Content.Load<Texture2D>("TopBarrier");
         }
 
         /// <summary>
@@ -267,6 +342,7 @@ namespace Geometry_Bash
             {
                 // All other code for this state goes here
 
+                #region Selection Process
                 // red player's player select
                 if (!redReady)
                 {
@@ -306,7 +382,6 @@ namespace Geometry_Bash
                 if (SingleKeyPress(Keys.Q))
                 {
                     redReady = false;
-
                 }
 
                 // blue player's player select
@@ -342,14 +417,15 @@ namespace Geometry_Bash
                     {
                         p2Char = Character.Diamond;
                     }
-                    blueReady = true;
 
+                    blueReady = true;
                 }
                 if (SingleKeyPress(Keys.U))
                 {
                     blueReady = false;
 
                 }
+                #endregion
 
                 // handles button pressing for game state
                 if (mouseLocation.Intersects(backButton))
@@ -371,43 +447,46 @@ namespace Geometry_Bash
                         blueReady = false;
                         gamestate = GameState.LevelSelect;
 
+                        #region Player Initialization
                         //create each player and make them the correct shape based off of their character enum
+                        p1rec = new Rectangle(50, 50, 50, 50);
+                        p2rec = new Rectangle(50, 550, 50, 50);
+                        // player 1
                         if(p1Char == Character.Square)
                         {
-                            player1 = new Square(1, new Rectangle(50, 50, 50, 50), redSquareTexture);
+                            player1 = new Square(1, p1rec, redSquareTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
                         }
                         else if (p1Char == Character.Circle)
                         {
-                            //player1 = new Circle(1, new Rectangle(50, 50, 50, 50), redCircleTexture);
+                            player1 = new Circle(1, p1rec, redCircleTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
                         }
                         else if (p1Char == Character.Diamond)
                         {
-                            //player1 = new Diamond(1, new Rectangle(50, 50, 50, 50), redDiamondTexture);
+                            player1 = new Diamond(1, p1rec, redDiamondTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
                         }
-
+                        // player 2
                         if (p2Char == Character.Square)
                         {
-                            player2 = new Square(2, new Rectangle(50, 550, 50, 50), blueSquareTexture);
+                            player2 = new Square(2, p2rec, blueSquareTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
                         }                                                          
                         else if (p2Char == Character.Circle)                       
                         {                                                          
-                            //player2 = new Circle(2, new Rectangle(50, 550, 50, 50), blueCircleTexture);
+                            player2 = new Circle(2, p2rec, blueCircleTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
                         }
                         else if (p2Char == Character.Diamond)
                         {
-                            //player2 = new Diamond(2, new Rectangle(50, 550, 50, 50), blueDiamondTexture);
+                            player2 = new Diamond(2, p2rec, blueDiamondTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
                         }
-
+                        #endregion
                     }
                 }
+
+                previousKbState = kbState;
             }
 
             // Level Selection Screen
             if (gamestate == GameState.LevelSelect)
             {
-                if (SingleKeyPress(Keys.Enter))
-                { gamestate = GameState.Game; }
-
                 // All other code for this state goes here
 
                 // handles button pressing for game state
@@ -421,8 +500,7 @@ namespace Geometry_Bash
                     { gamestate = GameState.PlayerSelect; }
                 }
 
-                
-                //if (buttonpressed) { gamestate = GameState.Game; }
+                // ADD: transition to gameplay needed
             }
 
             // Actual Gameplay
@@ -432,16 +510,28 @@ namespace Geometry_Bash
                 player1.Move(kbState);
                 player2.Move(kbState);
 
+                player1.OutsideCollision(player1);
+                player2.OutsideCollision(player2);
+
+                player1.Attack(player1, player2, kbState);
+                player2.Attack(player2, player1, kbState);
 
                 // makes sure mouse is invisible during game
                 this.IsMouseVisible = false;
-
+                
                 // pauses game
                 if (SingleKeyPress(Keys.P))
                 { }
 
-                //if (character health == 0) 
-                //  { gamestate = GameState.EndGame; }
+                // goes to gameover if a player dies
+                if (player1.Health <= 0)
+                {
+                    gamestate = GameState.EndGame;
+                }
+                else if (player2.Health <= 0)
+                {
+                    gamestate = GameState.EndGame;
+                }
             }
 
             // Options
@@ -464,8 +554,14 @@ namespace Geometry_Bash
             {
                 // all other code for this state goes here
 
-
-                //if (buttonpressed) { gamestate = GameState.Menu; }
+                // handles button pressing for game state
+                if (mouseLocation.Intersects(backButton))
+                {
+                    if (SingleLeftMousePress())
+                    {
+                        gamestate = GameState.Menu;
+                    }
+                }
             }
 
             // save old kb state in prev.kb
@@ -489,7 +585,7 @@ namespace Geometry_Bash
             Rectangle mouseLocation = new Rectangle(ms.Position, new Point(5, 5));
 
             // TODO: Add your drawing code here
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
 
             // sets stardard values for the window to help with drawing
             int windowWidth = GraphicsDevice.Viewport.Width;
@@ -502,7 +598,7 @@ namespace Geometry_Bash
                 // main menu screen
                 spriteBatch.Draw(mainMenu, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
-                // fixes button locations (the rectangles)
+                // button locations (the rectangles)
                 playButton = new Rectangle(new Point(windowWidth / 2 - standardButtonSize.X / 2, 432), standardButtonSize);
                 instructionsButton = new Rectangle(new Point(windowWidth / 2 - standardButtonSize.X / 2, 530), standardButtonSize);
                 optionsButton = new Rectangle(new Point(windowWidth / 2 - standardButtonSize.X / 2, 628), standardButtonSize);
@@ -572,32 +668,46 @@ namespace Geometry_Bash
             // Level Selection Screen
             if (gamestate == GameState.LevelSelect)
             {
-                spriteBatch.Draw(yellowButton, backButton, Color.White);
+                // draws background first
+                spriteBatch.Draw(levelSelect, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
+
+                // buttons for each level
+                level1hover = new Rectangle(new Point(278, 262), new Point(251, 193));
+                level2hover = new Rectangle(new Point(753, 262), new Point(251, 193));
+                if (mouseLocation.Intersects(level1hover))
+                { spriteBatch.Draw(levelTile, level1hover, Color.White); }
+                if (mouseLocation.Intersects(level2hover))
+                { spriteBatch.Draw(levelTile, level2hover, Color.White); }
 
                 // changes back button if mouse hovers over
                 if (mouseLocation.Intersects(backButton))
                 { spriteBatch.Draw(back, backButton, Color.White); }
-
-                // ADD: transition to gameplay needed
             }
 
             // Actual Gameplay
             if (gamestate == GameState.Game)
             {
+                // background
+                spriteBatch.Draw(gameScreen, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
-                
-                // CHARACTER SPRITE STUFF HERE
-                if(player1.Collision(player1, player2))
+                // walls
+                /*
+                for (int i = 0; i < level1.GetLength(0); i++)
                 {
-                    spriteBatch.Draw(player1.Texture, player1.HitBox, Color.Black);
-                    spriteBatch.Draw(player2.Texture, player2.HitBox, Color.Black);
-                }                                                           
-                else
-                {
-                    spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White);
-                    spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White);
+                    for (int j = 0; j < level1.GetLength(1); j++)
+                    {
+                        if (level1[i,j] == 'x')
+                        {
+                            spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
+                        }
+                    }
                 }
+                */
 
+                float transparency1 = (float)player1.Health/10;
+                float transparency2 = (float)player2.Health/10;
+                spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
+                spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
 
                 // HEALTH BAR
 
@@ -620,8 +730,25 @@ namespace Geometry_Bash
             // End Game, when someone wins
             if (gamestate == GameState.EndGame)
             {
+                // game over screen
+                spriteBatch.Draw(gameOver, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
+                if(player1.Health<= 0)
+                {
+                    spriteBatch.Draw(player2_wins, new Vector2(windowWidth/2 - 750/2, 300), Color.White);
+                }
+                else
+                {
+                    spriteBatch.Draw(player1_wins, new Vector2(windowWidth/2 - 750/2, 300), Color.White);
+                }
+                // changes back button if mouse hovers over
+                if (mouseLocation.Intersects(backButton))
+                { spriteBatch.Draw(back, backButton, Color.White); }
             }
+
+            //Debug Drawing
+            spriteBatch.DrawString(text, Mouse.GetState().X + "," + Mouse.GetState().Y, new Vector2(5,5), Color.Wheat);
+
 
 
             spriteBatch.End();

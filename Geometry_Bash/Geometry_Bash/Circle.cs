@@ -11,10 +11,18 @@ namespace Geometry_Bash
 {
     class Circle : Player
     {
-        public Circle(int player, Rectangle sAP, Texture2D texture) : base(texture, sAP)
+
+
+        public Circle(int player, Rectangle sAP, Texture2D texture, int windowWidth, int windowHeight) : base(texture, sAP, windowWidth, windowHeight)
         {
+            //set health
+            health = 10;
+
+
+            //check if it is player one or two and then set the correct keybindings
             if (player == 1)
             {
+
                 keyUp = Keys.W;
                 keyDown = Keys.S;
                 keyLeft = Keys.A;
@@ -38,5 +46,7 @@ namespace Geometry_Bash
                 keyAttack2 = Keys.O;
             }
         }
+
+        
     }
 }
