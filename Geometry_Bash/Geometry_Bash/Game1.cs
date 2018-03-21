@@ -489,7 +489,8 @@ namespace Geometry_Bash
                     if (SingleLeftMousePress())
                     { gamestate = GameState.PlayerSelect; }
                 }
-                
+
+                // ADD: transition to gameplay needed
             }
 
             // Actual Gameplay
@@ -671,8 +672,6 @@ namespace Geometry_Bash
                 // changes back button if mouse hovers over
                 if (mouseLocation.Intersects(backButton))
                 { spriteBatch.Draw(back, backButton, Color.White); }
-
-                // ADD: transition to gameplay needed
             }
 
             // Actual Gameplay
@@ -706,7 +705,12 @@ namespace Geometry_Bash
             // End Game, when someone wins
             if (gamestate == GameState.EndGame)
             {
+                // game over screen
+                spriteBatch.Draw(gameOver, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
+                // changes back button if mouse hovers over
+                if (mouseLocation.Intersects(backButton))
+                { spriteBatch.Draw(back, backButton, Color.White); }
             }
 
             //Debug Drawing
