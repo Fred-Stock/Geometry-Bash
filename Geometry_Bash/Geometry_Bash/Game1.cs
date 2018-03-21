@@ -757,7 +757,6 @@ namespace Geometry_Bash
                         }
                     }
                 }
-
                 // level 2
                 for (int i = 0; i < level2.GetLength(0); i++)
                 {
