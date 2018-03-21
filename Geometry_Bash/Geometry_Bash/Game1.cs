@@ -109,6 +109,10 @@ namespace Geometry_Bash
         // level loading fields
         StreamReader reader = null;
         char[,] level1;
+        string line = "";
+        int rows1 = 0;
+        int cols1 = 0;
+        List<string> level1CompleteRows = new List<string>();
 
         //player objects
         Player player1;
@@ -151,14 +155,10 @@ namespace Geometry_Bash
             // TODO: Add your initialization logic here
 
             // load level 1
-            /*
+            
             try
             {
                 reader = new StreamReader("Level1.txt");
-                string line = "";
-                int rows1 = 0;
-                int cols1 = 0;
-                List<string> level1CompleteRows = null;
                 int firstLineCheck = 0;
 
                 while ((line = reader.ReadLine()) != null)
@@ -200,7 +200,7 @@ namespace Geometry_Bash
                     reader.Close();
                 }
             }
-            */
+            
 
             base.Initialize();
         }
