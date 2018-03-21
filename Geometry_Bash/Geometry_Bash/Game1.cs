@@ -493,7 +493,8 @@ namespace Geometry_Bash
                     if (SingleLeftMousePress())
                     { gamestate = GameState.PlayerSelect; }
                 }
-                
+
+                // ADD: transition to gameplay needed
             }
 
             // Actual Gameplay
@@ -509,26 +510,22 @@ namespace Geometry_Bash
                 player1.Attack(player1, player2, kbState);
                 player2.Attack(player2, player1, kbState);
 
-                if(player1.Health <= 0)
-                {
-                    gamestate = GameState.Menu;
-                }
-                else if (player2.Health <= 0)
-                {
-                    gamestate = GameState.Menu;
-                }
-
                 // makes sure mouse is invisible during game
                 this.IsMouseVisible = false;
-
-
                 
                 // pauses game
                 if (SingleKeyPress(Keys.P))
                 { }
 
-                //if (character health == 0) 
-                //  { gamestate = GameState.EndGame; }
+                // goes to gameover if a player dies
+                if (player1.Health <= 0)
+                {
+                    gamestate = GameState.EndGame;
+                }
+                else if (player2.Health <= 0)
+                {
+                    gamestate = GameState.EndGame;
+                }
             }
 
             // Options
@@ -551,8 +548,14 @@ namespace Geometry_Bash
             {
                 // all other code for this state goes here
 
-
-                //if (buttonpressed) { gamestate = GameState.Menu; }
+                // handles button pressing for game state
+                if (mouseLocation.Intersects(backButton))
+                {
+                    if (SingleLeftMousePress())
+                    {
+                        gamestate = GameState.Menu;
+                    }
+                }
             }
 
             // save old kb state in prev.kb
@@ -673,8 +676,6 @@ namespace Geometry_Bash
                 // changes back button if mouse hovers over
                 if (mouseLocation.Intersects(backButton))
                 { spriteBatch.Draw(back, backButton, Color.White); }
-
-                // ADD: transition to gameplay needed
             }
 
             // Actual Gameplay
@@ -708,7 +709,12 @@ namespace Geometry_Bash
             // End Game, when someone wins
             if (gamestate == GameState.EndGame)
             {
+                // game over screen
+                spriteBatch.Draw(gameOver, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
+                // changes back button if mouse hovers over
+                if (mouseLocation.Intersects(backButton))
+                { spriteBatch.Draw(back, backButton, Color.White); }
             }
 
             //Debug Drawing
