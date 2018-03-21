@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
 using System.Collections.Generic;
+using System;
 
 namespace Geometry_Bash
 {
@@ -86,8 +87,8 @@ namespace Geometry_Bash
         Rectangle redDiamond;
 
         // level select tiles
-        Rectangle level1;
-        Rectangle level2;
+        Rectangle level1hover;
+        Rectangle level2hover;
 
         // ready banners
         Rectangle redReadyBanner;
@@ -99,8 +100,9 @@ namespace Geometry_Bash
         #endregion
 
 
-        // streamreader
-        StreamReader reader;
+        // level loading fields
+        StreamReader reader = null;
+        char[,] level1;
 
         //player objects
         Player player1;
@@ -141,8 +143,6 @@ namespace Geometry_Bash
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-            reader = null;
 
 
             base.Initialize();
@@ -194,7 +194,55 @@ namespace Geometry_Bash
             optionsScreen = Content.Load<Texture2D>("Screens//Options_temp");
             levelSelect = Content.Load<Texture2D>("Screens//Level_Selection");
 
+            // load level 1
+            try
+            {
+                reader = new StreamReader("Level1.txt");
+                string line= "";
+                int rows1 = 0;
+                int cols1 = 0;
+                List<string> level1CompleteRows = null;
+                int firstLineCheck = 0;
 
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (firstLineCheck == 0)
+                    {
+                        // get rows/cols
+                        string[] rowscols = line.Split(',');
+                        rows1 = int.Parse(rowscols[0]);
+                        cols1 = int.Parse(rowscols[1]);
+                        firstLineCheck++;
+                    }
+
+                    else
+                    {
+                        // puts all rows into list
+                        level1CompleteRows.Add(line);
+                    }
+                }
+
+                level1 = new char[rows1, cols1];
+                
+                for (int i = 0; i < rows1; i++)
+                {
+                    for (int j = 0; j < cols1; j++)
+                    {
+                        level1[i, j] = level1CompleteRows[j][i];
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+            }
         }
 
         /// <summary>
@@ -607,12 +655,12 @@ namespace Geometry_Bash
                 spriteBatch.Draw(levelSelect, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
                 // buttons for each level
-                level1 = new Rectangle(new Point(278, 262), new Point(251, 193));
-                level2 = new Rectangle(new Point(753, 262), new Point(251, 193));
-                if (mouseLocation.Intersects(level1))
-                { spriteBatch.Draw(yellowButton, level1, Color.White); }
-                if (mouseLocation.Intersects(level2))
-                { spriteBatch.Draw(yellowButton, level2, Color.White); }
+                level1hover = new Rectangle(new Point(278, 262), new Point(251, 193));
+                level2hover = new Rectangle(new Point(753, 262), new Point(251, 193));
+                if (mouseLocation.Intersects(level1hover))
+                { spriteBatch.Draw(yellowButton, level1hover, Color.White); }
+                if (mouseLocation.Intersects(level2hover))
+                { spriteBatch.Draw(yellowButton, level2hover, Color.White); }
 
                 // changes back button if mouse hovers over
                 if (mouseLocation.Intersects(backButton))
@@ -629,18 +677,7 @@ namespace Geometry_Bash
                 spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
                 spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
 
-
-                if(player1.Health <= 0)
-                {
-                    gamestate = GameState.Menu;
-                }
-                if(player2.Health <= 0)
-                {
-                    gamestate = GameState.Menu;
-                }
                 // HEALTH BAR
-                
-
 
                 // SUPER METER
 
