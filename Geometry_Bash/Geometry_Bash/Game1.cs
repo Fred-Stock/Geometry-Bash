@@ -62,7 +62,7 @@ namespace Geometry_Bash
         Texture2D redSquareTile;
         Texture2D redCircleTile;
         Texture2D redDiamondTile;
-
+        Texture2D levelTile;
         Texture2D readyBanner;
 
         // screens
@@ -241,7 +241,7 @@ namespace Geometry_Bash
             redSquareTile = Content.Load<Texture2D>("Button Sprites//redsquare_hover");
             redCircleTile = Content.Load<Texture2D>("Button Sprites//redcircle_hover");
             redDiamondTile = Content.Load<Texture2D>("Button Sprites//reddiamond_hover");
-
+            levelTile = Content.Load<Texture2D>("Button Sprites//levelSelectHover");
             readyBanner = Content.Load<Texture2D>("ReadyBanner");
             player1_wins = Content.Load<Texture2D>("Screens//player1_wins");
             player2_wins = Content.Load<Texture2D>("Screens//player2_wins");
@@ -675,9 +675,9 @@ namespace Geometry_Bash
                 level1hover = new Rectangle(new Point(278, 262), new Point(251, 193));
                 level2hover = new Rectangle(new Point(753, 262), new Point(251, 193));
                 if (mouseLocation.Intersects(level1hover))
-                { spriteBatch.Draw(yellowButton, level1hover, Color.White); }
+                { spriteBatch.Draw(levelTile, level1hover, Color.White); }
                 if (mouseLocation.Intersects(level2hover))
-                { spriteBatch.Draw(yellowButton, level2hover, Color.White); }
+                { spriteBatch.Draw(levelTile, level2hover, Color.White); }
 
                 // changes back button if mouse hovers over
                 if (mouseLocation.Intersects(backButton))
