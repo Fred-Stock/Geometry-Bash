@@ -52,6 +52,8 @@ namespace Geometry_Bash
         Texture2D back;
         Texture2D instructions;
         Texture2D options;
+        Texture2D player1_wins;
+        Texture2D player2_wins;
 
         // character select tiles
         Texture2D blueSquareTile;
@@ -241,6 +243,8 @@ namespace Geometry_Bash
             redDiamondTile = Content.Load<Texture2D>("Button Sprites//reddiamond_hover");
 
             readyBanner = Content.Load<Texture2D>("ReadyBanner");
+            player1_wins = Content.Load<Texture2D>("Screens//player1_wins");
+            player2_wins = Content.Load<Texture2D>("Screens//player2_wins");
 
             // screen loads
             mainMenu = Content.Load<Texture2D>("Screens//Main Menu");
@@ -729,6 +733,14 @@ namespace Geometry_Bash
                 // game over screen
                 spriteBatch.Draw(gameOver, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
+                if(player1.Health<= 0)
+                {
+                    spriteBatch.Draw(player2_wins, new Vector2(windowWidth/2 - 750/2, 300), Color.White);
+                }
+                else
+                {
+                    spriteBatch.Draw(player1_wins, new Vector2(windowWidth/2 - 750/2, 300), Color.White);
+                }
                 // changes back button if mouse hovers over
                 if (mouseLocation.Intersects(backButton))
                 { spriteBatch.Draw(back, backButton, Color.White); }
