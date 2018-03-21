@@ -370,7 +370,6 @@ namespace Geometry_Bash
                         redReady = false;
                         blueReady = false;
                         gamestate = GameState.LevelSelect;
-                        //test
 
                         //create each player and make them the correct shape based off of their character enum
                         if(p1Char == Character.Square)
@@ -380,12 +379,10 @@ namespace Geometry_Bash
                         else if (p1Char == Character.Circle)
                         {
                             //player1 = new Circle(1, new Rectangle(50, 50, 50, 50), redCircleTexture);
-
                         }
                         else if (p1Char == Character.Diamond)
                         {
                             //player1 = new Diamond(1, new Rectangle(50, 50, 50, 50), redDiamondTexture);
-
                         }
 
                         if (p2Char == Character.Square)
@@ -395,12 +392,10 @@ namespace Geometry_Bash
                         else if (p2Char == Character.Circle)                       
                         {                                                          
                             //player2 = new Circle(2, new Rectangle(50, 550, 50, 50), blueCircleTexture);
-
                         }
                         else if (p2Char == Character.Diamond)
                         {
                             //player2 = new Diamond(2, new Rectangle(50, 550, 50, 50), blueDiamondTexture);
-
                         }
 
                     }
