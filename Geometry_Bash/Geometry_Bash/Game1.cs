@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.IO;
+using System.Collections.Generic;
 
 namespace Geometry_Bash
 {
@@ -99,6 +100,9 @@ namespace Geometry_Bash
         #endregion
 
 
+        // streamreader
+        StreamReader reader;
+
         //player objects
         Player player1;
         Player player2;
@@ -106,9 +110,9 @@ namespace Geometry_Bash
         //create character enum refrences for the two players
         Character p1Char;
         Character p2Char;
-
         GameState gamestate = GameState.Menu;
 
+        // keyboard and mouse states for "one click"
         MouseState ms;
         MouseState previousMs;
         KeyboardState kbState;
@@ -139,7 +143,7 @@ namespace Geometry_Bash
         {
             // TODO: Add your initialization logic here
 
-           
+            reader = null;
 
 
             base.Initialize();
@@ -167,9 +171,6 @@ namespace Geometry_Bash
             blueCircleTexture = Content.Load<Texture2D>("CharSprites//circle_blue");
             blueDiamondTexture = Content.Load<Texture2D>("CharSprites//diamond_blue");
 
-
-
-
             // load button textures
             yellowButton = Content.Load<Texture2D>("Button Sprites//button_yellow");
             play = Content.Load<Texture2D>("Button Sprites//play_hover");
@@ -186,7 +187,6 @@ namespace Geometry_Bash
             redDiamondTile = Content.Load<Texture2D>("Button Sprites//reddiamond_hover");
 
             readyBanner = Content.Load<Texture2D>("ReadyBanner");
-
 
             // screen loads
             mainMenu = Content.Load<Texture2D>("Screens//Main Menu");
