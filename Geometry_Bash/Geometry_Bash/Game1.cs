@@ -109,10 +109,14 @@ namespace Geometry_Bash
         // level loading fields
         StreamReader reader = null;
         char[,] level1;
+        char[,] level2;
         string line = "";
         int rows1 = 0;
         int cols1 = 0;
+        int rows2 = 0;
+        int cols2 = 0;
         List<string> level1CompleteRows = new List<string>();
+        List<string> level2CompleteRows = new List<string>();
 
         //player objects
         Player player1;
@@ -185,6 +189,52 @@ namespace Geometry_Bash
                     for (int j = 0; j < cols1; j++)
                     {
                         level1[i, j] = level1CompleteRows[j][i];
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+            }
+
+            // load level 2
+            try
+            {
+                reader = new StreamReader(File.OpenRead("Level1.txt"));
+                int firstLineCheck = 0;
+
+                while ((line = reader.ReadLine()) != null)
+                {
+                    if (firstLineCheck == 0)
+                    {
+                        // get rows/cols
+                        string[] rowscols = line.Split(',');
+                        rows2 = int.Parse(rowscols[0]);
+                        cols2 = int.Parse(rowscols[1]);
+                        firstLineCheck++;
+                    }
+
+                    else
+                    {
+                        // puts all rows into list
+                        level2CompleteRows.Add(line);
+                    }
+                }
+
+                level2 = new char[rows2, cols2];
+
+                for (int i = 0; i < rows2; i++)
+                {
+                    for (int j = 0; j < cols2; j++)
+                    {
+                        level2[i, j] = level2CompleteRows[j][i];
                     }
                 }
             }
@@ -680,6 +730,30 @@ namespace Geometry_Bash
                 // changes back button if mouse hovers over
                 if (mouseLocation.Intersects(backButton))
                 { spriteBatch.Draw(back, backButton, Color.White); }
+
+                // level 1
+                for (int i = 0; i < level1.GetLength(0); i++)
+                {
+                    for (int j = 0; j < level1.GetLength(1); j++)
+                    {
+                        if (level1[i, j] == 'x')
+                        {
+                            spriteBatch.Draw(wall, new Rectangle(new Point(280 + 7 * i, 265 + 10 * j), new Point(7, 10)), Color.Black);
+                        }
+                    }
+                }
+
+                // level 2
+                for (int i = 0; i < level2.GetLength(0); i++)
+                {
+                    for (int j = 0; j < level2.GetLength(1); j++)
+                    {
+                        if (level2[i, j] == 'x')
+                        {
+                            spriteBatch.Draw(wall, new Rectangle(new Point(755 + 7 * i, 265 + 10 * j), new Point(7, 10)), Color.Black);
+                        }
+                    }
+                }
             }
 
             // Actual Gameplay
@@ -688,7 +762,7 @@ namespace Geometry_Bash
                 // background
                 spriteBatch.Draw(gameScreen, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
-                // walls
+                // walls if level 1
                 for (int i = 0; i < level1.GetLength(0); i++)
                 {
                     for (int j = 0; j < level1.GetLength(1); j++)
@@ -699,6 +773,19 @@ namespace Geometry_Bash
                         }
                     }
                 }
+
+                // walls if level 2
+                /*
+                for (int i = 0; i < level2.GetLength(0); i++)
+                {
+                    for (int j = 0; j < level2.GetLength(1); j++)
+                    {
+                        if (level2[i, j] == 'x')
+                        {
+                            spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
+                        }
+                    }
+                }*/
 
                 float transparency1 = (float)player1.Health/10;
                 float transparency2 = (float)player2.Health/10;
