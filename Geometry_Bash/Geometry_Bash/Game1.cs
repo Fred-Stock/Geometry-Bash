@@ -498,8 +498,8 @@ namespace Geometry_Bash
 
                         #region Player Initialization
                         //create each player and make them the correct shape based off of their character enum
-                        p1rec = new Rectangle(50, 50, 50, 50);
-                        p2rec = new Rectangle(50, 550, 50, 50);
+                        p1rec = new Rectangle(9*40, 8*40, 50, 50);
+                        p2rec = new Rectangle(22*40, 8*40, 50, 50);
                         // player 1
                         if(p1Char == Character.Square)
                         {
