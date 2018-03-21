@@ -155,10 +155,9 @@ namespace Geometry_Bash
             // TODO: Add your initialization logic here
 
             // load level 1
-            /*
             try
             {
-                reader = new StreamReader("Level1.txt");
+                reader = new StreamReader(File.OpenRead("Level1.txt"));
                 int firstLineCheck = 0;
 
                 while ((line = reader.ReadLine()) != null)
@@ -200,7 +199,6 @@ namespace Geometry_Bash
                     reader.Close();
                 }
             }
-            */
 
             base.Initialize();
         }
@@ -691,7 +689,6 @@ namespace Geometry_Bash
                 spriteBatch.Draw(gameScreen, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
                 // walls
-                /*
                 for (int i = 0; i < level1.GetLength(0); i++)
                 {
                     for (int j = 0; j < level1.GetLength(1); j++)
@@ -702,7 +699,6 @@ namespace Geometry_Bash
                         }
                     }
                 }
-                */
 
                 float transparency1 = (float)player1.Health/10;
                 float transparency2 = (float)player2.Health/10;
