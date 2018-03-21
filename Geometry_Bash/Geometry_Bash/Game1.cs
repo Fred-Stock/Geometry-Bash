@@ -70,6 +70,7 @@ namespace Geometry_Bash
         Texture2D optionsScreen;
         Texture2D levelSelect;
         Texture2D gameScreen;
+        Texture2D gameOver;
         #endregion
 
         #region Rectangles
@@ -195,6 +196,7 @@ namespace Geometry_Bash
             optionsScreen = Content.Load<Texture2D>("Screens//Options_temp");
             levelSelect = Content.Load<Texture2D>("Screens//Level_Selection");
             gameScreen = Content.Load<Texture2D>("Screens//LevelBackground");
+            gameOver = Content.Load<Texture2D>("Screens//GameOver");
 
             // load level 1
             try
