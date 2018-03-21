@@ -117,6 +117,7 @@ namespace Geometry_Bash
         int cols2 = 0;
         List<string> level1CompleteRows = new List<string>();
         List<string> level2CompleteRows = new List<string>();
+        int levelChoice = 0;
 
         //player objects
         Player player1;
@@ -207,7 +208,7 @@ namespace Geometry_Bash
             // load level 2
             try
             {
-                reader = new StreamReader(File.OpenRead("Level1.txt"));
+                reader = new StreamReader(File.OpenRead("Level2.txt"));
                 int firstLineCheck = 0;
 
                 while ((line = reader.ReadLine()) != null)
@@ -538,14 +539,28 @@ namespace Geometry_Bash
                 // All other code for this state goes here
 
                 // handles button pressing for game state
-                // press enter to go to Game state
-                if (SingleKeyPress(Keys.Enter))
-                { gamestate = GameState.Game; }
                 // press back button to go to player select
                 if (mouseLocation.Intersects(backButton))
                 {
                     if (SingleLeftMousePress())
                     { gamestate = GameState.PlayerSelect; }
+                }
+                // click your level choice and goes to game with that level
+                if (mouseLocation.Intersects(level1hover))
+                {
+                    if (SingleLeftMousePress())
+                    {
+                        levelChoice = 1;
+                        gamestate = GameState.Game;
+                    }
+                }
+                if (mouseLocation.Intersects(level2hover))
+                {
+                    if (SingleLeftMousePress())
+                    {
+                        levelChoice = 2;
+                        gamestate = GameState.Game;
+                    }
                 }
 
                 // ADD: transition to gameplay needed
@@ -762,30 +777,35 @@ namespace Geometry_Bash
                 // background
                 spriteBatch.Draw(gameScreen, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
+                // Draws the right level choice
                 // walls if level 1
-                for (int i = 0; i < level1.GetLength(0); i++)
+                if (levelChoice == 1)
                 {
-                    for (int j = 0; j < level1.GetLength(1); j++)
+                    for (int i = 0; i < level1.GetLength(0); i++)
                     {
-                        if (level1[i,j] == 'x')
+                        for (int j = 0; j < level1.GetLength(1); j++)
                         {
-                            spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
+                            if (level1[i, j] == 'x')
+                            {
+                                spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
+                            }
                         }
                     }
                 }
-
                 // walls if level 2
-                /*
-                for (int i = 0; i < level2.GetLength(0); i++)
+                else if (levelChoice == 2)
                 {
-                    for (int j = 0; j < level2.GetLength(1); j++)
+                    for (int i = 0; i < level2.GetLength(0); i++)
                     {
-                        if (level2[i, j] == 'x')
+                        for (int j = 0; j < level2.GetLength(1); j++)
                         {
-                            spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
+                            if (level2[i, j] == 'x')
+                            {
+                                spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
+                            }
                         }
                     }
-                }*/
+                }
 
                 float transparency1 = (float)player1.Health/10;
                 float transparency2 = (float)player2.Health/10;
