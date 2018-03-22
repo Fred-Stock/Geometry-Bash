@@ -741,8 +741,8 @@ namespace Geometry_Bash
                 spriteBatch.Draw(levelSelect, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
                 // buttons for each level
-                level1hover = new Rectangle(new Point(278, 262), new Point(251, 193));
-                level2hover = new Rectangle(new Point(753, 262), new Point(251, 193));
+                level1hover = new Rectangle(new Point(162, 266), new Point(320, 180));
+                level2hover = new Rectangle(new Point(800, 266), new Point(320, 180));
                 if (mouseLocation.Intersects(level1hover))
                 { spriteBatch.Draw(levelTile, level1hover, Color.White); }
                 if (mouseLocation.Intersects(level2hover))
@@ -759,7 +759,7 @@ namespace Geometry_Bash
                     {
                         if (level1[i, j] == 'x')
                         {
-                            spriteBatch.Draw(wall, new Rectangle(new Point(280 + 7 * i, 265 + 10 * j), new Point(7, 10)), Color.Black);
+                            spriteBatch.Draw(wall, new Rectangle(new Point(162 + 10 * i, 266 + 10 * j), new Point(10, 10)), Color.Black);
                         }
                     }
                 }
@@ -770,7 +770,7 @@ namespace Geometry_Bash
                     {
                         if (level2[i, j] == 'x')
                         {
-                            spriteBatch.Draw(wall, new Rectangle(new Point(755 + 7 * i, 265 + 10 * j), new Point(7, 10)), Color.Black);
+                            spriteBatch.Draw(wall, new Rectangle(new Point(800 + 10 * i, 266 + 10 * j), new Point(10, 10)), Color.Black);
                         }
                     }
                 }
