@@ -148,7 +148,6 @@ namespace Geometry_Bash
         //music
         SoundEffect mainMenuTheme;
         SoundEffect gameTheme;
-        int musicTime;
         bool playMusic;
 
         public Game1()
@@ -862,8 +861,8 @@ namespace Geometry_Bash
                     }
                 }
 
-                float transparency1 = (float)player1.Health/10;
-                float transparency2 = (float)player2.Health/10;
+                transparency1 = (float)player1.Health/10;
+                transparency2 = (float)player2.Health/10;
                 spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
                 spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
 
