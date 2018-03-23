@@ -36,6 +36,8 @@ namespace Geometry_Bash
     /// </summary>
     public class Game1 : Game
     {
+        GameTime gameTime;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteFont text;
@@ -156,6 +158,7 @@ namespace Geometry_Bash
             graphics.PreferredBackBufferWidth = 1280;  // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = 720;   // set this value to the desired height of your window
             graphics.ApplyChanges();
+            gameTime = new GameTime();
         }
 
         /// <summary>
@@ -818,6 +821,14 @@ namespace Geometry_Bash
             // Actual Gameplay
             if (gamestate == GameState.Game)
             {
+                
+                float transparency1 = (float)player1.Health/10;
+                float transparency2 = (float)player2.Health/10;
+                Vector2 player1Origin = new Vector2(player1.Texture.Width / 2f, player1.Texture.Height / 2f);
+                Vector2 player2Origin = new Vector2(player2.Texture.Width / 2f, player2.Texture.Height / 2f);
+                spriteBatch.Draw(player1.Texture,null, player1.HitBox,null, player1Origin, player1.Rotation,new Vector2(1,1), Color.White * transparency1);
+                spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
+
                 // background
                 spriteBatch.Draw(gameScreen, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 

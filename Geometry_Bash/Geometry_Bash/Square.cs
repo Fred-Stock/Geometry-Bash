@@ -12,9 +12,13 @@ namespace Geometry_Bash
     class Square : Player
     {
         
-        
+
+        double timer = 0;
+
         public Square(int player, Rectangle sAP, Texture2D texture, int windowWidth, int windowHeight) : base(texture, sAP, windowWidth, windowHeight)
         {
+            //set movespeed
+            moveSpeed = 5;
             //set health
             health = 10;
 
@@ -49,12 +53,15 @@ namespace Geometry_Bash
         public override void Attack(Player player1, Player player2, KeyboardState kbState)
         {
             Square player = (Square)player1;
-
             bool hit = false;//boolean to prevent exseive hits
+
+
+
 
             if (kbState.IsKeyDown(player.keyAttack1) && !(prevKbState.IsKeyDown(player.keyAttack1)))
             {
                 Rectangle temp = player1.HitBox;
+                Rectangle temp2 = player2.HitBox;
 
                 if (kbState.IsKeyDown(player.keyRight))
                 {
@@ -68,11 +75,11 @@ namespace Geometry_Bash
                         hit = true;
 
                         //knockback
-                        temp = player2.HitBox;
-                        temp.X += 75;
-                        player2.HitBox = temp;
+                        temp2.X += 150;
+                        player2.HitBox = temp2;
                     }
                 }
+            
                 if (kbState.IsKeyDown(player.keyLeft))
                 {
                     temp.X -= 75;
@@ -85,9 +92,8 @@ namespace Geometry_Bash
                         hit = true;
 
                         //knockback
-                        temp = player2.HitBox;
-                        temp.X -= 75;
-                        player2.HitBox = temp;
+                        temp2.X -= 150;
+                        player2.HitBox = temp2;
                     }
                 }
                 if (kbState.IsKeyDown(player.keyUp))
@@ -102,9 +108,8 @@ namespace Geometry_Bash
                         hit = true;
 
                         //knockback
-                        temp = player2.HitBox;
-                        temp.Y -= 75;
-                        player2.HitBox = temp;
+                        temp2.Y -= 150;
+                        player2.HitBox = temp2;
                     }
                 }
                 if (kbState.IsKeyDown(player.keyDown))
@@ -119,9 +124,8 @@ namespace Geometry_Bash
                         hit = true;
 
                         //knockback
-                        temp = player2.HitBox;
-                        temp.Y += 75;
-                        player2.HitBox = temp;
+                        temp2.Y += 150;
+                        player2.HitBox = temp2;
                     }
                 }
 
@@ -135,6 +139,20 @@ namespace Geometry_Bash
             prevKbState = kbState;
         }
 
+        public override void Attack2(Player player1, Player player2, KeyboardState kbstate)
+        {
+            
+            Square player = (Square)player1;
 
+            bool hit = false;
+
+            if (kbstate.IsKeyDown(player.keyAttack2) && !(prevKbState.IsKeyDown(player.keyAttack2)))
+            {
+                Rectangle temp = player1.HitBox;
+                for (int i = 0; i < 300; i ++)
+                player1.Rotation += 6;
+
+            }
+        }
     }
 }
