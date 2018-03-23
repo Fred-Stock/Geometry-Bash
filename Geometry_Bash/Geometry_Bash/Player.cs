@@ -23,6 +23,8 @@ namespace Geometry_Bash
         protected Keys keyAttack1;
         protected Keys keyAttack2;
 
+        protected int moveSpeed;
+
         protected Texture2D sprite;
         protected Rectangle hitBox;
 
@@ -60,21 +62,21 @@ namespace Geometry_Bash
 
             if (keys.IsKeyDown(keyRight))
             {
-                temp.X += 5;
+                temp.X += moveSpeed;
             }
             if (keys.IsKeyDown(keyLeft))
             {
-                temp.X -= 5;
+                temp.X -= moveSpeed;
             }
 
             if (keys.IsKeyDown(keyUp))
             {
-                temp.Y -= 5;
+                temp.Y -= moveSpeed;
             }
 
             if (keys.IsKeyDown(keyDown))
             {
-                temp.Y += 5;
+                temp.Y += moveSpeed;
             }
             hitBox = temp;
         }

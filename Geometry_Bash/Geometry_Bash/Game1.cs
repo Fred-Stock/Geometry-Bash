@@ -31,6 +31,8 @@ namespace Geometry_Bash
     /// </summary>
     public class Game1 : Game
     {
+        GameTime gameTime;
+
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         SpriteFont text;
@@ -122,6 +124,7 @@ namespace Geometry_Bash
             graphics.PreferredBackBufferWidth = 1280;  // set this value to the desired width of your window
             graphics.PreferredBackBufferHeight = 720;   // set this value to the desired height of your window
             graphics.ApplyChanges();
+            gameTime = new GameTime();
         }
 
         /// <summary>
@@ -133,9 +136,6 @@ namespace Geometry_Bash
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-           
-
 
             base.Initialize();
         }
