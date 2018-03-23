@@ -55,7 +55,7 @@ namespace Geometry_Bash
             Square player = (Square)player1;
             bool hit = false;//boolean to prevent exseive hits
 
-            timer += gameTime.ElapsedGameTime.TotalSeconds;
+
 
 
             if (kbState.IsKeyDown(player.keyAttack1) && !(prevKbState.IsKeyDown(player.keyAttack1)))
@@ -65,7 +65,7 @@ namespace Geometry_Bash
 
                 if (kbState.IsKeyDown(player.keyRight))
                 {
-                    temp.X -= 75;
+                    temp.X += 75;
                     player1.HitBox = temp;
 
                     if (player1.Collision(player1, player2) && !hit)
