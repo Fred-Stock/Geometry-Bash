@@ -135,6 +135,20 @@ namespace Geometry_Bash
             prevKbState = kbState;
         }
 
+        public override void Attack2(Player player1, Player player2, KeyboardState kbstate)
+        {
+            
+            Square player = (Square)player1;
 
+            bool hit = false;
+
+            if (kbstate.IsKeyDown(player.keyAttack2) && !(prevKbState.IsKeyDown(player.keyAttack2)))
+            {
+                Rectangle temp = player1.HitBox;
+                for (int i = 0; i < 300; i ++)
+                player1.Rotation += 6;
+
+            }
+        }
     }
 }

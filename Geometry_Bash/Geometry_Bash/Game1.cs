@@ -624,9 +624,12 @@ namespace Geometry_Bash
             // Actual Gameplay
             if (gamestate == GameState.Game)
             {
+                
                 float transparency1 = (float)player1.Health/10;
                 float transparency2 = (float)player2.Health/10;
-                spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
+                Vector2 player1Origin = new Vector2(player1.Texture.Width / 2f, player1.Texture.Height / 2f);
+                Vector2 player2Origin = new Vector2(player2.Texture.Width / 2f, player2.Texture.Height / 2f);
+                spriteBatch.Draw(player1.Texture,null, player1.HitBox,null, player1Origin, player1.Rotation,new Vector2(1,1), Color.White * transparency1);
                 spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
 
 

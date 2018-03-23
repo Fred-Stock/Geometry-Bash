@@ -30,7 +30,7 @@ namespace Geometry_Bash
 
         protected int windowWidth;
         protected int windowHeight;
-
+        protected float rotation;
         public double Health
         {
             get { return health; }
@@ -43,12 +43,21 @@ namespace Geometry_Bash
             set { hitBox = value; }
         }
 
+        public float Rotation
+        {
+            get { return rotation; }
+            set { rotation = value; }
+
+        }
+
         public Player(Texture2D texture,  Rectangle sAP, int windowWidth, int windowHeight) : base(texture, sAP)
         {
             hitBox = sAP;
             this.windowWidth = windowWidth;
             this.windowHeight = windowHeight;
         }
+
+        
 
         public void Move(KeyboardState keys)
         {
@@ -119,6 +128,20 @@ namespace Geometry_Bash
             prevKbState = kbState;
         }
 
+        public virtual void Attack2(Player player1, Player player2, KeyboardState kbState)
+        {
+
+            if (kbState.IsKeyDown(player1.keyAttack2) && prevKbState.IsKeyUp(player1.keyAttack2))
+            {
+                if (player1.Collision(player1, player2))
+                {
+
+                    player2.health--;
+                }
+            }
+
+            prevKbState = kbState;
+        }
 
 
         public void OutsideCollision(Player player)
