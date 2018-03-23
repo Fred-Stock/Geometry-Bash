@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework.Input;
 using System.IO;
 using System.Collections.Generic;
 using System;
+using System.Media;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Geometry_Bash
 {
@@ -140,6 +143,12 @@ namespace Geometry_Bash
         bool redReady = false;
         bool blueReady = false;
 
+        //music
+        SoundEffect mainMenuTheme;
+        SoundEffect gameTheme;
+        int musicTime;
+        bool playMusic;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -251,6 +260,8 @@ namespace Geometry_Bash
                 }
             }
 
+            playMusic = true;
+
             base.Initialize();
         }
 
@@ -306,6 +317,11 @@ namespace Geometry_Bash
 
             // walls
             wall = Content.Load<Texture2D>("TopBarrier");
+
+            //music and sounds
+            mainMenuTheme = Content.Load<SoundEffect>("Sounds//menuTheme");
+            gameTheme = Content.Load<SoundEffect>("Sounds//gameTheme");
+
         }
 
         /// <summary>
@@ -332,6 +348,7 @@ namespace Geometry_Bash
                 Exit();
 
             // TODO: Add your update logic here
+            
 
             // set current kb state
             kbState = Keyboard.GetState();
@@ -341,6 +358,26 @@ namespace Geometry_Bash
             this.IsMouseVisible = true;
             ms = Mouse.GetState();
             Rectangle mouseLocation = new Rectangle(ms.Position, new Point(5, 5));
+
+            if(gamestate == GameState.Menu || gamestate == GameState.Instructions || gamestate == GameState.Options || gamestate == GameState.PlayerSelect || gamestate == GameState.LevelSelect)
+            {
+                if (playMusic == true)
+                {
+                    mainMenuTheme.Play();
+                    playMusic = false;
+                }
+            }
+            //in game sounds not working yet
+            /*
+            else
+            {
+                if(playMusic == true)
+                {
+                    gameTheme.Play();
+                    playMusic = false;
+                }
+            }
+            */
 
             // Menu
             if (gamestate == GameState.Menu)
@@ -371,6 +408,8 @@ namespace Geometry_Bash
                         gamestate = GameState.Options;
                     }
                 }
+                
+
             }
 
             // Instructions
