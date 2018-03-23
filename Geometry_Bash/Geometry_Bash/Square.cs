@@ -75,7 +75,7 @@ namespace Geometry_Bash
                         hit = true;
 
                         //knockback
-                        temp2.X -= 150;
+                        temp2.X += 150;
                         player2.HitBox = temp2;
                     }
                 }
