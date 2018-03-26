@@ -14,15 +14,27 @@ namespace Geometry_Bash
     public partial class OptionsMenu : Form
     {
         //fields
-        int squareHealth = 1;
-        int circleHealth = 1;
-        int diamondHealth = 1;
-        int squareDamage = 1;
-        int circleDamage = 1;
-        int diamondDamage = 1;
-        int squareSpeed = 1;
-        int circleSpeed = 1;
-        int diamondSpeed = 1;
+        private int squareHealth = 1;
+        private int circleHealth = 1;
+        private int diamondHealth = 1;
+        private int squareDamage = 1;
+        private int circleDamage = 1;
+        private int diamondDamage = 1;
+        private int squareSpeed = 1;
+        private int circleSpeed = 1;
+        private int diamondSpeed = 1;
+
+        // properties
+        public int SquareHealth { get { return squareHealth; } }
+        public int CircleHealth { get { return circleHealth; } }
+        public int DiamondHealth { get { return diamondHealth; } }
+        public int SquareDamage { get { return squareDamage; } }
+        public int CircleDamage { get { return circleDamage; } }
+        public int DiamondDamage { get { return diamondDamage; } }
+        public int SquareSpeed { get { return squareSpeed; } }
+        public int CircleSpeed { get { return circleSpeed; } }
+        public int DiamondSpeed { get { return diamondSpeed; } }
+
 
         public OptionsMenu()
         {
