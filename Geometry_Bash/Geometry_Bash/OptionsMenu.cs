@@ -25,16 +25,6 @@ namespace Geometry_Bash
         private int diamondSpeed = 1;
 
         // properties
-        public int SquareHealth { get { return squareHealth; } }
-        public int CircleHealth { get { return circleHealth; } }
-        public int DiamondHealth { get { return diamondHealth; } }
-        public int SquareDamage { get { return squareDamage; } }
-        public int CircleDamage { get { return circleDamage; } }
-        public int DiamondDamage { get { return diamondDamage; } }
-        public int SquareSpeed { get { return squareSpeed; } }
-        public int CircleSpeed { get { return circleSpeed; } }
-        public int DiamondSpeed { get { return diamondSpeed; } }
-
 
         public OptionsMenu()
         {

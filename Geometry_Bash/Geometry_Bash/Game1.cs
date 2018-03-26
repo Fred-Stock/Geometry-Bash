@@ -149,6 +149,7 @@ namespace Geometry_Bash
         SoundEffect mainMenuTheme;
         SoundEffect gameTheme;
         bool playMusic;
+        bool playGameMusic;
 
         public Game1()
         {
@@ -263,6 +264,7 @@ namespace Geometry_Bash
             }
 
             playMusic = true;
+            playGameMusic = false ;
 
             base.Initialize();
         }
@@ -361,25 +363,24 @@ namespace Geometry_Bash
             ms = Mouse.GetState();
             Rectangle mouseLocation = new Rectangle(ms.Position, new Point(5, 5));
 
-            if(gamestate == GameState.Menu || gamestate == GameState.Instructions || gamestate == GameState.Options || gamestate == GameState.PlayerSelect || gamestate == GameState.LevelSelect)
+            if (gamestate == GameState.Menu || gamestate == GameState.Instructions || gamestate == GameState.Options || gamestate == GameState.PlayerSelect || gamestate == GameState.LevelSelect)
             {
                 if (playMusic == true)
                 {
                     mainMenuTheme.Play();
                     playMusic = false;
                 }
+                playGameMusic = true;
             }
-            //in game sounds not working yet
-            /*
             else
             {
-                if(playMusic == true)
+                if(playGameMusic == true)
                 {
                     gameTheme.Play();
-                    playMusic = false;
+                    playGameMusic = false;
                 }
             }
-            */
+            
 
             // Menu
             if (gamestate == GameState.Menu)
