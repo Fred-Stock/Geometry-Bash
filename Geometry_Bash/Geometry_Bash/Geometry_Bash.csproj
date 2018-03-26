@@ -64,6 +64,12 @@
     <Compile Include="GameObject.cs" />
     <Compile Include="Geometry.cs" />
     <Compile Include="Hud.cs" />
+    <Compile Include="OptionsMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OptionsMenu.Designer.cs">
+      <DependentUpon>OptionsMenu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -74,6 +80,9 @@
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
