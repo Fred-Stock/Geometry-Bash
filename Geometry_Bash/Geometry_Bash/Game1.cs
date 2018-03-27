@@ -151,10 +151,10 @@ namespace Geometry_Bash
         bool blueReady = false;
 
         //music
-        SoundEffect mainMenuTheme;
-        SoundEffect gameTheme;
-        bool playMusic;
-        bool playGameMusic;
+        int playNum = 0;
+        int playNum2 = 0;
+        private Song menuMusic;
+        private Song gameMusic;
 
         public Game1()
         {
@@ -289,9 +289,7 @@ namespace Geometry_Bash
                     reader.Close();
                 }
             }
-
-            playMusic = true;
-            playGameMusic = false ;
+            
 
             base.Initialize();
         }
@@ -350,8 +348,8 @@ namespace Geometry_Bash
             wall = Content.Load<Texture2D>("TopBarrier");
 
             //music and sounds
-            mainMenuTheme = Content.Load<SoundEffect>("Sounds//menuTheme");
-            gameTheme = Content.Load<SoundEffect>("Sounds//gameTheme");
+            menuMusic = Content.Load<Song>("Sounds//menuTheme");
+            gameMusic = Content.Load<Song>("Sounds//gameTheme");
 
         }
 
@@ -390,27 +388,34 @@ namespace Geometry_Bash
             ms = Mouse.GetState();
             Rectangle mouseLocation = new Rectangle(ms.Position, new Point(5, 5));
 
+            //music
             if (gamestate == GameState.Menu || gamestate == GameState.Instructions || gamestate == GameState.Options || gamestate == GameState.PlayerSelect || gamestate == GameState.LevelSelect)
             {
-                if (playMusic == true)
+                if(playNum == 0)
                 {
-                    mainMenuTheme.Play();
-                    playMusic = false;
+                    MediaPlayer.Stop();
+                    playNum++;
+                    MediaPlayer.Play(menuMusic);
                 }
-                playGameMusic = true;
+            }
+            else if(gamestate == GameState.EndGame)
+            {
+                MediaPlayer.Stop();
             }
             else
             {
-                if(playGameMusic == true)
+                if(playNum2 == 0)
                 {
-                    gameTheme.Play();
-                    playGameMusic = false;
+                    playNum2++;
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(gameMusic);
                 }
+                
             }
-            
 
-            // Menu
-            if (gamestate == GameState.Menu)
+
+                // Menu
+                if (gamestate == GameState.Menu)
             {
                 // all other code for this state goes here
 
@@ -644,6 +649,7 @@ namespace Geometry_Bash
             // Actual Gameplay
             if (gamestate == GameState.Game)
             {
+
                 // all other code for this state goes here
                 player1.Move(kbState);
                 player2.Move(kbState);
@@ -691,6 +697,10 @@ namespace Geometry_Bash
             if (gamestate == GameState.EndGame)
             {
                 // all other code for this state goes here
+
+                //ints for music playing
+                playNum = 0;
+                playNum2 = 0;
 
                 // handles button pressing for game state
                 if (mouseLocation.Intersects(backButton))

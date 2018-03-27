@@ -380,15 +380,15 @@
 /processorParam:TextureFormat=Color
 /build:Screens/Level_Selection.jpg
 
-#begin Sounds/gameTheme.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
+#begin Sounds/menuTheme.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
 /processorParam:Quality=Best
-/build:Sounds/gameTheme.wav
+/build:Sounds/menuTheme.mp3
 
-#begin Sounds/menuTheme.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
+#begin Sounds/gameTheme.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
 /processorParam:Quality=Best
-/build:Sounds/menuTheme.wav
+/build:Sounds/gameTheme.mp3
 
