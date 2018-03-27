@@ -125,7 +125,9 @@ namespace Geometry_Bash
         int levelChoice = 0;
         #endregion
 
+        // options/stats fields
         OptionsMenu optionsform = new OptionsMenu();
+        List<double> stats = new List<double>();
 
         //player objects
         Player player1;
@@ -252,6 +254,28 @@ namespace Geometry_Bash
                     {
                         level2[i, j] = level2CompleteRows[j][i];
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+            }
+
+            // load stats
+            try
+            {
+                reader = new StreamReader(File.OpenRead("stats.txt"));
+
+                while ((line = reader.ReadLine()) != null)
+                {
+                    //stats.Add(double.Parse(line.Split(',')));
                 }
             }
             catch (Exception ex)
