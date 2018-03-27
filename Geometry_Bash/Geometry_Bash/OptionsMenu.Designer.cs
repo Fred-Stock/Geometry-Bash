@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsMenu));
             this.SquareHealth = new System.Windows.Forms.Label();
             this.CircleHealth = new System.Windows.Forms.Label();
             this.DiamondHealth = new System.Windows.Forms.Label();
@@ -259,6 +260,7 @@
             // SaveButton
             // 
             this.SaveButton.BackColor = System.Drawing.Color.Transparent;
+            this.SaveButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SaveButton.BackgroundImage")));
             this.SaveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SaveButton.Location = new System.Drawing.Point(464, 578);
             this.SaveButton.Name = "SaveButton";
@@ -273,6 +275,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.DiamondSpeedText);
