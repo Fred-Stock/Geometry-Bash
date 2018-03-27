@@ -93,27 +93,29 @@
             // 
             // SquareTextBox
             // 
-            this.SquareTextBox.Location = new System.Drawing.Point(126, 205);
+            this.SquareTextBox.Location = new System.Drawing.Point(187, 205);
             this.SquareTextBox.Name = "SquareTextBox";
-            this.SquareTextBox.Size = new System.Drawing.Size(200, 20);
+            this.SquareTextBox.Size = new System.Drawing.Size(40, 20);
             this.SquareTextBox.TabIndex = 3;
-            this.SquareTextBox.Text = "1";
+            this.SquareTextBox.Text = "10";
             this.SquareTextBox.TextChanged += new System.EventHandler(this.SquareTextBox_TextChanged);
             // 
             // CircleTextBox
             // 
-            this.CircleTextBox.Location = new System.Drawing.Point(126, 305);
+            this.CircleTextBox.Location = new System.Drawing.Point(187, 305);
             this.CircleTextBox.Name = "CircleTextBox";
-            this.CircleTextBox.Size = new System.Drawing.Size(200, 20);
+            this.CircleTextBox.Size = new System.Drawing.Size(40, 20);
             this.CircleTextBox.TabIndex = 4;
+            this.CircleTextBox.Text = "10";
             this.CircleTextBox.TextChanged += new System.EventHandler(this.CircleTextBox_TextChanged);
             // 
             // DiamondTextBox
             // 
-            this.DiamondTextBox.Location = new System.Drawing.Point(140, 405);
+            this.DiamondTextBox.Location = new System.Drawing.Point(187, 405);
             this.DiamondTextBox.Name = "DiamondTextBox";
-            this.DiamondTextBox.Size = new System.Drawing.Size(200, 20);
+            this.DiamondTextBox.Size = new System.Drawing.Size(40, 20);
             this.DiamondTextBox.TabIndex = 5;
+            this.DiamondTextBox.Text = "10";
             this.DiamondTextBox.TextChanged += new System.EventHandler(this.DiamondTextBox_TextChanged);
             // 
             // SquareDamage
@@ -160,26 +162,29 @@
             // 
             // SquareDamageText
             // 
-            this.SquareDamageText.Location = new System.Drawing.Point(551, 205);
+            this.SquareDamageText.Location = new System.Drawing.Point(610, 205);
             this.SquareDamageText.Name = "SquareDamageText";
-            this.SquareDamageText.Size = new System.Drawing.Size(200, 20);
+            this.SquareDamageText.Size = new System.Drawing.Size(37, 20);
             this.SquareDamageText.TabIndex = 9;
+            this.SquareDamageText.Text = "3";
             this.SquareDamageText.TextChanged += new System.EventHandler(this.SquareDamageText_TextChanged);
             // 
             // CircleDamageText
             // 
-            this.CircleDamageText.Location = new System.Drawing.Point(551, 305);
+            this.CircleDamageText.Location = new System.Drawing.Point(610, 305);
             this.CircleDamageText.Name = "CircleDamageText";
-            this.CircleDamageText.Size = new System.Drawing.Size(200, 20);
+            this.CircleDamageText.Size = new System.Drawing.Size(37, 20);
             this.CircleDamageText.TabIndex = 10;
+            this.CircleDamageText.Text = "3";
             this.CircleDamageText.TextChanged += new System.EventHandler(this.CircleDamageText_TextChanged);
             // 
             // DiamondDamageText
             // 
-            this.DiamondDamageText.Location = new System.Drawing.Point(574, 405);
+            this.DiamondDamageText.Location = new System.Drawing.Point(610, 405);
             this.DiamondDamageText.Name = "DiamondDamageText";
-            this.DiamondDamageText.Size = new System.Drawing.Size(200, 20);
+            this.DiamondDamageText.Size = new System.Drawing.Size(37, 20);
             this.DiamondDamageText.TabIndex = 11;
+            this.DiamondDamageText.Text = "3";
             this.DiamondDamageText.TextChanged += new System.EventHandler(this.DiamondDamageText_TextChanged);
             // 
             // DiamondSpeed
@@ -226,26 +231,29 @@
             // 
             // DiamondSpeedText
             // 
-            this.DiamondSpeedText.Location = new System.Drawing.Point(971, 405);
+            this.DiamondSpeedText.Location = new System.Drawing.Point(985, 405);
             this.DiamondSpeedText.Name = "DiamondSpeedText";
-            this.DiamondSpeedText.Size = new System.Drawing.Size(200, 20);
+            this.DiamondSpeedText.Size = new System.Drawing.Size(37, 20);
             this.DiamondSpeedText.TabIndex = 17;
+            this.DiamondSpeedText.Text = "5";
             this.DiamondSpeedText.TextChanged += new System.EventHandler(this.DiamondSpeedText_TextChanged);
             // 
             // CircleSpeedText
             // 
-            this.CircleSpeedText.Location = new System.Drawing.Point(948, 305);
+            this.CircleSpeedText.Location = new System.Drawing.Point(985, 305);
             this.CircleSpeedText.Name = "CircleSpeedText";
-            this.CircleSpeedText.Size = new System.Drawing.Size(200, 20);
+            this.CircleSpeedText.Size = new System.Drawing.Size(37, 20);
             this.CircleSpeedText.TabIndex = 16;
+            this.CircleSpeedText.Text = "5";
             this.CircleSpeedText.TextChanged += new System.EventHandler(this.CircleSpeedText_TextChanged);
             // 
             // SquareSpeedText
             // 
-            this.SquareSpeedText.Location = new System.Drawing.Point(948, 205);
+            this.SquareSpeedText.Location = new System.Drawing.Point(985, 205);
             this.SquareSpeedText.Name = "SquareSpeedText";
-            this.SquareSpeedText.Size = new System.Drawing.Size(200, 20);
+            this.SquareSpeedText.Size = new System.Drawing.Size(37, 20);
             this.SquareSpeedText.TabIndex = 15;
+            this.SquareSpeedText.Text = "5";
             this.SquareSpeedText.TextChanged += new System.EventHandler(this.SquareSpeedText_TextChanged);
             // 
             // SaveButton
