@@ -14,26 +14,27 @@ namespace Geometry_Bash
     public partial class OptionsMenu : Form
     {
         //fields
-        private int squareH = 1;
-        private int circleH = 1;
-        private int diamondH = 1;
-        private int squareD = 1;
-        private int circleD = 1;
-        private int diamondD = 1;
-        private int squareS = 1;
-        private int circleS = 1;
-        private int diamondS = 1;
+        // IF THESE ARE SWITCHED, SWITCH IN FORM TEXT BOXES TOO
+        private double squareH = 10;
+        private double circleH = 10;
+        private double diamondH = 10;
+        private double squareD = 1;
+        private double circleD = 1;
+        private double diamondD = 1;
+        private double squareS = 5;
+        private double circleS = 5;
+        private double diamondS = 5;
 
         // properties
-        public int SquareH { get { return squareH; } }
-        public int CircleH { get { return circleH; } }
-        public int DiamondH { get { return diamondH; } }
-        public int SquareD { get { return squareD; } }
-        public int CircleD { get { return circleD; } }
-        public int DiamondD { get { return diamondD; } }
-        public int SquareS { get { return squareS; } }
-        public int CircleS { get { return circleS; } }
-        public int DiamondS { get { return diamondS; } }
+        public double SquareH { get { return squareH; } }
+        public double CircleH { get { return circleH; } }
+        public double DiamondH { get { return diamondH; } }
+        public double SquareD { get { return squareD; } }
+        public double CircleD { get { return circleD; } }
+        public double DiamondD { get { return diamondD; } }
+        public double SquareS { get { return squareS; } }
+        public double CircleS { get { return circleS; } }
+        public double DiamondS { get { return diamondS; } }
 
 
         public OptionsMenu()
@@ -43,47 +44,47 @@ namespace Geometry_Bash
 
         private void SquareTextBox_TextChanged(object sender, EventArgs e)
         {
-            squareH = int.Parse(SquareTextBox.Text);
+            squareH = double.Parse(SquareTextBox.Text);
         }
 
         private void CircleTextBox_TextChanged(object sender, EventArgs e)
         {
-            circleH = int.Parse(CircleTextBox.Text);
+            circleH = double.Parse(CircleTextBox.Text);
         }
 
         private void DiamondTextBox_TextChanged(object sender, EventArgs e)
         {
-            diamondH = int.Parse(DiamondTextBox.Text);
+            diamondH = double.Parse(DiamondTextBox.Text);
         }
 
         private void SquareDamageText_TextChanged(object sender, EventArgs e)
         {
-            squareD = int.Parse(SquareDamageText.Text);
+            squareD = double.Parse(SquareDamageText.Text);
         }
 
         private void CircleDamageText_TextChanged(object sender, EventArgs e)
         {
-            circleD = int.Parse(CircleDamageText.Text);
+            circleD = double.Parse(CircleDamageText.Text);
         }
 
         private void DiamondDamageText_TextChanged(object sender, EventArgs e)
         {
-            diamondD = int.Parse(DiamondDamageText.Text);
+            diamondD = double.Parse(DiamondDamageText.Text);
         }
 
         private void SquareSpeedText_TextChanged(object sender, EventArgs e)
         {
-            squareS = int.Parse(SquareSpeedText.Text);
+            squareS = double.Parse(SquareSpeedText.Text);
         }
 
         private void CircleSpeedText_TextChanged(object sender, EventArgs e)
         {
-            circleS = int.Parse(CircleSpeedText.Text);
+            circleS = double.Parse(CircleSpeedText.Text);
         }
 
         private void DiamondSpeedText_TextChanged(object sender, EventArgs e)
         {
-            diamondS = int.Parse(DiamondSpeedText.Text);
+            diamondS = double.Parse(DiamondSpeedText.Text);
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
