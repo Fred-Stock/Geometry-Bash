@@ -96,7 +96,7 @@ namespace Geometry_Bash
 
             try
             {
-                StreamWriter fileOut = new StreamWriter("stats.txt");
+                StreamWriter fileOut = new StreamWriter(File.OpenRead("stats.txt"));
                 fileOut.Write(output);
                 fileOut.Close();
             }

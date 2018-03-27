@@ -7,6 +7,7 @@ using System;
 using System.Media;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Audio;
+//using System.Windows.Forms;
 
 namespace Geometry_Bash
 {
@@ -123,6 +124,8 @@ namespace Geometry_Bash
         List<string> level2CompleteRows = new List<string>();
         int levelChoice = 0;
         #endregion
+
+        OptionsMenu optionsform = new OptionsMenu();
 
         //player objects
         Player player1;
@@ -408,7 +411,7 @@ namespace Geometry_Bash
                 {
                     if (ms.LeftButton == ButtonState.Pressed)
                     {
-                        gamestate = GameState.Options;
+                        optionsform.ShowDialog();
                     }
                 }
                 

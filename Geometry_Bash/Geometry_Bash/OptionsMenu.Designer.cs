@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsMenu));
             this.SquareHealth = new System.Windows.Forms.Label();
             this.CircleHealth = new System.Windows.Forms.Label();
             this.DiamondHealth = new System.Windows.Forms.Label();
@@ -54,12 +53,12 @@
             // 
             this.SquareHealth.AutoSize = true;
             this.SquareHealth.BackColor = System.Drawing.Color.Transparent;
-            this.SquareHealth.Font = new System.Drawing.Font("MS Office Symbol Regular", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SquareHealth.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SquareHealth.Location = new System.Drawing.Point(16, 201);
             this.SquareHealth.Margin = new System.Windows.Forms.Padding(3);
             this.SquareHealth.Name = "SquareHealth";
             this.SquareHealth.Padding = new System.Windows.Forms.Padding(0, 0, 0, 6);
-            this.SquareHealth.Size = new System.Drawing.Size(105, 27);
+            this.SquareHealth.Size = new System.Drawing.Size(149, 31);
             this.SquareHealth.TabIndex = 0;
             this.SquareHealth.Text = "Square Health";
             this.SquareHealth.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -68,12 +67,12 @@
             // 
             this.CircleHealth.AutoSize = true;
             this.CircleHealth.BackColor = System.Drawing.Color.Transparent;
-            this.CircleHealth.Font = new System.Drawing.Font("MS Office Symbol Regular", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CircleHealth.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CircleHealth.Location = new System.Drawing.Point(16, 301);
             this.CircleHealth.Margin = new System.Windows.Forms.Padding(3);
             this.CircleHealth.Name = "CircleHealth";
             this.CircleHealth.Padding = new System.Windows.Forms.Padding(0, 0, 0, 6);
-            this.CircleHealth.Size = new System.Drawing.Size(96, 27);
+            this.CircleHealth.Size = new System.Drawing.Size(135, 31);
             this.CircleHealth.TabIndex = 1;
             this.CircleHealth.Text = "Circle Health";
             this.CircleHealth.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -82,12 +81,12 @@
             // 
             this.DiamondHealth.AutoSize = true;
             this.DiamondHealth.BackColor = System.Drawing.Color.Transparent;
-            this.DiamondHealth.Font = new System.Drawing.Font("MS Office Symbol Regular", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DiamondHealth.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DiamondHealth.Location = new System.Drawing.Point(16, 401);
             this.DiamondHealth.Margin = new System.Windows.Forms.Padding(3);
             this.DiamondHealth.Name = "DiamondHealth";
             this.DiamondHealth.Padding = new System.Windows.Forms.Padding(0, 0, 0, 6);
-            this.DiamondHealth.Size = new System.Drawing.Size(118, 27);
+            this.DiamondHealth.Size = new System.Drawing.Size(165, 31);
             this.DiamondHealth.TabIndex = 2;
             this.DiamondHealth.Text = "Diamond Health";
             this.DiamondHealth.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -98,6 +97,7 @@
             this.SquareTextBox.Name = "SquareTextBox";
             this.SquareTextBox.Size = new System.Drawing.Size(200, 20);
             this.SquareTextBox.TabIndex = 3;
+            this.SquareTextBox.Text = "1";
             this.SquareTextBox.TextChanged += new System.EventHandler(this.SquareTextBox_TextChanged);
             // 
             // CircleTextBox
@@ -120,12 +120,12 @@
             // 
             this.SquareDamage.AutoSize = true;
             this.SquareDamage.BackColor = System.Drawing.Color.Transparent;
-            this.SquareDamage.Font = new System.Drawing.Font("MS Office Symbol Regular", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SquareDamage.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SquareDamage.Location = new System.Drawing.Point(426, 201);
             this.SquareDamage.Margin = new System.Windows.Forms.Padding(3);
             this.SquareDamage.Name = "SquareDamage";
             this.SquareDamage.Padding = new System.Windows.Forms.Padding(0, 0, 0, 6);
-            this.SquareDamage.Size = new System.Drawing.Size(119, 27);
+            this.SquareDamage.Size = new System.Drawing.Size(167, 31);
             this.SquareDamage.TabIndex = 6;
             this.SquareDamage.Text = "Square Damage";
             this.SquareDamage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -134,12 +134,12 @@
             // 
             this.CircleDamage.AutoSize = true;
             this.CircleDamage.BackColor = System.Drawing.Color.Transparent;
-            this.CircleDamage.Font = new System.Drawing.Font("MS Office Symbol Regular", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CircleDamage.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CircleDamage.Location = new System.Drawing.Point(426, 301);
             this.CircleDamage.Margin = new System.Windows.Forms.Padding(3);
             this.CircleDamage.Name = "CircleDamage";
             this.CircleDamage.Padding = new System.Windows.Forms.Padding(0, 0, 0, 6);
-            this.CircleDamage.Size = new System.Drawing.Size(110, 27);
+            this.CircleDamage.Size = new System.Drawing.Size(153, 31);
             this.CircleDamage.TabIndex = 7;
             this.CircleDamage.Text = "Circle Damage";
             this.CircleDamage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -148,12 +148,12 @@
             // 
             this.DiamondDamage.AutoSize = true;
             this.DiamondDamage.BackColor = System.Drawing.Color.Transparent;
-            this.DiamondDamage.Font = new System.Drawing.Font("MS Office Symbol Regular", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DiamondDamage.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DiamondDamage.Location = new System.Drawing.Point(426, 401);
             this.DiamondDamage.Margin = new System.Windows.Forms.Padding(3);
             this.DiamondDamage.Name = "DiamondDamage";
             this.DiamondDamage.Padding = new System.Windows.Forms.Padding(0, 0, 0, 6);
-            this.DiamondDamage.Size = new System.Drawing.Size(132, 27);
+            this.DiamondDamage.Size = new System.Drawing.Size(183, 31);
             this.DiamondDamage.TabIndex = 8;
             this.DiamondDamage.Text = "Diamond Damage";
             this.DiamondDamage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -186,12 +186,12 @@
             // 
             this.DiamondSpeed.AutoSize = true;
             this.DiamondSpeed.BackColor = System.Drawing.Color.Transparent;
-            this.DiamondSpeed.Font = new System.Drawing.Font("MS Office Symbol Regular", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DiamondSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DiamondSpeed.Location = new System.Drawing.Point(814, 401);
             this.DiamondSpeed.Margin = new System.Windows.Forms.Padding(3);
             this.DiamondSpeed.Name = "DiamondSpeed";
             this.DiamondSpeed.Padding = new System.Windows.Forms.Padding(0, 0, 0, 6);
-            this.DiamondSpeed.Size = new System.Drawing.Size(118, 27);
+            this.DiamondSpeed.Size = new System.Drawing.Size(165, 31);
             this.DiamondSpeed.TabIndex = 14;
             this.DiamondSpeed.Text = "Diamond Speed";
             this.DiamondSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -200,12 +200,12 @@
             // 
             this.CircleSpeed.AutoSize = true;
             this.CircleSpeed.BackColor = System.Drawing.Color.Transparent;
-            this.CircleSpeed.Font = new System.Drawing.Font("MS Office Symbol Regular", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CircleSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CircleSpeed.Location = new System.Drawing.Point(814, 301);
             this.CircleSpeed.Margin = new System.Windows.Forms.Padding(3);
             this.CircleSpeed.Name = "CircleSpeed";
             this.CircleSpeed.Padding = new System.Windows.Forms.Padding(0, 0, 0, 6);
-            this.CircleSpeed.Size = new System.Drawing.Size(96, 27);
+            this.CircleSpeed.Size = new System.Drawing.Size(135, 31);
             this.CircleSpeed.TabIndex = 13;
             this.CircleSpeed.Text = "Circle Speed";
             this.CircleSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -214,12 +214,12 @@
             // 
             this.SquareSpeed.AutoSize = true;
             this.SquareSpeed.BackColor = System.Drawing.Color.Transparent;
-            this.SquareSpeed.Font = new System.Drawing.Font("MS Office Symbol Regular", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SquareSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SquareSpeed.Location = new System.Drawing.Point(814, 201);
             this.SquareSpeed.Margin = new System.Windows.Forms.Padding(3);
             this.SquareSpeed.Name = "SquareSpeed";
             this.SquareSpeed.Padding = new System.Windows.Forms.Padding(0, 0, 0, 6);
-            this.SquareSpeed.Size = new System.Drawing.Size(105, 27);
+            this.SquareSpeed.Size = new System.Drawing.Size(149, 31);
             this.SquareSpeed.TabIndex = 12;
             this.SquareSpeed.Text = "Square Speed";
             this.SquareSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -251,8 +251,7 @@
             // SaveButton
             // 
             this.SaveButton.BackColor = System.Drawing.Color.Transparent;
-            this.SaveButton.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("SaveButton.BackgroundImage")));
-            this.SaveButton.Font = new System.Drawing.Font("MS Office Symbol Regular", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SaveButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SaveButton.Location = new System.Drawing.Point(464, 578);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Padding = new System.Windows.Forms.Padding(0, 0, 0, 20);
@@ -261,12 +260,11 @@
             this.SaveButton.UseVisualStyleBackColor = false;
             this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
-            // Form1
+            // OptionsMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveBorder;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.DiamondSpeedText);
@@ -288,7 +286,7 @@
             this.Controls.Add(this.CircleHealth);
             this.Controls.Add(this.SquareHealth);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.Name = "Form1";
+            this.Name = "OptionsMenu";
             this.Text = "Stats Changer";
             this.ResumeLayout(false);
             this.PerformLayout();
