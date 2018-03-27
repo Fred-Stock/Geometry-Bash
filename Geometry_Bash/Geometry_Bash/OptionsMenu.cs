@@ -14,28 +14,27 @@ namespace Geometry_Bash
     public partial class OptionsMenu : Form
     {
         //fields
-        private int squareHealth = 1;
-        private int circleHealth = 1;
-        private int diamondHealth = 1;
-        private int squareDamage = 1;
-        private int circleDamage = 1;
-        private int diamondDamage = 1;
-        private int squareSpeed = 1;
-        private int circleSpeed = 1;
-        private int diamondSpeed = 1;
+        private int squareH = 1;
+        private int circleH = 1;
+        private int diamondH = 1;
+        private int squareD = 1;
+        private int circleD = 1;
+        private int diamondD = 1;
+        private int squareS = 1;
+        private int circleS = 1;
+        private int diamondS = 1;
 
         // properties
-        /*
-        public int SquareHealth { get { return squareHealth; } }
-        public int CircleHealth { get { return circleHealth; } }
-        public int DiamondHealth { get { return diamondHealth; } }
-        public int SquareDamage { get { return squareDamage; } }
-        public int CircleDamage { get { return circleDamage; } }
-        public int DiamondDamage { get { return diamondDamage; } }
-        public int SquareSpeed { get { return squareSpeed; } }
-        public int CircleSpeed { get { return circleSpeed; } }
-        public int DiamondSpeed { get { return diamondSpeed; } }
-        */
+        public int SquareH { get { return squareH; } }
+        public int CircleH { get { return circleH; } }
+        public int DiamondH { get { return diamondH; } }
+        public int SquareD { get { return squareD; } }
+        public int CircleD { get { return circleD; } }
+        public int DiamondD { get { return diamondD; } }
+        public int SquareS { get { return squareS; } }
+        public int CircleS { get { return circleS; } }
+        public int DiamondS { get { return diamondS; } }
+
 
         public OptionsMenu()
         {
@@ -44,56 +43,56 @@ namespace Geometry_Bash
 
         private void SquareTextBox_TextChanged(object sender, EventArgs e)
         {
-            squareHealth = int.Parse(SquareTextBox.Text);
+            squareH = int.Parse(SquareTextBox.Text);
         }
 
         private void CircleTextBox_TextChanged(object sender, EventArgs e)
         {
-            circleHealth = int.Parse(CircleTextBox.Text);
+            circleH = int.Parse(CircleTextBox.Text);
         }
 
         private void DiamondTextBox_TextChanged(object sender, EventArgs e)
         {
-            diamondHealth = int.Parse(DiamondTextBox.Text);
+            diamondH = int.Parse(DiamondTextBox.Text);
         }
 
         private void SquareDamageText_TextChanged(object sender, EventArgs e)
         {
-            squareDamage = int.Parse(SquareDamageText.Text);
+            squareD = int.Parse(SquareDamageText.Text);
         }
 
         private void CircleDamageText_TextChanged(object sender, EventArgs e)
         {
-            circleDamage = int.Parse(CircleDamageText.Text);
+            circleD = int.Parse(CircleDamageText.Text);
         }
 
         private void DiamondDamageText_TextChanged(object sender, EventArgs e)
         {
-            diamondDamage = int.Parse(DiamondDamageText.Text);
+            diamondD = int.Parse(DiamondDamageText.Text);
         }
 
         private void SquareSpeedText_TextChanged(object sender, EventArgs e)
         {
-            squareSpeed = int.Parse(SquareSpeedText.Text);
+            squareS = int.Parse(SquareSpeedText.Text);
         }
 
         private void CircleSpeedText_TextChanged(object sender, EventArgs e)
         {
-            circleSpeed = int.Parse(CircleSpeedText.Text);
+            circleS = int.Parse(CircleSpeedText.Text);
         }
 
         private void DiamondSpeedText_TextChanged(object sender, EventArgs e)
         {
-            diamondSpeed = int.Parse(DiamondSpeedText.Text);
+            diamondS = int.Parse(DiamondSpeedText.Text);
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
             //outout is "squareHealth,circleHealth,diamondHealth,squareDamage,circleDamage,diamondDiamond,squareSpeed,circleSpeed,diamondSpeed"
 
-            string output = squareHealth + "," + circleHealth + "," + diamondHealth + "," +
-                            squareDamage + "," + circleDamage + "," + diamondDamage + "," +
-                            squareSpeed + "," + circleSpeed + "," + diamondSpeed + ",";
+            string output = squareH + "," + circleH + "," + diamondH + "," +
+                            squareD + "," + circleD + "," + diamondD + "," +
+                            squareS + "," + circleS + "," + diamondS + ",";
 
             try
             {
