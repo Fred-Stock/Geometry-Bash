@@ -16,8 +16,9 @@ namespace Geometry_Bash
 
         public Diamond(int player, Rectangle sAP, Texture2D texture, int windowWidth, int windowHeight, int[] stats) : base(texture, sAP, windowWidth, windowHeight)
         {
-            //set health
-            health = 10;
+            // stats loads in H/D/S
+            health = stats[0];
+            moveSpeed = stats[2];
 
             
             //check if it is player one or two and then set the correct keybindings
@@ -30,9 +31,6 @@ namespace Geometry_Bash
 
                 keyAttack1 = Keys.Q;
                 keyAttack2 = Keys.E;
-
-
-
             }
 
             if (player == 2)
