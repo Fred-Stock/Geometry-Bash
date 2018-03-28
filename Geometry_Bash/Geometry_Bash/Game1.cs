@@ -4,6 +4,10 @@ using Microsoft.Xna.Framework.Input;
 using System.IO;
 using System.Collections.Generic;
 using System;
+using System.Media;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
+//using System.Windows.Forms;
 
 namespace Geometry_Bash
 {
@@ -15,7 +19,6 @@ namespace Geometry_Bash
         PlayerSelect,
         LevelSelect,
         Game,
-        Options,
         EndGame
     }
 
@@ -121,6 +124,13 @@ namespace Geometry_Bash
         int levelChoice = 0;
         #endregion
 
+        // options/stats fields
+        OptionsMenu optionsform = new OptionsMenu();
+        double[] stats = new double[9];
+        double[] squareStats = new double[3];
+        double[] circleStats = new double[3];
+        double[] diamondStats = new double[3];
+
         //player objects
         Player player1;
         Player player2;
@@ -141,6 +151,12 @@ namespace Geometry_Bash
         int bluePlayerTileHighlight = 0;
         bool redReady = false;
         bool blueReady = false;
+
+        //music
+        int playNum = 0;
+        int playNum2 = 0;
+        private Song menuMusic;
+        private Song gameMusic;
 
         public Game1()
         {
@@ -254,6 +270,47 @@ namespace Geometry_Bash
                 }
             }
 
+            // load stats
+            try
+            {
+                reader = new StreamReader("../../../../stats.txt");
+
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] stringStats = line.Split(',');
+                    //stats = new double[stringStats.Length];
+
+                    for (int i = 0; i < stringStats.Length; i++)
+                    {
+                        stats[i] = int.Parse(stringStats[i]);
+                    }
+                }
+
+                // square
+                squareStats[0] = stats[0];
+                squareStats[1] = stats[3];
+                squareStats[2] = stats[6];
+                // circle
+                circleStats[0] = stats[1];
+                circleStats[1] = stats[4];
+                circleStats[2] = stats[7];
+                // diamond
+                diamondStats[0] = stats[2];
+                diamondStats[1] = stats[5];
+                diamondStats[2] = stats[9];
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader.Close();
+                }
+            }
+
             base.Initialize();
         }
 
@@ -309,6 +366,11 @@ namespace Geometry_Bash
 
             // walls
             wall = Content.Load<Texture2D>("TopBarrier");
+
+            //music and sounds
+            menuMusic = Content.Load<Song>("Sounds//menuTheme");
+            gameMusic = Content.Load<Song>("Sounds//gameTheme");
+
         }
 
         /// <summary>
@@ -335,6 +397,7 @@ namespace Geometry_Bash
                 Exit();
 
             // TODO: Add your update logic here
+            
 
             // set current kb state
             kbState = Keyboard.GetState();
@@ -344,6 +407,32 @@ namespace Geometry_Bash
             this.IsMouseVisible = true;
             ms = Mouse.GetState();
             Rectangle mouseLocation = new Rectangle(ms.Position, new Point(5, 5));
+
+            //music
+            if (gamestate == GameState.Menu || gamestate == GameState.Instructions || gamestate == GameState.PlayerSelect || gamestate == GameState.LevelSelect)
+            {
+                if(playNum == 0)
+                {
+                    MediaPlayer.Stop();
+                    playNum++;
+                    MediaPlayer.Play(menuMusic);
+                }
+            }
+            else if(gamestate == GameState.EndGame)
+            {
+                MediaPlayer.Stop();
+            }
+            else
+            {
+                if(playNum2 == 0)
+                {
+                    playNum2++;
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(gameMusic);
+                }
+                
+            }
+
 
             // Menu
             if (gamestate == GameState.Menu)
@@ -371,9 +460,11 @@ namespace Geometry_Bash
                 {
                     if (ms.LeftButton == ButtonState.Pressed)
                     {
-                        gamestate = GameState.Options;
+                        optionsform.ShowDialog();
                     }
                 }
+                
+
             }
 
             // Instructions
@@ -579,6 +670,7 @@ namespace Geometry_Bash
             // Actual Gameplay
             if (gamestate == GameState.Game)
             {
+
                 // all other code for this state goes here
                 player1.Move(kbState);
                 player2.Move(kbState);
@@ -607,25 +699,14 @@ namespace Geometry_Bash
                 }
             }
 
-            // Options
-            if (gamestate == GameState.Options)
-            {
-                // all other code for this state goes here
-
-                // handles button pressing for game state
-                if (mouseLocation.Intersects(backButton))
-                {
-                    if (SingleLeftMousePress())
-                    {
-                        gamestate = GameState.Menu;
-                    }
-                }
-            }
-
             // End Game, when someone wins
             if (gamestate == GameState.EndGame)
             {
                 // all other code for this state goes here
+
+                //ints for music playing
+                playNum = 0;
+                playNum2 = 0;
 
                 // handles button pressing for game state
                 if (mouseLocation.Intersects(backButton))
@@ -835,23 +916,16 @@ namespace Geometry_Bash
                     }
                 }
 
-                
+                transparency1 = (float)player1.Health/10;
+                transparency2 = (float)player2.Health/10;
+                spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
+                spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
+
                 // HEALTH BAR
 
                 // SUPER METER
 
                 // PAUSE BUTTON
-            }
-
-            // Options
-            if (gamestate == GameState.Options)
-            {
-                // options menu screen
-                spriteBatch.Draw(optionsScreen, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
-
-                // changes back button if mouse hovers over
-                if (mouseLocation.Intersects(backButton))
-                { spriteBatch.Draw(back, backButton, Color.White); }
             }
 
             // End Game, when someone wins
