@@ -42,53 +42,19 @@ namespace Geometry_Bash
             InitializeComponent();
         }
 
-        private void SquareTextBox_TextChanged(object sender, EventArgs e)
-        {
-            squareH = double.Parse(SquareTextBox.Text);
-        }
-
-        private void CircleTextBox_TextChanged(object sender, EventArgs e)
-        {
-            circleH = double.Parse(CircleTextBox.Text);
-        }
-
-        private void DiamondTextBox_TextChanged(object sender, EventArgs e)
-        {
-            diamondH = double.Parse(DiamondTextBox.Text);
-        }
-
-        private void SquareDamageText_TextChanged(object sender, EventArgs e)
-        {
-            squareD = double.Parse(SquareDamageText.Text);
-        }
-
-        private void CircleDamageText_TextChanged(object sender, EventArgs e)
-        {
-            circleD = double.Parse(CircleDamageText.Text);
-        }
-
-        private void DiamondDamageText_TextChanged(object sender, EventArgs e)
-        {
-            diamondD = double.Parse(DiamondDamageText.Text);
-        }
-
-        private void SquareSpeedText_TextChanged(object sender, EventArgs e)
-        {
-            squareS = double.Parse(SquareSpeedText.Text);
-        }
-
-        private void CircleSpeedText_TextChanged(object sender, EventArgs e)
-        {
-            circleS = double.Parse(CircleSpeedText.Text);
-        }
-
-        private void DiamondSpeedText_TextChanged(object sender, EventArgs e)
-        {
-            diamondS = double.Parse(DiamondSpeedText.Text);
-        }
-
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            // saves new input into fields
+            squareH = double.Parse(SquareTextBox.Text);
+            circleH = double.Parse(CircleTextBox.Text);
+            diamondH = double.Parse(DiamondTextBox.Text);
+            squareD = double.Parse(SquareDamageText.Text);
+            circleD = double.Parse(CircleDamageText.Text);
+            diamondD = double.Parse(DiamondDamageText.Text);
+            squareS = double.Parse(SquareSpeedText.Text);
+            circleS = double.Parse(CircleSpeedText.Text);
+            diamondS = double.Parse(DiamondSpeedText.Text);
+
             //outout is "squareHealth,circleHealth,diamondHealth,squareDamage,circleDamage,diamondDiamond,squareSpeed,circleSpeed,diamondSpeed"
 
             string output = squareH + "," + circleH + "," + diamondH + "," +

@@ -19,7 +19,6 @@ namespace Geometry_Bash
         PlayerSelect,
         LevelSelect,
         Game,
-        Options,
         EndGame
     }
 
@@ -127,7 +126,10 @@ namespace Geometry_Bash
 
         // options/stats fields
         OptionsMenu optionsform = new OptionsMenu();
-        List<double> stats = new List<double>();
+        double[] stats;
+        double[] squareStats;
+        double[] circleStats;
+        double[] diamondStats;
 
         //player objects
         Player player1;
@@ -275,8 +277,30 @@ namespace Geometry_Bash
 
                 while ((line = reader.ReadLine()) != null)
                 {
-                    //stats.Add(double.Parse(line.Split(',')));
+                    string[] stringStats = line.Split(',');
+                    stats = new double[stringStats.Length];
+
+                    for (int i = 0; i < stringStats.Length; i++)
+                    {
+                        stats[i] = double.Parse(stringStats[i]);
+                    }
                 }
+
+                // square
+                squareStats = new double[stats.Length / 3];
+                squareStats[0] = stats[0];
+                squareStats[1] = stats[3];
+                squareStats[2] = stats[6];
+                // circle
+                circleStats = new double[stats.Length / 3];
+                circleStats[0] = stats[1];
+                circleStats[1] = stats[4];
+                circleStats[2] = stats[7];
+                // diamond
+                diamondStats = new double[stats.Length / 3];
+                diamondStats[0] = stats[2];
+                diamondStats[1] = stats[5];
+                diamondStats[2] = stats[9];
             }
             catch (Exception ex)
             {
@@ -389,7 +413,7 @@ namespace Geometry_Bash
             Rectangle mouseLocation = new Rectangle(ms.Position, new Point(5, 5));
 
             //music
-            if (gamestate == GameState.Menu || gamestate == GameState.Instructions || gamestate == GameState.Options || gamestate == GameState.PlayerSelect || gamestate == GameState.LevelSelect)
+            if (gamestate == GameState.Menu || gamestate == GameState.Instructions || gamestate == GameState.PlayerSelect || gamestate == GameState.LevelSelect)
             {
                 if(playNum == 0)
                 {
@@ -414,8 +438,8 @@ namespace Geometry_Bash
             }
 
 
-                // Menu
-                if (gamestate == GameState.Menu)
+            // Menu
+            if (gamestate == GameState.Menu)
             {
                 // all other code for this state goes here
 
@@ -678,21 +702,6 @@ namespace Geometry_Bash
                 }
             }
 
-            // Options
-            if (gamestate == GameState.Options)
-            {
-                // all other code for this state goes here
-
-                // handles button pressing for game state
-                if (mouseLocation.Intersects(backButton))
-                {
-                    if (SingleLeftMousePress())
-                    {
-                        gamestate = GameState.Menu;
-                    }
-                }
-            }
-
             // End Game, when someone wins
             if (gamestate == GameState.EndGame)
             {
@@ -909,17 +918,6 @@ namespace Geometry_Bash
                 // SUPER METER
 
                 // PAUSE BUTTON
-            }
-
-            // Options
-            if (gamestate == GameState.Options)
-            {
-                // options menu screen
-                spriteBatch.Draw(optionsScreen, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
-
-                // changes back button if mouse hovers over
-                if (mouseLocation.Intersects(backButton))
-                { spriteBatch.Draw(back, backButton, Color.White); }
             }
 
             // End Game, when someone wins
