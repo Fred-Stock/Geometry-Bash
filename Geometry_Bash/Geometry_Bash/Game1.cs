@@ -371,22 +371,22 @@ namespace Geometry_Bash
             {
                 if(playNum == 0)
                 {
-                    MediaPlayer.Stop();
-                    playNum++;
-                    MediaPlayer.Play(menuMusic);
+                    //MediaPlayer.Stop();
+                    //playNum++;
+                    //MediaPlayer.Play(menuMusic);
                 }
             }
             else if(gamestate == GameState.EndGame)
             {
-                MediaPlayer.Stop();
+                //MediaPlayer.Stop();
             }
             else
             {
                 if(playNum2 == 0)
                 {
                     playNum2++;
-                    MediaPlayer.Stop();
-                    MediaPlayer.Play(gameMusic);
+                    //MediaPlayer.Stop();
+                    //MediaPlayer.Play(gameMusic);
                 }
                 
             }
@@ -868,24 +868,6 @@ namespace Geometry_Bash
                 // background
                 spriteBatch.Draw(gameScreen, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
-               // Draw Players
-                     float transparency1 = (float)player1.Health/10;
-                     float transparency2 = (float)player2.Health/10;
-                     Vector2 player1Origin = new Vector2(player1.Texture.Width / 2f, player1.Texture.Height / 2f);
-                     Rectangle player1SourceRectangle = new Rectangle(0, 0, player1.Texture.Width, player1.Texture.Height);
-                     Vector2 player2Origin = new Vector2(player2.Texture.Width / 2f, player2.Texture.Height / 2f);
-                     Rectangle player2SourceRectangle = new Rectangle(0, 0, player2.Texture.Width, player2.Texture.Height);
-                     spriteBatch.Draw(player1.Texture, player1.HitBox, player1SourceRectangle, Color.White * transparency1,  player1.Rotation, player1Origin, SpriteEffects.None, 1);
-                     spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
-
-
-          //   float transparency1 = (float)player1.Health / 10;
-          //   float transparency2 = (float)player2.Health / 10;
-          //   spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
-          //   spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
-
-                
-
                 // Draws the right level choice
                 // walls if level 1
                 if (levelChoice == 1)
@@ -916,10 +898,21 @@ namespace Geometry_Bash
                     }
                 }
 
-                transparency1 = (float)player1.Health/10;
-                transparency2 = (float)player2.Health/10;
-                spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
+                // Draw Players
+                float transparency1 = (float)player1.Health / 10;
+                float transparency2 = (float)player2.Health / 10;
+                Vector2 player1Origin = new Vector2(player1.Texture.Width / 2f, player1.Texture.Height / 2f);
+                Rectangle player1SourceRectangle = new Rectangle(0, 0, player1.Texture.Width, player1.Texture.Height);
+                Vector2 player2Origin = new Vector2(player2.Texture.Width / 2f, player2.Texture.Height / 2f);
+                Rectangle player2SourceRectangle = new Rectangle(0, 0, player2.Texture.Width, player2.Texture.Height);
+                spriteBatch.Draw(player1.Texture, player1.HitBox, player1SourceRectangle, Color.White * transparency1, player1.Rotation, player1Origin, SpriteEffects.None, 1);
                 spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
+
+
+                // float transparency1 = (float)player1.Health / 10;
+                // float transparency2 = (float)player2.Health / 10;
+                // spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
+                // spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
 
                 // HEALTH BAR
 
