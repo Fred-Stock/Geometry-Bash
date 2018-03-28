@@ -126,10 +126,10 @@ namespace Geometry_Bash
 
         // options/stats fields
         OptionsMenu optionsform = new OptionsMenu();
-        double[] stats;
-        double[] squareStats;
-        double[] circleStats;
-        double[] diamondStats;
+        double[] stats = new double[9];
+        double[] squareStats = new double[3];
+        double[] circleStats = new double[3];
+        double[] diamondStats = new double[3];
 
         //player objects
         Player player1;
@@ -273,31 +273,28 @@ namespace Geometry_Bash
             // load stats
             try
             {
-                reader = new StreamReader(File.OpenRead("stats.txt"));
+                reader = new StreamReader("../../../../stats.txt");
 
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] stringStats = line.Split(',');
-                    stats = new double[stringStats.Length];
+                    //stats = new double[stringStats.Length];
 
                     for (int i = 0; i < stringStats.Length; i++)
                     {
-                        stats[i] = double.Parse(stringStats[i]);
+                        stats[i] = int.Parse(stringStats[i]);
                     }
                 }
 
                 // square
-                squareStats = new double[stats.Length / 3];
                 squareStats[0] = stats[0];
                 squareStats[1] = stats[3];
                 squareStats[2] = stats[6];
                 // circle
-                circleStats = new double[stats.Length / 3];
                 circleStats[0] = stats[1];
                 circleStats[1] = stats[4];
                 circleStats[2] = stats[7];
                 // diamond
-                diamondStats = new double[stats.Length / 3];
                 diamondStats[0] = stats[2];
                 diamondStats[1] = stats[5];
                 diamondStats[2] = stats[9];
