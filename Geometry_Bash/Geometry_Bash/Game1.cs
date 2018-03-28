@@ -601,6 +601,7 @@ namespace Geometry_Bash
                         if(p1Char == Character.Square)
                         {
                             player1 = new Square(1, p1rec, redSquareTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                           
                         }
                         else if (p1Char == Character.Circle)
                         {
@@ -864,16 +865,27 @@ namespace Geometry_Bash
             // Actual Gameplay
             if (gamestate == GameState.Game)
             {
-                
-                float transparency1 = (float)player1.Health/10;
-                float transparency2 = (float)player2.Health/10;
-                Vector2 player1Origin = new Vector2(player1.Texture.Width / 2f, player1.Texture.Height / 2f);
-                Vector2 player2Origin = new Vector2(player2.Texture.Width / 2f, player2.Texture.Height / 2f);
-                spriteBatch.Draw(player1.Texture,null, player1.HitBox,null, player1Origin, player1.Rotation,new Vector2(1,1), Color.White * transparency1);
-                spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
 
                 // background
                 spriteBatch.Draw(gameScreen, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
+
+               // Draw Players
+                     float transparency1 = (float)player1.Health/10;
+                     float transparency2 = (float)player2.Health/10;
+                     Vector2 player1Origin = new Vector2(player1.Texture.Width / 2f, player1.Texture.Height / 2f);
+                     Rectangle player1SourceRectangle = new Rectangle(0, 0, player1.Texture.Width, player1.Texture.Height);
+                     Vector2 player2Origin = new Vector2(player2.Texture.Width / 2f, player2.Texture.Height / 2f);
+                     Rectangle player2SourceRectangle = new Rectangle(0, 0, player2.Texture.Width, player2.Texture.Height);
+                     spriteBatch.Draw(player1.Texture, player1.HitBox, player1SourceRectangle, Color.White * transparency1,  player1.Rotation, player1Origin, SpriteEffects.None, 1);
+                     spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
+
+
+          //   float transparency1 = (float)player1.Health / 10;
+          //   float transparency2 = (float)player2.Health / 10;
+          //   spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
+          //   spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
+
+                
 
                 // Draws the right level choice
                 // walls if level 1

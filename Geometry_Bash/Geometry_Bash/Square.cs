@@ -150,8 +150,8 @@ namespace Geometry_Bash
             if (kbstate.IsKeyDown(player.keyAttack2) && !(prevKbState.IsKeyDown(player.keyAttack2)))
             {
                 Rectangle temp = player1.HitBox;
-                for (int i = 0; i < 300; i ++)
-                player1.Rotation += 6;
+                for (int i = 0; i < 300; i++)
+                player1.Rotation += 1f;
 
             }
         }
