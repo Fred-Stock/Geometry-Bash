@@ -389,22 +389,22 @@ namespace Geometry_Bash
             {
                 if(playNum == 0)
                 {
-                    //MediaPlayer.Stop();
-                    //playNum++;
-                    //MediaPlayer.Play(menuMusic);
+                    MediaPlayer.Stop();
+                    playNum++;
+                    MediaPlayer.Play(menuMusic);
                 }
             }
             else if(gamestate == GameState.EndGame)
             {
-                //MediaPlayer.Stop();
+                MediaPlayer.Stop();
             }
             else
             {
                 if(playNum2 == 0)
                 {
                     playNum2++;
-                    //MediaPlayer.Stop();
-                    //MediaPlayer.Play(gameMusic);
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(gameMusic);
                 }
                 
             }
