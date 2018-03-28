@@ -270,47 +270,6 @@ namespace Geometry_Bash
                 }
             }
 
-            // load stats
-            try
-            {
-                reader = new StreamReader("../../../../stats.txt");
-
-                while ((line = reader.ReadLine()) != null)
-                {
-                    string[] stringStats = line.Split(',');
-                    //stats = new double[stringStats.Length];
-
-                    for (int i = 0; i < stringStats.Length; i++)
-                    {
-                        stats[i] = int.Parse(stringStats[i]);
-                    }
-                }
-
-                // square
-                squareStats[0] = stats[0];
-                squareStats[1] = stats[3];
-                squareStats[2] = stats[6];
-                // circle
-                circleStats[0] = stats[1];
-                circleStats[1] = stats[4];
-                circleStats[2] = stats[7];
-                // diamond
-                diamondStats[0] = stats[2];
-                diamondStats[1] = stats[5];
-                diamondStats[2] = stats[9];
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-            finally
-            {
-                if (reader != null)
-                {
-                    reader.Close();
-                }
-            }
-
             base.Initialize();
         }
 
@@ -446,6 +405,48 @@ namespace Geometry_Bash
                     {
                         bluePlayerTileHighlight = 0;
                         redPlayerTileHighlight = 0;
+
+                        // load stats
+                        try
+                        {
+                            reader = new StreamReader("../../../../stats.txt");
+
+                            while ((line = reader.ReadLine()) != null)
+                            {
+                                string[] stringStats = line.Split(',');
+                                //stats = new double[stringStats.Length];
+
+                                for (int i = 0; i < stringStats.Length; i++)
+                                {
+                                    stats[i] = int.Parse(stringStats[i]);
+                                }
+                            }
+
+                            // square
+                            squareStats[0] = stats[0];
+                            squareStats[1] = stats[3];
+                            squareStats[2] = stats[6];
+                            // circle
+                            circleStats[0] = stats[1];
+                            circleStats[1] = stats[4];
+                            circleStats[2] = stats[7];
+                            // diamond
+                            diamondStats[0] = stats[2];
+                            diamondStats[1] = stats[5];
+                            diamondStats[2] = stats[9];
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
+                        finally
+                        {
+                            if (reader != null)
+                            {
+                                reader.Close();
+                            }
+                        }
+
                         gamestate = GameState.PlayerSelect;
                     }
                 }
