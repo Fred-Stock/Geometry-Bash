@@ -42,6 +42,11 @@ namespace Geometry_Bash
             InitializeComponent();
         }
 
+        private void DiamondSpeedText_TextChanged(object sender, EventArgs e)
+        {
+            diamondS = double.Parse(DiamondSpeedText.Text);
+        }
+
         private void SaveButton_Click(object sender, EventArgs e)
         {
             // saves new input into fields
@@ -63,7 +68,7 @@ namespace Geometry_Bash
 
             try
             {
-                StreamWriter fileOut = new StreamWriter(File.OpenRead("stats.txt"));
+                StreamWriter fileOut = new StreamWriter("../../../../stats.txt");
                 fileOut.Write(output);
                 fileOut.Close();
             }

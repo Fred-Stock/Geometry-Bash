@@ -313,7 +313,6 @@ namespace Geometry_Bash
                     reader.Close();
                 }
             }
-            
 
             base.Initialize();
         }
