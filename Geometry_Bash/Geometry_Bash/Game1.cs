@@ -123,12 +123,14 @@ namespace Geometry_Bash
         int levelChoice = 0;
         #endregion
 
-        // options/stats fields
+        #region options/stats fields
+        StreamWriter writer = null;
         OptionsMenu optionsform = new OptionsMenu();
-        double[] stats = new double[9];
-        double[] squareStats = new double[3];
-        double[] circleStats = new double[3];
-        double[] diamondStats = new double[3];
+        int[] stats = new int[9];
+        int[] squareStats = new int[3];
+        int[] circleStats = new int[3];
+        int[] diamondStats = new int[3];
+        #endregion
 
         //player objects
         Player player1;
@@ -267,6 +269,22 @@ namespace Geometry_Bash
                 {
                     reader.Close();
                 }
+            }
+
+            // set default stat values
+            try
+            {
+                writer = new StreamWriter("../../../../stats.txt");
+                string output = 10 + "," + 10 + "," + 10 + "," + 3 + "," + 3 + "," + 3 + "," + 5 + "," + 5 + "," + 5;
+                writer.Write(output);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                writer.Close();
             }
 
             base.Initialize();
@@ -599,29 +617,29 @@ namespace Geometry_Bash
                         // player 1
                         if(p1Char == Character.Square)
                         {
-                            player1 = new Square(1, p1rec, redSquareTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                            player1 = new Square(1, p1rec, redSquareTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, squareStats);
                            
                         }
                         else if (p1Char == Character.Circle)
                         {
-                            player1 = new Circle(1, p1rec, redCircleTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                            player1 = new Circle(1, p1rec, redCircleTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, circleStats);
                         }
                         else if (p1Char == Character.Diamond)
                         {
-                            player1 = new Diamond(1, p1rec, redDiamondTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                            player1 = new Diamond(1, p1rec, redDiamondTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, diamondStats);
                         }
                         // player 2
                         if (p2Char == Character.Square)
                         {
-                            player2 = new Square(2, p2rec, blueSquareTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                            player2 = new Square(2, p2rec, blueSquareTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, squareStats);
                         }                                                          
                         else if (p2Char == Character.Circle)                       
                         {                                                          
-                            player2 = new Circle(2, p2rec, blueCircleTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                            player2 = new Circle(2, p2rec, blueCircleTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, circleStats);
                         }
                         else if (p2Char == Character.Diamond)
                         {
-                            player2 = new Diamond(2, p2rec, blueDiamondTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                            player2 = new Diamond(2, p2rec, blueDiamondTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, diamondStats);
                         }
                         #endregion
                     }
@@ -908,7 +926,7 @@ namespace Geometry_Bash
                 spriteBatch.Draw(player1.Texture, player1.HitBox, player1SourceRectangle, Color.White * transparency1, player1.Rotation, player1Origin, SpriteEffects.None, 1);
                 spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
 
-
+                
                 // float transparency1 = (float)player1.Health / 10;
                 // float transparency2 = (float)player2.Health / 10;
                 // spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);

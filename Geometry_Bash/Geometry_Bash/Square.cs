@@ -16,10 +16,10 @@ namespace Geometry_Bash
 
         double timer = 0;
 
-        public Square(int player, Rectangle sAP, Texture2D texture, int windowWidth, int windowHeight) : base(texture, sAP, windowWidth, windowHeight)
+        public Square(int player, Rectangle sAP, Texture2D texture, int windowWidth, int windowHeight, int[] stats) : base(texture, sAP, windowWidth, windowHeight)
         {
             //set movespeed
-            moveSpeed = 5;
+            moveSpeed = stats[2];
             //set health
             health = 10;
 

@@ -64,7 +64,7 @@ namespace Geometry_Bash
 
             string output = squareH + "," + circleH + "," + diamondH + "," +
                             squareD + "," + circleD + "," + diamondD + "," +
-                            squareS + "," + circleS + "," + diamondS + ",";
+                            squareS + "," + circleS + "," + diamondS;
 
             try
             {
