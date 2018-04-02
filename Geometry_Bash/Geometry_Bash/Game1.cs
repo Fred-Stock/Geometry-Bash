@@ -130,7 +130,7 @@ namespace Geometry_Bash
 
         #region options/stats fields
         StreamWriter writer = null;
-        OptionsMenu optionsform = new OptionsMenu();
+        //OptionsMenu optionsform = new OptionsMenu();
         int[] stats = new int[9];
         int[] squareStats = new int[3];
         int[] circleStats = new int[3];
@@ -483,7 +483,7 @@ namespace Geometry_Bash
                 {
                     if (ms.LeftButton == ButtonState.Pressed)
                     {
-                        optionsform.ShowDialog();
+                        //optionsform.ShowDialog();
                     }
                 }
                 
@@ -925,7 +925,7 @@ namespace Geometry_Bash
                             if (level1[i, j] == 'x')
                             {
                                 spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
-                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
+                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width / 2, 40 * j + player1.HitBox.Height / 2), new Point(40, 40))))
                                 {
                                     player1.HitBox = prevPos1;
                                 }
@@ -947,7 +947,7 @@ namespace Geometry_Bash
                             if (level2[i, j] == 'x')
                             {
                                 spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
-                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
+                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width/2, 40 * j + player1.HitBox.Height/2), new Point(40, 40))))
                                 {
                                     player1.HitBox = prevPos1;
                                 }
