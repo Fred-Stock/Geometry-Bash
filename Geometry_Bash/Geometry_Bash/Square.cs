@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.IO;
 
 namespace Geometry_Bash
 {
@@ -15,12 +16,11 @@ namespace Geometry_Bash
 
         double timer = 0;
 
-        public Square(int player, Rectangle sAP, Texture2D texture, int windowWidth, int windowHeight) : base(texture, sAP, windowWidth, windowHeight)
+        public Square(int player, Rectangle sAP, Texture2D texture, int windowWidth, int windowHeight, int[] stats) : base(texture, sAP, windowWidth, windowHeight)
         {
-            //set movespeed
-            moveSpeed = 5;
-            //set health
-            health = 10;
+            // stats loads in H/D/S
+            health = stats[0];
+            moveSpeed = stats[2];
 
 
             //check if it is player one or two and then set the correct keybindings
@@ -33,7 +33,6 @@ namespace Geometry_Bash
                 
                 keyAttack1 = Keys.Q;
                 keyAttack2 = Keys.E;
-
             }
 
            if (player == 2)
@@ -139,6 +138,20 @@ namespace Geometry_Bash
             prevKbState = kbState;
         }
 
+        public override void Attack2(Player player1, Player player2, KeyboardState kbstate)
+        {
+            
+            Square player = (Square)player1;
 
+            bool hit = false;
+
+            if (kbstate.IsKeyDown(player.keyAttack2) && !(prevKbState.IsKeyDown(player.keyAttack2)))
+            {
+                Rectangle temp = player1.HitBox;
+                for (int i = 0; i < 300; i++)
+                player1.Rotation += 1f;
+
+            }
+        }
     }
 }

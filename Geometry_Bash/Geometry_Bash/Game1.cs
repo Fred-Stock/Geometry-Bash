@@ -4,6 +4,9 @@ using Microsoft.Xna.Framework.Input;
 using System.IO;
 using System.Collections.Generic;
 using System;
+using System.Media;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 namespace Geometry_Bash
 {
@@ -15,7 +18,6 @@ namespace Geometry_Bash
         PlayerSelect,
         LevelSelect,
         Game,
-        Options,
         EndGame
     }
 
@@ -126,6 +128,15 @@ namespace Geometry_Bash
         int levelChoice = 0;
         #endregion
 
+        #region options/stats fields
+        StreamWriter writer = null;
+        OptionsMenu optionsform = new OptionsMenu();
+        int[] stats = new int[9];
+        int[] squareStats = new int[3];
+        int[] circleStats = new int[3];
+        int[] diamondStats = new int[3];
+        #endregion
+
         //player objects
         Player player1;
         Player player2;
@@ -146,6 +157,12 @@ namespace Geometry_Bash
         int bluePlayerTileHighlight = 0;
         bool redReady = false;
         bool blueReady = false;
+
+        //music
+        int playNum = 0;
+        int playNum2 = 0;
+        private Song menuMusic;
+        private Song gameMusic;
 
         public Game1()
         {
@@ -259,6 +276,22 @@ namespace Geometry_Bash
                 }
             }
 
+            // set default stat values
+            try
+            {
+                writer = new StreamWriter("../../../../stats.txt");
+                string output = 10 + "," + 10 + "," + 10 + "," + 3 + "," + 3 + "," + 3 + "," + 5 + "," + 5 + "," + 5;
+                writer.Write(output);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                writer.Close();
+            }
+
             base.Initialize();
         }
 
@@ -314,6 +347,11 @@ namespace Geometry_Bash
 
             // walls
             wall = Content.Load<Texture2D>("TopBarrier");
+
+            //music and sounds
+            menuMusic = Content.Load<Song>("Sounds//menuTheme");
+            gameMusic = Content.Load<Song>("Sounds//gameTheme");
+
         }
 
         /// <summary>
@@ -340,6 +378,7 @@ namespace Geometry_Bash
                 Exit();
 
             // TODO: Add your update logic here
+            
 
             // set current kb state
             kbState = Keyboard.GetState();
@@ -349,6 +388,32 @@ namespace Geometry_Bash
             this.IsMouseVisible = true;
             ms = Mouse.GetState();
             Rectangle mouseLocation = new Rectangle(ms.Position, new Point(5, 5));
+
+            //music
+            if (gamestate == GameState.Menu || gamestate == GameState.Instructions || gamestate == GameState.PlayerSelect || gamestate == GameState.LevelSelect)
+            {
+                if(playNum == 0)
+                {
+                    MediaPlayer.Stop();
+                    playNum++;
+                    MediaPlayer.Play(menuMusic);
+                }
+            }
+            else if(gamestate == GameState.EndGame)
+            {
+                MediaPlayer.Stop();
+            }
+            else
+            {
+                if(playNum2 == 0)
+                {
+                    playNum2++;
+                    MediaPlayer.Stop();
+                    MediaPlayer.Play(gameMusic);
+                }
+                
+            }
+
 
             // Menu
             if (gamestate == GameState.Menu)
@@ -362,6 +427,48 @@ namespace Geometry_Bash
                     {
                         bluePlayerTileHighlight = 0;
                         redPlayerTileHighlight = 0;
+
+                        // load stats
+                        try
+                        {
+                            reader = new StreamReader("../../../../stats.txt");
+
+                            while ((line = reader.ReadLine()) != null)
+                            {
+                                string[] stringStats = line.Split(',');
+                                //stats = new double[stringStats.Length];
+
+                                for (int i = 0; i < stringStats.Length; i++)
+                                {
+                                    stats[i] = int.Parse(stringStats[i]);
+                                }
+                            }
+
+                            // square
+                            squareStats[0] = stats[0];
+                            squareStats[1] = stats[3];
+                            squareStats[2] = stats[6];
+                            // circle
+                            circleStats[0] = stats[1];
+                            circleStats[1] = stats[4];
+                            circleStats[2] = stats[7];
+                            // diamond
+                            diamondStats[0] = stats[2];
+                            diamondStats[1] = stats[5];
+                            diamondStats[2] = stats[9];
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex);
+                        }
+                        finally
+                        {
+                            if (reader != null)
+                            {
+                                reader.Close();
+                            }
+                        }
+
                         gamestate = GameState.PlayerSelect;
                     }
                 }
@@ -376,9 +483,11 @@ namespace Geometry_Bash
                 {
                     if (ms.LeftButton == ButtonState.Pressed)
                     {
-                        gamestate = GameState.Options;
+                        optionsform.ShowDialog();
                     }
                 }
+                
+
             }
 
             // Instructions
@@ -513,28 +622,29 @@ namespace Geometry_Bash
                         // player 1
                         if(p1Char == Character.Square)
                         {
-                            player1 = new Square(1, p1rec, redSquareTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                            player1 = new Square(1, p1rec, redSquareTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, squareStats);
+                           
                         }
                         else if (p1Char == Character.Circle)
                         {
-                            player1 = new Circle(1, p1rec, redCircleTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                            player1 = new Circle(1, p1rec, redCircleTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, circleStats);
                         }
                         else if (p1Char == Character.Diamond)
                         {
-                            player1 = new Diamond(1, p1rec, redDiamondTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                            player1 = new Diamond(1, p1rec, redDiamondTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, diamondStats);
                         }
                         // player 2
                         if (p2Char == Character.Square)
                         {
-                            player2 = new Square(2, p2rec, blueSquareTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                            player2 = new Square(2, p2rec, blueSquareTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, squareStats);
                         }                                                          
                         else if (p2Char == Character.Circle)                       
                         {                                                          
-                            player2 = new Circle(2, p2rec, blueCircleTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                            player2 = new Circle(2, p2rec, blueCircleTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, circleStats);
                         }
                         else if (p2Char == Character.Diamond)
                         {
-                            player2 = new Diamond(2, p2rec, blueDiamondTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height);
+                            player2 = new Diamond(2, p2rec, blueDiamondTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, diamondStats);
                         }
                         #endregion
                     }
@@ -629,25 +739,14 @@ namespace Geometry_Bash
 
             }
 
-            // Options
-            if (gamestate == GameState.Options)
-            {
-                // all other code for this state goes here
-
-                // handles button pressing for game state
-                if (mouseLocation.Intersects(backButton))
-                {
-                    if (SingleLeftMousePress())
-                    {
-                        gamestate = GameState.Menu;
-                    }
-                }
-            }
-
             // End Game, when someone wins
             if (gamestate == GameState.EndGame)
             {
                 // all other code for this state goes here
+
+                //ints for music playing
+                playNum = 0;
+                playNum2 = 0;
 
                 // handles button pressing for game state
                 if (mouseLocation.Intersects(backButton))
@@ -811,6 +910,7 @@ namespace Geometry_Bash
             // Actual Gameplay
             if (gamestate == GameState.Game)
             {
+
                 // background
                 spriteBatch.Draw(gameScreen, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
@@ -860,10 +960,21 @@ namespace Geometry_Bash
                     }
                 }
 
-                float transparency1 = (float)player1.Health/10;
-                float transparency2 = (float)player2.Health/10;
-                spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
+                // Draw Players
+                float transparency1 = (float)player1.Health / 10;
+                float transparency2 = (float)player2.Health / 10;
+                Vector2 player1Origin = new Vector2(player1.Texture.Width / 2f, player1.Texture.Height / 2f);
+                Rectangle player1SourceRectangle = new Rectangle(0, 0, player1.Texture.Width, player1.Texture.Height);
+                Vector2 player2Origin = new Vector2(player2.Texture.Width / 2f, player2.Texture.Height / 2f);
+                Rectangle player2SourceRectangle = new Rectangle(0, 0, player2.Texture.Width, player2.Texture.Height);
+                spriteBatch.Draw(player1.Texture, player1.HitBox, player1SourceRectangle, Color.White * transparency1, player1.Rotation, player1Origin, SpriteEffects.None, 1);
                 spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
+
+                
+                // float transparency1 = (float)player1.Health / 10;
+                // float transparency2 = (float)player2.Health / 10;
+                // spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
+                // spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
 
                 prevPos1 = player1.HitBox;
                 prevPos2 = player2.HitBox;
@@ -873,17 +984,6 @@ namespace Geometry_Bash
                 // SUPER METER
 
                 // PAUSE BUTTON
-            }
-
-            // Options
-            if (gamestate == GameState.Options)
-            {
-                // options menu screen
-                spriteBatch.Draw(optionsScreen, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
-
-                // changes back button if mouse hovers over
-                if (mouseLocation.Intersects(backButton))
-                { spriteBatch.Draw(back, backButton, Color.White); }
             }
 
             // End Game, when someone wins
