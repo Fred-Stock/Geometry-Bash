@@ -41,6 +41,11 @@ namespace Geometry_Bash
         SpriteBatch spriteBatch;
         SpriteFont text;
 
+        //rectangle list to hold where walls are
+        List<Rectangle> wallsList;
+        
+
+
         #region Textures
         //Character Textures
         Texture2D redSquareTexture;
@@ -125,7 +130,7 @@ namespace Geometry_Bash
 
         #region options/stats fields
         StreamWriter writer = null;
-        OptionsMenu optionsform = new OptionsMenu();
+        //OptionsMenu optionsform = new OptionsMenu();
         int[] stats = new int[9];
         int[] squareStats = new int[3];
         int[] circleStats = new int[3];
@@ -478,7 +483,7 @@ namespace Geometry_Bash
                 {
                     if (ms.LeftButton == ButtonState.Pressed)
                     {
-                        optionsform.ShowDialog();
+                        //optionsform.ShowDialog();
                     }
                 }
                 
@@ -688,6 +693,18 @@ namespace Geometry_Bash
             // Actual Gameplay
             if (gamestate == GameState.Game)
             {
+                wallsList = new List<Rectangle>();
+                for(int i = 0; i < level2.GetLength(1); i++)
+                {
+                    for (int k = 0; k < level2.GetLength(0); k++)
+                    {
+                        if (level1[k, i] == 'x')
+                        {
+                            wallsList.Add(new Rectangle(new Point(40 * k, 40 * i), new Point(40, 40)));
+                        }
+                    }
+                }
+
 
                 // all other code for this state goes here
                 player1.Move(kbState);
@@ -703,8 +720,10 @@ namespace Geometry_Bash
                 this.IsMouseVisible = false;
                 
                 // pauses game
-                if (SingleKeyPress(Keys.P))
-                { }
+                if (SingleKeyPress(Keys.Space))
+                {
+                     
+                }
 
                 // goes to gameover if a player dies
                 if (player1.Health <= 0)
@@ -715,6 +734,9 @@ namespace Geometry_Bash
                 {
                     gamestate = GameState.EndGame;
                 }
+
+               
+
             }
 
             // End Game, when someone wins
@@ -742,6 +764,11 @@ namespace Geometry_Bash
 
             base.Update(gameTime);
         }
+
+        //create retangles to store the players previous position
+        Rectangle prevPos1 = new Rectangle();
+        Rectangle prevPos2 = new Rectangle();
+
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -840,6 +867,7 @@ namespace Geometry_Bash
             // Level Selection Screen
             if (gamestate == GameState.LevelSelect)
             {
+                
                 // draws background first
                 spriteBatch.Draw(levelSelect, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
@@ -897,6 +925,14 @@ namespace Geometry_Bash
                             if (level1[i, j] == 'x')
                             {
                                 spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
+                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width / 2, 40 * j + player1.HitBox.Height / 2), new Point(40, 40))))
+                                {
+                                    player1.HitBox = prevPos1;
+                                }
+                                if (player2.HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
+                                {
+                                    player2.HitBox = prevPos2;
+                                }
                             }
                         }
                     }
@@ -911,6 +947,14 @@ namespace Geometry_Bash
                             if (level2[i, j] == 'x')
                             {
                                 spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
+                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width/2, 40 * j + player1.HitBox.Height/2), new Point(40, 40))))
+                                {
+                                    player1.HitBox = prevPos1;
+                                }
+                                if (player2.HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
+                                {
+                                    player2.HitBox = prevPos2;
+                                }
                             }
                         }
                     }
@@ -931,6 +975,9 @@ namespace Geometry_Bash
                 // float transparency2 = (float)player2.Health / 10;
                 // spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
                 // spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
+
+                prevPos1 = player1.HitBox;
+                prevPos2 = player2.HitBox;
 
                 // HEALTH BAR
 
@@ -962,7 +1009,6 @@ namespace Geometry_Bash
             spriteBatch.DrawString(text, Mouse.GetState().X + "," + Mouse.GetState().Y, new Vector2(5,5), Color.Wheat);
 
 
-
             spriteBatch.End();
             base.Draw(gameTime);
         }
@@ -992,5 +1038,8 @@ namespace Geometry_Bash
             else
             { return false; }
         }
+
+       
+        
     }
 }

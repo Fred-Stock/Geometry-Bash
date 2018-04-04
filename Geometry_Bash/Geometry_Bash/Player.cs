@@ -172,6 +172,34 @@ namespace Geometry_Bash
                 player.HitBox = temp;
             }
         }
+        /// <summary>
+        /// method to handle a player colliding with the wall of the object
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="direction">integer value for which directiong the wall is from the player 0 - 3,
+        /// 0 being up, 1 being right, 2 being below, 3 being left </param>
+        public void WallCollision(Player player, int direction)
+        {
+            Rectangle temp = player.HitBox;
+
+            if(direction == 0)
+            {
+                temp.Y -= 1;
+            }
+            if (direction == 1)
+            {
+                temp.X -= 1;
+            }
+            if (direction == 2)
+            {
+                temp.Y += 1;
+            }
+            if (direction == 3)
+            {
+                temp.X += 1;
+            }
+            player.HitBox = temp;
+        }
         
     }
 }
