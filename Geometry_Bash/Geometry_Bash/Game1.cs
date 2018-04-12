@@ -167,8 +167,10 @@ namespace Geometry_Bash
         //music
         int playNum = 0;
         int playNum2 = 0;
+        int playNum3 = 0;
         private Song menuMusic;
         private Song gameMusic;
+        private Song endMusic;
 
         public Game1()
         {
@@ -363,6 +365,7 @@ namespace Geometry_Bash
             //music and sounds
             menuMusic = Content.Load<Song>("Sounds//menuTheme");
             gameMusic = Content.Load<Song>("Sounds//gameTheme");
+            endMusic = Content.Load<Song>("Sounds//endScreen");
 
         }
 
@@ -413,7 +416,15 @@ namespace Geometry_Bash
             }
             else if(gamestate == GameState.EndGame)
             {
-                MediaPlayer.Stop();
+                
+                if(playNum3 == 0)
+                {
+                    MediaPlayer.Stop();
+                    playNum3++;
+                    MediaPlayer.Play(endMusic);
+                }
+                
+                
             }
             else
             {
@@ -431,6 +442,7 @@ namespace Geometry_Bash
             if (gamestate == GameState.Menu)
             {
                 // all other code for this state goes here
+                playNum3 = 0;
 
                 // handles button pressing for game state
                 if (mouseLocation.Intersects(playButton))
