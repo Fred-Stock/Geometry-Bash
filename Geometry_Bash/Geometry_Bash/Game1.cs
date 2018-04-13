@@ -136,7 +136,7 @@ namespace Geometry_Bash
 
         #region options/stats fields
         StreamWriter writer = null;
-        //OptionsMenu optionsform = new OptionsMenu();
+        OptionsMenu optionsform = new OptionsMenu();
         int[] stats = new int[9];
         int[] squareStats = new int[3];
         int[] circleStats = new int[3];
@@ -462,7 +462,6 @@ namespace Geometry_Bash
                             while ((line = reader.ReadLine()) != null)
                             {
                                 string[] stringStats = line.Split(',');
-                                //stats = new double[stringStats.Length];
 
                                 for (int i = 0; i < stringStats.Length; i++)
                                 {
@@ -509,7 +508,7 @@ namespace Geometry_Bash
                 {
                     if (ms.LeftButton == ButtonState.Pressed)
                     {
-                        //optionsform.ShowDialog();
+                        optionsform.ShowDialog();
                     }
                 }
                 
