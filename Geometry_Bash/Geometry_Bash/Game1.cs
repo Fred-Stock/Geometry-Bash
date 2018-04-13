@@ -18,6 +18,7 @@ namespace Geometry_Bash
         PlayerSelect,
         LevelSelect,
         Game,
+        Pause,
         EndGame
     }
 
@@ -718,6 +719,9 @@ namespace Geometry_Bash
             // Actual Gameplay
             if (gamestate == GameState.Game)
             {
+                // makes sure mouse is invisible during game
+                this.IsMouseVisible = false;
+
                 wallsList = new List<Rectangle>();
                 for(int i = 0; i < level2.GetLength(1); i++)
                 {
@@ -740,14 +744,11 @@ namespace Geometry_Bash
 
                 player1.Attack(player1, player2, kbState);
                 player2.Attack(player2, player1, kbState);
-
-                // makes sure mouse is invisible during game
-                this.IsMouseVisible = false;
                 
                 // pauses game
                 if (SingleKeyPress(Keys.Space))
                 {
-                     
+                    gamestate = GameState.Pause;
                 }
 
                 // goes to gameover if a player dies
@@ -762,6 +763,16 @@ namespace Geometry_Bash
 
                
 
+            }
+
+            // Paused
+            if (gamestate == GameState.Pause)
+            {
+                // unpauses game
+                if (SingleKeyPress(Keys.P))
+                {
+                    gamestate = GameState.Game;
+                }
             }
 
             // End Game, when someone wins
@@ -1009,6 +1020,69 @@ namespace Geometry_Bash
                 // SUPER METER
 
                 // PAUSE BUTTON
+            }
+
+            // Paused
+            if (gamestate == GameState.Pause)
+            {
+                // background
+                spriteBatch.Draw(gameScreen, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.LimeGreen);
+
+                // Draws the right level choice
+                // walls if level 1
+                if (levelChoice == 1)
+                {
+                    for (int i = 0; i < level1.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < level1.GetLength(1); j++)
+                        {
+                            if (level1[i, j] == 'x')
+                            {
+                                spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
+                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width / 2, 40 * j + player1.HitBox.Height / 2), new Point(40, 40))))
+                                {
+                                    player1.HitBox = prevPos1;
+                                }
+                                if (player2.HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
+                                {
+                                    player2.HitBox = prevPos2;
+                                }
+                            }
+                        }
+                    }
+                }
+                // walls if level 2
+                else if (levelChoice == 2)
+                {
+                    for (int i = 0; i < level2.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < level2.GetLength(1); j++)
+                        {
+                            if (level2[i, j] == 'x')
+                            {
+                                spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
+                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width / 2, 40 * j + player1.HitBox.Height / 2), new Point(40, 40))))
+                                {
+                                    player1.HitBox = prevPos1;
+                                }
+                                if (player2.HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
+                                {
+                                    player2.HitBox = prevPos2;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Draw Players
+                float transparency1 = (float)player1.Health / 10;
+                float transparency2 = (float)player2.Health / 10;
+                Vector2 player1Origin = new Vector2(player1.Texture.Width / 2f, player1.Texture.Height / 2f);
+                Rectangle player1SourceRectangle = new Rectangle(0, 0, player1.Texture.Width, player1.Texture.Height);
+                Vector2 player2Origin = new Vector2(player2.Texture.Width / 2f, player2.Texture.Height / 2f);
+                Rectangle player2SourceRectangle = new Rectangle(0, 0, player2.Texture.Width, player2.Texture.Height);
+                spriteBatch.Draw(player1.Texture, player1.HitBox, player1SourceRectangle, Color.White * transparency1, player1.Rotation, player1Origin, SpriteEffects.None, 1);
+                spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
             }
 
             // End Game, when someone wins
