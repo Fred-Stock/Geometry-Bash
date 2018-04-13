@@ -192,6 +192,7 @@ namespace Geometry_Bash
         {
             // TODO: Add your initialization logic here
 
+            #region Level Loading
             // load level 1
             try
             {
@@ -283,6 +284,7 @@ namespace Geometry_Bash
                     reader.Close();
                 }
             }
+            #endregion
 
             // set default stat values
             try
