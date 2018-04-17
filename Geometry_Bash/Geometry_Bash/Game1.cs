@@ -89,6 +89,7 @@ namespace Geometry_Bash
         Texture2D levelSelect;
         Texture2D gameScreen;
         Texture2D gameOver;
+        Texture2D pauseMenu;
 
         Texture2D wall;
         #endregion
@@ -361,6 +362,7 @@ namespace Geometry_Bash
             levelSelect = Content.Load<Texture2D>("Screens//Level_Selection");
             gameScreen = Content.Load<Texture2D>("Screens//LevelBackground");
             gameOver = Content.Load<Texture2D>("Screens//GameOver");
+            pauseMenu = Content.Load<Texture2D>("Screens//Pause Menu_p");
 
             // walls
             wall = Content.Load<Texture2D>("TopBarrier");
@@ -1025,8 +1027,7 @@ namespace Geometry_Bash
             // Paused
             if (gamestate == GameState.Pause)
             {
-                // background
-                spriteBatch.Draw(gameScreen, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.LimeGreen);
+                
 
                 // Draws the right level choice
                 // walls if level 1
@@ -1083,6 +1084,9 @@ namespace Geometry_Bash
                 Rectangle player2SourceRectangle = new Rectangle(0, 0, player2.Texture.Width, player2.Texture.Height);
                 spriteBatch.Draw(player1.Texture, player1.HitBox, player1SourceRectangle, Color.White * transparency1, player1.Rotation, player1Origin, SpriteEffects.None, 1);
                 spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
+
+                // foreground
+                spriteBatch.Draw(pauseMenu, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
             }
 
             // End Game, when someone wins
