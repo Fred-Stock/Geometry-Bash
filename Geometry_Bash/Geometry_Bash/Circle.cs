@@ -43,6 +43,22 @@ namespace Geometry_Bash
                 keyAttack1 = Keys.U;
                 keyAttack2 = Keys.O;
             }
+
+        }
+
+        public override void Attack(Player player1, Player player2, KeyboardState kbState)
+        {
+            Circle player =  (Circle)player1;
+
+            if (kbState.IsKeyDown(player.keyAttack1))
+            {
+                
+            }
+
+
+
+            prevKbState = kbState;
+
         }
 
         
