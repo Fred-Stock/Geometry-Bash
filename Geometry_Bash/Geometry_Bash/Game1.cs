@@ -56,10 +56,6 @@ namespace Geometry_Bash
         Texture2D blueCircleTexture;
         Texture2D blueDiamondTexture;
 
-        //projectile textures
-        Texture2D porejctile;
-        
-
         //character special textures
         Texture2D redCircleAttackTexture;
         Texture2D blueCircleAttackTexture;
@@ -317,15 +313,6 @@ namespace Geometry_Bash
         /// </summary>
         protected override void LoadContent()
         {
-
-
-            //temp projectile sprite since im not updated
-            porejctile = Content.Load<Texture2D>("CharSprites//square");
-
-
-
-
-
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -864,7 +851,6 @@ namespace Geometry_Bash
             }
 
             // Instructions
-
             if (gamestate == GameState.Instructions)
             {
                 //instructions menu screen
@@ -1023,15 +1009,8 @@ namespace Geometry_Bash
                 Rectangle player2SourceRectangle = new Rectangle(0, 0, player2.Texture.Width, player2.Texture.Height);
                 spriteBatch.Draw(player1.Texture, player1.HitBox, player1SourceRectangle, Color.White * transparency1, player1.Rotation, player1Origin, SpriteEffects.None, 1);
                 spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
-
                 
-                if(player1 is Diamond)
-                {
-                    if (player1.Proj1.Active)
-                    {
-                        spriteBatch.Draw(porejctile, player1.Proj1.HitBox, Color.White);
-                    }
-                }
+                
 
                 // float transparency1 = (float)player1.Health / 10;
                 // float transparency2 = (float)player2.Health / 10;
@@ -1057,23 +1036,15 @@ namespace Geometry_Bash
                 }
                 #endregion
 
-                #region swap sprites for diamond attack
-                if (player1 is Diamond && kbState.IsKeyDown(Keys.Q))
+                #region diamond attack sprites
+                if (player1 is Diamond && player1.Proj1.Active)
                 {
-                    //player1.Texture = redDiamondParticles;
+                    spriteBatch.Draw(redDiamondParticles, player1.Proj1.HitBox, Color.White);
                 }
-                else if (player1 is Diamond && kbState.IsKeyUp(Keys.Q))
-                {
-                    player1.Texture = redDiamondTexture;
-                }
-                if (player2 is Diamond && kbState.IsKeyDown(Keys.U))
-                {
-                    //player2.Texture = blueDiamondParticles;
-                }
-                else if (player2 is Diamond && kbState.IsKeyUp(Keys.U))
-                {
-                    player2.Texture = blueDiamondTexture;
-                }
+                //if (player2 is Diamond && player2.Proj2.Active)
+                //{
+                //    spriteBatch.Draw(blueDiamondParticles, player2.Proj1.HitBox, Color.White);
+                //}
                 #endregion
 
                 prevPos1 = player1.HitBox;
