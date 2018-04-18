@@ -483,7 +483,7 @@ namespace Geometry_Bash
                             // diamond
                             diamondStats[0] = stats[2];
                             diamondStats[1] = stats[5];
-                            diamondStats[2] = stats[9];
+                            diamondStats[2] = stats[8];
                         }
                         catch (Exception ex)
                         {
