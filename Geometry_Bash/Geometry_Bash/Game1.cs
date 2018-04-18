@@ -18,6 +18,7 @@ namespace Geometry_Bash
         PlayerSelect,
         LevelSelect,
         Game,
+        Pause,
         EndGame
     }
 
@@ -58,6 +59,13 @@ namespace Geometry_Bash
         //projectile textures
         Texture2D porejctile;
         
+
+        //character special textures
+        Texture2D redCircleAttackTexture;
+        Texture2D blueCircleAttackTexture;
+        Texture2D redDiamondParticles;
+        Texture2D blueDiamondParticles;
+        
         // button textures
         Texture2D yellowButton;
         Texture2D play;
@@ -85,6 +93,7 @@ namespace Geometry_Bash
         Texture2D levelSelect;
         Texture2D gameScreen;
         Texture2D gameOver;
+        Texture2D pauseMenu;
 
         Texture2D wall;
         #endregion
@@ -133,7 +142,7 @@ namespace Geometry_Bash
 
         #region options/stats fields
         StreamWriter writer = null;
-        //OptionsMenu optionsform = new OptionsMenu();
+        OptionsMenu optionsform = new OptionsMenu();
         int[] stats = new int[9];
         int[] squareStats = new int[3];
         int[] circleStats = new int[3];
@@ -164,8 +173,10 @@ namespace Geometry_Bash
         //music
         int playNum = 0;
         int playNum2 = 0;
+        int playNum3 = 0;
         private Song menuMusic;
         private Song gameMusic;
+        private Song endMusic;
 
         public Game1()
         {
@@ -187,6 +198,7 @@ namespace Geometry_Bash
         {
             // TODO: Add your initialization logic here
 
+            #region Level Loading
             // load level 1
             try
             {
@@ -278,6 +290,7 @@ namespace Geometry_Bash
                     reader.Close();
                 }
             }
+            #endregion
 
             // set default stat values
             try
@@ -329,6 +342,12 @@ namespace Geometry_Bash
             blueCircleTexture = Content.Load<Texture2D>("CharSprites//circle_blue");
             blueDiamondTexture = Content.Load<Texture2D>("CharSprites//diamond_blue");
 
+            //load character special textures
+            redCircleAttackTexture = Content.Load<Texture2D>("CharSprites//circle_ult");
+            blueCircleAttackTexture = Content.Load<Texture2D>("CharSprites//circle_blue_ult");
+            redDiamondParticles = Content.Load<Texture2D>("CharSprites//diamond_red_shards");
+            blueDiamondParticles = Content.Load<Texture2D>("CharSprites//diamond_blue_shards");
+
             // load button textures
             yellowButton = Content.Load<Texture2D>("Button Sprites//button_yellow");
             play = Content.Load<Texture2D>("Button Sprites//play_hover");
@@ -356,6 +375,7 @@ namespace Geometry_Bash
             levelSelect = Content.Load<Texture2D>("Screens//Level_Selection");
             gameScreen = Content.Load<Texture2D>("Screens//LevelBackground");
             gameOver = Content.Load<Texture2D>("Screens//GameOver");
+            pauseMenu = Content.Load<Texture2D>("Screens//Pause Menu_p");
 
             // walls
             wall = Content.Load<Texture2D>("TopBarrier");
@@ -363,6 +383,7 @@ namespace Geometry_Bash
             //music and sounds
             menuMusic = Content.Load<Song>("Sounds//menuTheme");
             gameMusic = Content.Load<Song>("Sounds//gameTheme");
+            endMusic = Content.Load<Song>("Sounds//endScreen");
 
         }
 
@@ -413,7 +434,15 @@ namespace Geometry_Bash
             }
             else if(gamestate == GameState.EndGame)
             {
-                MediaPlayer.Stop();
+                
+                if(playNum3 == 0)
+                {
+                    MediaPlayer.Stop();
+                    playNum3++;
+                    MediaPlayer.Play(endMusic);
+                }
+                
+                
             }
             else
             {
@@ -431,6 +460,7 @@ namespace Geometry_Bash
             if (gamestate == GameState.Menu)
             {
                 // all other code for this state goes here
+                playNum3 = 0;
 
                 // handles button pressing for game state
                 if (mouseLocation.Intersects(playButton))
@@ -448,7 +478,6 @@ namespace Geometry_Bash
                             while ((line = reader.ReadLine()) != null)
                             {
                                 string[] stringStats = line.Split(',');
-                                //stats = new double[stringStats.Length];
 
                                 for (int i = 0; i < stringStats.Length; i++)
                                 {
@@ -495,7 +524,7 @@ namespace Geometry_Bash
                 {
                     if (ms.LeftButton == ButtonState.Pressed)
                     {
-                        //optionsform.ShowDialog();
+                        optionsform.ShowDialog();
                     }
                 }
                 
@@ -705,6 +734,9 @@ namespace Geometry_Bash
             // Actual Gameplay
             if (gamestate == GameState.Game)
             {
+                // makes sure mouse is invisible during game
+                this.IsMouseVisible = false;
+
                 wallsList = new List<Rectangle>();
                 for(int i = 0; i < level2.GetLength(1); i++)
                 {
@@ -727,14 +759,11 @@ namespace Geometry_Bash
 
                 player1.Attack(player1, player2, kbState);
                 player2.Attack(player2, player1, kbState);
-
-                // makes sure mouse is invisible during game
-                this.IsMouseVisible = false;
                 
                 // pauses game
                 if (SingleKeyPress(Keys.Space))
                 {
-                     
+                    gamestate = GameState.Pause;
                 }
 
                 // goes to gameover if a player dies
@@ -749,6 +778,16 @@ namespace Geometry_Bash
 
                
 
+            }
+
+            // Paused
+            if (gamestate == GameState.Pause)
+            {
+                // unpauses game
+                if (SingleKeyPress(Keys.P))
+                {
+                    gamestate = GameState.Game;
+                }
             }
 
             // End Game, when someone wins
@@ -999,6 +1038,25 @@ namespace Geometry_Bash
                 // spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
                 // spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
 
+                #region swap sprites for circle
+                if (player1 is Circle && kbState.IsKeyDown(Keys.Q))
+                {
+                    player1.Texture = redCircleAttackTexture;
+                }
+                else if (player1 is Circle && kbState.IsKeyUp(Keys.Q))
+                {
+                    player1.Texture = redCircleTexture;
+                }
+                if (player2 is Circle && kbState.IsKeyDown(Keys.U))
+                {
+                    player2.Texture = blueCircleAttackTexture;
+                }
+                else if (player2 is Circle && kbState.IsKeyUp(Keys.U))
+                {
+                    player2.Texture = blueCircleTexture;
+                }
+                #endregion
+
                 prevPos1 = player1.HitBox;
                 prevPos2 = player2.HitBox;
 
@@ -1007,6 +1065,71 @@ namespace Geometry_Bash
                 // SUPER METER
 
                 // PAUSE BUTTON
+            }
+
+            // Paused
+            if (gamestate == GameState.Pause)
+            {
+                
+
+                // Draws the right level choice
+                // walls if level 1
+                if (levelChoice == 1)
+                {
+                    for (int i = 0; i < level1.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < level1.GetLength(1); j++)
+                        {
+                            if (level1[i, j] == 'x')
+                            {
+                                spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
+                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width / 2, 40 * j + player1.HitBox.Height / 2), new Point(40, 40))))
+                                {
+                                    player1.HitBox = prevPos1;
+                                }
+                                if (player2.HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
+                                {
+                                    player2.HitBox = prevPos2;
+                                }
+                            }
+                        }
+                    }
+                }
+                // walls if level 2
+                else if (levelChoice == 2)
+                {
+                    for (int i = 0; i < level2.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < level2.GetLength(1); j++)
+                        {
+                            if (level2[i, j] == 'x')
+                            {
+                                spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
+                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width / 2, 40 * j + player1.HitBox.Height / 2), new Point(40, 40))))
+                                {
+                                    player1.HitBox = prevPos1;
+                                }
+                                if (player2.HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
+                                {
+                                    player2.HitBox = prevPos2;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Draw Players
+                float transparency1 = (float)player1.Health / 10;
+                float transparency2 = (float)player2.Health / 10;
+                Vector2 player1Origin = new Vector2(player1.Texture.Width / 2f, player1.Texture.Height / 2f);
+                Rectangle player1SourceRectangle = new Rectangle(0, 0, player1.Texture.Width, player1.Texture.Height);
+                Vector2 player2Origin = new Vector2(player2.Texture.Width / 2f, player2.Texture.Height / 2f);
+                Rectangle player2SourceRectangle = new Rectangle(0, 0, player2.Texture.Width, player2.Texture.Height);
+                spriteBatch.Draw(player1.Texture, player1.HitBox, player1SourceRectangle, Color.White * transparency1, player1.Rotation, player1Origin, SpriteEffects.None, 1);
+                spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
+
+                // foreground
+                spriteBatch.Draw(pauseMenu, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
             }
 
             // End Game, when someone wins
