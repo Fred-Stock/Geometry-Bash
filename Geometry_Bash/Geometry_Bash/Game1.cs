@@ -1008,11 +1008,30 @@ namespace Geometry_Bash
                 spriteBatch.Draw(player1.Texture, player1.HitBox, player1SourceRectangle, Color.White * transparency1, player1.Rotation, player1Origin, SpriteEffects.None, 1);
                 spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
 
-                
+
                 // float transparency1 = (float)player1.Health / 10;
                 // float transparency2 = (float)player2.Health / 10;
                 // spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
                 // spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
+
+                #region swap sprites for circle
+                if (player1 is Circle && kbState.IsKeyDown(Keys.Q))
+                {
+                    player1.Texture = redCircleAttackTexture;
+                }
+                else
+                {
+                    player1.Texture = redCircleTexture;
+                }
+                if (player2 is Circle && kbState.IsKeyDown(Keys.U))
+                {
+                    player2.Texture = blueCircleAttackTexture;
+                }
+                else
+                {
+                    player2.Texture = blueCircleTexture;
+                }
+                #endregion
 
                 prevPos1 = player1.HitBox;
                 prevPos2 = player2.HitBox;
