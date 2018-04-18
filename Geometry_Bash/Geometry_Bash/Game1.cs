@@ -1014,7 +1014,7 @@ namespace Geometry_Bash
                 // spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
                 // spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
 
-                #region swap sprites for circle
+                #region swap sprites for circle attack
                 if (player1 is Circle && kbState.IsKeyDown(Keys.Q))
                 {
                     player1.Texture = redCircleAttackTexture;
@@ -1030,6 +1030,25 @@ namespace Geometry_Bash
                 else if (player2 is Circle && kbState.IsKeyUp(Keys.U))
                 {
                     player2.Texture = blueCircleTexture;
+                }
+                #endregion
+
+                #region swap sprites for diamond attack
+                if (player1 is Diamond && kbState.IsKeyDown(Keys.Q))
+                {
+                    //player1.Texture = redDiamondParticles;
+                }
+                else if (player1 is Diamond && kbState.IsKeyUp(Keys.Q))
+                {
+                    player1.Texture = redDiamondTexture;
+                }
+                if (player2 is Diamond && kbState.IsKeyDown(Keys.U))
+                {
+                    //player2.Texture = blueDiamondParticles;
+                }
+                else if (player2 is Diamond && kbState.IsKeyUp(Keys.U))
+                {
+                    player2.Texture = blueDiamondTexture;
                 }
                 #endregion
 
