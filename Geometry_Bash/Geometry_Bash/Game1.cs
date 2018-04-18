@@ -56,6 +56,10 @@ namespace Geometry_Bash
         Texture2D blueCircleTexture;
         Texture2D blueDiamondTexture;
 
+        //projectile textures
+        Texture2D porejctile;
+        
+
         //character special textures
         Texture2D redCircleAttackTexture;
         Texture2D blueCircleAttackTexture;
@@ -313,6 +317,15 @@ namespace Geometry_Bash
         /// </summary>
         protected override void LoadContent()
         {
+
+
+            //temp projectile sprite since im not updated
+            porejctile = Content.Load<Texture2D>("CharSprites//square");
+
+
+
+
+
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
@@ -851,6 +864,7 @@ namespace Geometry_Bash
             }
 
             // Instructions
+
             if (gamestate == GameState.Instructions)
             {
                 //instructions menu screen
@@ -998,6 +1012,8 @@ namespace Geometry_Bash
                     }
                 }
 
+
+
                 // Draw Players
                 float transparency1 = (float)player1.Health / 10;
                 float transparency2 = (float)player2.Health / 10;
@@ -1008,6 +1024,14 @@ namespace Geometry_Bash
                 spriteBatch.Draw(player1.Texture, player1.HitBox, player1SourceRectangle, Color.White * transparency1, player1.Rotation, player1Origin, SpriteEffects.None, 1);
                 spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
 
+                
+                if(player1 is Diamond)
+                {
+                    if (player1.Proj1.Active)
+                    {
+                        spriteBatch.Draw(porejctile, player1.Proj1.HitBox, Color.White);
+                    }
+                }
 
                 // float transparency1 = (float)player1.Health / 10;
                 // float transparency2 = (float)player2.Health / 10;
