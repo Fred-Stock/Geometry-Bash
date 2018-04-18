@@ -20,6 +20,8 @@ namespace Geometry_Bash
         private bool attackActive;
         private double attackTime;
         private double cooldownTimer;
+        private bool hit;
+        private String direction = "";
 
         public Square(int player, Rectangle sAP, Texture2D texture, int windowWidth, int windowHeight, int[] stats) : base(texture, sAP, windowWidth, windowHeight)
         {
@@ -57,125 +59,135 @@ namespace Geometry_Bash
         public override void Attack(Player player1, Player player2, KeyboardState kbState, double currentTime)
         {
             Square player = (Square)player1;
-            bool hit = false;//boolean to prevent exseive hits
+            hit = false;//boolean to prevent exseive hits
 
+            Rectangle temp = player1.HitBox;
+            Rectangle temp2 = player2.HitBox;
 
-
-
+            //when attack button is pressed
             if (kbState.IsKeyDown(player.keyAttack1) && !(prevKbState.IsKeyDown(player.keyAttack1)))
             {
-                Rectangle temp = player1.HitBox;
-                Rectangle temp2 = player2.HitBox;
+                                            //check if already active
+                                            //no -> attack  yes -> don't do anything
+                                            //attack:
+                                            //Lock movement, activate hitbox, set timer
+                                            //after attack:
+                                            //set regular movement, deactivate hitbox, set cooldown
 
-                if (kbState.IsKeyDown(player.keyRight))
-                {
-                    temp.X += 75;
+                if (player1.MoveLocked == false)
+                 {
+                    timer = 0;
+                    attackActive = true;
+                    moveLocked = true;
                     player1.HitBox = temp;
-
-                    if (player1.Collision(player1, player2) && !hit)
-                    {
-                        player2.Health -= 3;
-
-                        hit = true;
-
-                        //knockback
-                        temp2.X += 150;
-                        player2.HitBox = temp2;
-                    }
-                }
-            
-                if (kbState.IsKeyDown(player.keyLeft))
-                {
-                    
-                    attackTime = currentTime;
-
-                     timer = .5;
-                    
                     //New Movement
+                    temp = hitBox;
 
-                    //find the counter for seconds/frames
-
-                    if (attackActive == false)
+                    
+                    if (kbState.IsKeyDown(keyRight))
                     {
-                        moveSpeed = currentStats[2] * 2;
-                        attackActive = true;
-
-
-                    player1.HitBox = temp;
-
-
+                        direction = "right";
                     }
-                }
-                if (kbState.IsKeyDown(player.keyUp))
-                {
-                    temp.Y -= 75;
-                    player1.HitBox = temp;
-
-                    if (player1.Collision(player1, player2) && !hit)
+                    if (kbState.IsKeyDown(keyLeft))
                     {
-                        player2.Health -= 3;
-
-                        hit = true;
-
-                        //knockback
-                        temp2.Y -= 150;
-                        player2.HitBox = temp2;
+                        direction = "left";
                     }
-                }
-                if (kbState.IsKeyDown(player.keyDown))
-                {
-                    temp.Y += 75;
-                    player1.HitBox = temp;
 
-                    if (player1.Collision(player1, player2) && !hit)
+                    if (kbState.IsKeyDown(keyUp))
                     {
-                        player2.Health -= 3;
-
-                        hit = true;
-
-                        //knockback
-                        temp2.Y += 150;
-                        player2.HitBox = temp2;
+                        direction = "up";
                     }
+
+                    if (kbState.IsKeyDown(keyDown))
+                    {
+                        direction = "down";
+                    }
+
+                    
+
                 }
-
-
-
-                
-
                 
             }
+        //checks every frame
+            if (player1.MoveLocked)
+            {
+                if (direction == "right")
+                {
+                    temp.X += moveSpeed * 3;
+                }
+                if (direction == "left")
+                {
+                    temp.X -= moveSpeed * 3;
+                }
+
+                if (direction == "up")
+                {
+                    temp.Y -= moveSpeed * 3;
+                }
+
+                if (direction == "down")
+                {
+                    temp.Y += moveSpeed * 3;
+                }
+                player1.HitBox = temp;
+                hitBox = temp;
+
+                //check for collision with other player
+                if (player1.Collision(player1, player2) && !hit)
+                {
+                    player2.Health -= 1;
+
+                    hit = true;
+
+                    //knockback
+                    if (direction == "down")
+                        temp2.Y += 150;
+                    if (direction == "up")
+                        temp2.Y -= 150;
+                    if (direction == "right")
+                        temp2.X += 150;
+                    if (direction == "left")
+                        temp2.X -= 150;
+                    
+
+                    player2.HitBox = temp2;
+                    hit = false;
+                }
+                timer += 1;
+                timer = Math.Min(timer, 10);
+            }
+            
+            if (timer == 10)
+            {
+                player1.MoveLocked = false;
+                direction = "";
+                timer = 0;
+            }
+
 
             prevKbState = kbState;
+
         }
 
-        public override void Attack2(Player player1, Player player2, KeyboardState kbstate)
-        {
-            
-            Square player = (Square)player1;
-
-            bool hit = false;
-
-            if (kbstate.IsKeyDown(player.keyAttack2) && !(prevKbState.IsKeyDown(player.keyAttack2)))
-            {
-                Rectangle temp = player1.HitBox;
-                for (int i = 0; i < 300; i++)
-                player1.Rotation += 1f;
-
-            }
-        }
+      // public override void Attack2(Player player1, Player player2, KeyboardState kbstate)
+      // {
+      //     
+      //     Square player = (Square)player1;
+      //
+      //     bool hit = false;
+      //
+      //     if (kbstate.IsKeyDown(player.keyAttack2) && !(prevKbState.IsKeyDown(player.keyAttack2)))
+      //     {
+      //         Rectangle temp = player1.HitBox;
+      //         for (int i = 0; i < 300; i++)
+      //         player1.Rotation += 1f;
+      //
+      //     }
+      // }
 
         public override void Step(Player player1, Player player2, KeyboardState kbState, double currentTime)
         {
-            if (currentTime == attackTime + timer)
-            {
-                moveSpeed = currentStats[2];
-                attackActive = false;
-                attackTime = 0;
-            }
-
-            
-
+           
         }
     }
 }

@@ -50,7 +50,7 @@ namespace Geometry_Bash
                 keyAttack2 = Keys.O;
             }
         }
-        public override void Attack(Player player1, Player player2, KeyboardState kbState)
+        public override void Attack(Player player1, Player player2, KeyboardState kbState, double currentTime)
         {
 
             proj1 = new Projectile(5, 5, 5, 0);

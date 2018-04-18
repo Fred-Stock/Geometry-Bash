@@ -26,6 +26,7 @@ namespace Geometry_Bash
         protected Keys keyAttack2;
 
         protected int moveSpeed;
+        protected bool moveLocked;
 
         protected Projectile proj1;
 
@@ -61,43 +62,53 @@ namespace Geometry_Bash
             get { return proj1; }
         }
 
+        public bool MoveLocked
+        {
+            get { return moveLocked; }
+            set { moveLocked = value; }
+        }
+
         public Player(Texture2D texture,  Rectangle sAP, int windowWidth, int windowHeight) : base(texture, sAP)
         {
             hitBox = sAP;
             this.windowWidth = windowWidth;
             this.windowHeight = windowHeight;
+            moveLocked = false;
         }
 
         
 
         public void Move(KeyboardState keys)
         {
-
-            //create a new temp rectangle to modify the posotion of the player
-            Rectangle temp = hitBox;
-
-            keys = Keyboard.GetState();
-
-            if (keys.IsKeyDown(keyRight))
+            if (!moveLocked)
             {
-                temp.X += moveSpeed;
-            }
-            if (keys.IsKeyDown(keyLeft))
-            {
-                temp.X -= moveSpeed;
-            }
+                //create a new temp rectangle to modify the position of the player
+                Rectangle temp = hitBox;
 
-            if (keys.IsKeyDown(keyUp))
-            {
-                temp.Y -= moveSpeed;
-            }
+                keys = Keyboard.GetState();
 
-            if (keys.IsKeyDown(keyDown))
-            {
-                temp.Y += moveSpeed;
+                if (keys.IsKeyDown(keyRight))
+                {
+                    temp.X += moveSpeed;
+                }
+                if (keys.IsKeyDown(keyLeft))
+                {
+                    temp.X -= moveSpeed;
+                }
+
+                if (keys.IsKeyDown(keyUp))
+                {
+                    temp.Y -= moveSpeed;
+                }
+
+                if (keys.IsKeyDown(keyDown))
+                {
+                    temp.Y += moveSpeed;
+                }
+                hitBox = temp;
             }
-            hitBox = temp;
         }
+            
 
         //method to check collision of players
         public bool Collision(Player player1, Player player2)

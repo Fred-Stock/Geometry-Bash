@@ -747,11 +747,11 @@ namespace Geometry_Bash
                 player1.OutsideCollision(player1);
                 player2.OutsideCollision(player2);
 
-                player1.Attack(player1, player2, kbState, (int)gameTime.ElapsedGameTime.TotalSeconds);
-                player2.Attack(player2, player1, kbState, (int)gameTime.ElapsedGameTime.TotalSeconds);
+                player1.Attack(player1, player2, kbState, gameTime.ElapsedGameTime.TotalSeconds);
+                player2.Attack(player2, player1, kbState, gameTime.ElapsedGameTime.TotalSeconds);
 
-                player1.Step(gameTime.ElapsedGameTime.TotalSeconds);
-                player2.Step(gameTime.ElapsedGameTime.TotalSeconds);
+                player1.Step(player1, player2, kbState, gameTime.ElapsedGameTime.TotalSeconds);
+                player2.Step(player2, player1, kbState, gameTime.ElapsedGameTime.TotalSeconds);
 
                 // makes sure mouse is invisible during game
                 this.IsMouseVisible = false;
@@ -1159,7 +1159,11 @@ namespace Geometry_Bash
             _frameCounter.Update(deltaTime);
             var fps = string.Format("FPS: {0}", _frameCounter.AverageFramesPerSecond);
             spriteBatch.DrawString(text, fps, new Vector2(5, 20), Color.Wheat);
-
+            //drawing movelocked
+            if (gamestate == GameState.Game) { 
+            spriteBatch.DrawString(text, "Player 1 Movelocked: "  + player1.MoveLocked, new Vector2(5, 30), Color.Wheat);
+            spriteBatch.DrawString(text, "Player 2 Movelocked: "  + player2.MoveLocked, new Vector2(5, 40), Color.Wheat);
+            }
             spriteBatch.End();
             base.Draw(gameTime);
         }
