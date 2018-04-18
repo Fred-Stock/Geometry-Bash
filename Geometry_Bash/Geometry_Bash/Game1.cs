@@ -1019,7 +1019,7 @@ namespace Geometry_Bash
                 {
                     player1.Texture = redCircleAttackTexture;
                 }
-                else
+                else if (player1 is Circle && kbState.IsKeyUp(Keys.Q))
                 {
                     player1.Texture = redCircleTexture;
                 }
@@ -1027,7 +1027,7 @@ namespace Geometry_Bash
                 {
                     player2.Texture = blueCircleAttackTexture;
                 }
-                else
+                else if (player2 is Circle && kbState.IsKeyUp(Keys.U))
                 {
                     player2.Texture = blueCircleTexture;
                 }
