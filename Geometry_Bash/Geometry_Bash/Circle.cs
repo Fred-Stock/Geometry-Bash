@@ -46,6 +46,7 @@ namespace Geometry_Bash
 
         }
 
+        /* commented out ~for later~
         public override void Attack(Player player1, Player player2, KeyboardState kbState)
         {
             Circle player =  (Circle)player1;
@@ -55,12 +56,8 @@ namespace Geometry_Bash
                 
             }
 
-
-
             prevKbState = kbState;
-
         }
-
-        
+        */
     }
 }
