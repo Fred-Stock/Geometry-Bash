@@ -27,6 +27,8 @@ namespace Geometry_Bash
 
         protected int moveSpeed;
 
+        protected Projectile proj1;
+
         protected Texture2D sprite;
         protected Rectangle hitBox;
 
@@ -52,6 +54,11 @@ namespace Geometry_Bash
             get { return rotation; }
             set { rotation = value; }
 
+        }
+
+        public Projectile Proj1
+        {
+            get { return proj1; }
         }
 
         public Player(Texture2D texture,  Rectangle sAP, int windowWidth, int windowHeight) : base(texture, sAP)
