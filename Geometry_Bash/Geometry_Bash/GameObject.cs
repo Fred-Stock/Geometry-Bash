@@ -12,7 +12,8 @@ namespace Geometry_Bash
     {
       protected Texture2D texture;
       protected Rectangle sizeAndPosition;
-
+      protected int ySpeed;
+      protected int xSpeed;
 
         public Texture2D Texture
         {

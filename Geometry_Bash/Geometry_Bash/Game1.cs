@@ -164,6 +164,9 @@ namespace Geometry_Bash
         bool redReady = false;
         bool blueReady = false;
 
+        //Used for keeping track of passing frames
+        private FrameCounter _frameCounter = new FrameCounter();
+
         //music
         int playNum = 0;
         int playNum2 = 0;
@@ -737,8 +740,11 @@ namespace Geometry_Bash
                 player1.OutsideCollision(player1);
                 player2.OutsideCollision(player2);
 
-                player1.Attack(player1, player2, kbState);
-                player2.Attack(player2, player1, kbState);
+                player1.Attack(player1, player2, kbState, (int)gameTime.ElapsedGameTime.TotalSeconds);
+                player2.Attack(player2, player1, kbState, (int)gameTime.ElapsedGameTime.TotalSeconds);
+
+                player1.Step(gameTime.ElapsedGameTime.TotalSeconds);
+                player2.Step(gameTime.ElapsedGameTime.TotalSeconds);
 
                 // makes sure mouse is invisible during game
                 this.IsMouseVisible = false;
@@ -987,10 +993,12 @@ namespace Geometry_Bash
                 // Draw Players
                 float transparency1 = (float)player1.Health / 10;
                 float transparency2 = (float)player2.Health / 10;
+
                 Vector2 player1Origin = new Vector2(player1.Texture.Width / 2f, player1.Texture.Height / 2f);
                 Rectangle player1SourceRectangle = new Rectangle(0, 0, player1.Texture.Width, player1.Texture.Height);
                 Vector2 player2Origin = new Vector2(player2.Texture.Width / 2f, player2.Texture.Height / 2f);
                 Rectangle player2SourceRectangle = new Rectangle(0, 0, player2.Texture.Width, player2.Texture.Height);
+
                 spriteBatch.Draw(player1.Texture, player1.HitBox, player1SourceRectangle, Color.White * transparency1, player1.Rotation, player1Origin, SpriteEffects.None, 1);
                 spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
 
@@ -1031,7 +1039,11 @@ namespace Geometry_Bash
 
             //Debug Drawing
             spriteBatch.DrawString(text, Mouse.GetState().X + "," + Mouse.GetState().Y, new Vector2(5,5), Color.Wheat);
-
+            //drawing fps
+            var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _frameCounter.Update(deltaTime);
+            var fps = string.Format("FPS: {0}", _frameCounter.AverageFramesPerSecond);
+            spriteBatch.DrawString(text, fps, new Vector2(5, 20), Color.Wheat);
 
             spriteBatch.End();
             base.Draw(gameTime);

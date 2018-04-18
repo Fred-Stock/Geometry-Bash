@@ -60,6 +60,7 @@
     <Compile Include="Collectable.cs" />
     <Compile Include="Diamond.cs" />
     <Compile Include="Enemy.cs" />
+    <Compile Include="FrameCounter.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Geometry.cs" />

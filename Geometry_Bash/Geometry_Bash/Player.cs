@@ -117,7 +117,7 @@ namespace Geometry_Bash
         }
 
 
-        public virtual void Attack(Player player1, Player player2, KeyboardState kbState)
+        public virtual void Attack(Player player1, Player player2, KeyboardState kbState, double currentTime)
         {
            
             if (kbState.IsKeyDown(player1.keyAttack1) && prevKbState.IsKeyUp(player1.keyAttack1))
@@ -183,9 +183,9 @@ namespace Geometry_Bash
             Rectangle temp = player.HitBox;
 
             if(direction == 0)
-            {
-                temp.Y -= 1;
-            }
+            {                                                //     0
+                temp.Y -= 1;                                 //   3   1
+            }                                                //     2
             if (direction == 1)
             {
                 temp.X -= 1;
@@ -199,6 +199,11 @@ namespace Geometry_Bash
                 temp.X += 1;
             }
             player.HitBox = temp;
+        }
+
+        public virtual void Step(Player player1, Player player2, KeyboardState kbState, double currentTime)
+        {
+            return;
         }
         
     }

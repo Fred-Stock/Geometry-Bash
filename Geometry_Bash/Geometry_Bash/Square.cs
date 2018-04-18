@@ -14,14 +14,19 @@ namespace Geometry_Bash
     {
         
 
-        double timer = 0;
+        private double timer;
+        private FrameCounter frameCounter = new FrameCounter();
+        private int[] currentStats;
+        private bool attackActive;
+        private double attackTime;
+        private double cooldownTimer;
 
         public Square(int player, Rectangle sAP, Texture2D texture, int windowWidth, int windowHeight, int[] stats) : base(texture, sAP, windowWidth, windowHeight)
         {
             // stats loads in H/D/S
             health = stats[0];
             moveSpeed = stats[2];
-
+            currentStats = stats;
 
             //check if it is player one or two and then set the correct keybindings
             if (player == 1)
@@ -49,7 +54,7 @@ namespace Geometry_Bash
           
         }
 
-        public override void Attack(Player player1, Player player2, KeyboardState kbState)
+        public override void Attack(Player player1, Player player2, KeyboardState kbState, double currentTime)
         {
             Square player = (Square)player1;
             bool hit = false;//boolean to prevent exseive hits
@@ -81,18 +86,24 @@ namespace Geometry_Bash
             
                 if (kbState.IsKeyDown(player.keyLeft))
                 {
-                    temp.X -= 75;
+                    
+                    attackTime = currentTime;
+
+                     timer = .5;
+                    
+                    //New Movement
+
+                    //find the counter for seconds/frames
+
+                    if (attackActive == false)
+                    {
+                        moveSpeed = currentStats[2] * 2;
+                        attackActive = true;
+
+
                     player1.HitBox = temp;
 
-                    if (player1.Collision(player1, player2) && !hit)
-                    {
-                        player2.Health -= 3;
 
-                        hit = true;
-
-                        //knockback
-                        temp2.X -= 150;
-                        player2.HitBox = temp2;
                     }
                 }
                 if (kbState.IsKeyDown(player.keyUp))
@@ -152,6 +163,19 @@ namespace Geometry_Bash
                 player1.Rotation += 1f;
 
             }
+        }
+
+        public override void Step(Player player1, Player player2, KeyboardState kbState, double currentTime)
+        {
+            if (currentTime == attackTime + timer)
+            {
+                moveSpeed = currentStats[2];
+                attackActive = false;
+                attackTime = 0;
+            }
+
+            
+
         }
     }
 }
