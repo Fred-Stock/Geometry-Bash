@@ -15,7 +15,7 @@ namespace Geometry_Bash
         
 
         private double timer;
-        private FrameCounter frameCounter = new FrameCounter();
+        //private FrameCounter frameCounter = new FrameCounter();
         private int[] currentStats;
         private bool attackActive;
         private double attackTime;
@@ -53,13 +53,13 @@ namespace Geometry_Bash
                 keyAttack2 = Keys.O;
            }
 
+            hit = false;//boolean to prevent exseive hits
           
         }
 
         public override void Attack(Player player1, Player player2, KeyboardState kbState, double currentTime)
         {
             Square player = (Square)player1;
-            hit = false;//boolean to prevent exseive hits
 
             Rectangle temp = player1.HitBox;
             Rectangle temp2 = player2.HitBox;
@@ -135,33 +135,33 @@ namespace Geometry_Bash
                 //check for collision with other player
                 if (player1.Collision(player1, player2) && !hit)
                 {
-                    player2.Health -= 1;
+                    player2.Health -= player.currentStats[1];
 
                     hit = true;
 
                     //knockback
                     if (direction == "down")
-                        temp2.Y += 150;
+                        temp2.Y += 80;
                     if (direction == "up")
-                        temp2.Y -= 150;
+                        temp2.Y -= 80;
                     if (direction == "right")
-                        temp2.X += 150;
+                        temp2.X += 80;
                     if (direction == "left")
-                        temp2.X -= 150;
+                        temp2.X -= 80;
                     
 
                     player2.HitBox = temp2;
-                    hit = false;
                 }
                 timer += 1;
-                timer = Math.Min(timer, 10);
+                timer = Math.Min(timer, 4);
             }
             
-            if (timer == 10)
+            if (timer == 4)
             {
                 player1.MoveLocked = false;
                 direction = "";
                 timer = 0;
+                hit = false;
             }
 
 
