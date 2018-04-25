@@ -87,6 +87,7 @@ namespace Geometry_Bash
             this.distance = distance;
             this.damage = damage;
             this.direction = direction;
+            active = true;
             
             traveled = 0;
 

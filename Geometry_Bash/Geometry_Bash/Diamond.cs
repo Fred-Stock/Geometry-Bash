@@ -61,40 +61,52 @@ namespace Geometry_Bash
             //attack method
             if (kbState.IsKeyDown(player.keyAttack1) && !(prevKbState.IsKeyDown(player.keyAttack1)))
             {
-                Projectile proj = new Projectile(7, 5, 5, rng.Next(0,4));
                 //shoot a projectile in the direction the player is moving if stationary just send it in a random direction
+
+                //conditional to limit the amount of projectiles to four 
+                //if(projList.Count >= 8)
+                //{
+                //    projList.Clear();
+                //    for(int i = 0; i < 8; i++)
+                //    {
+                //        projList.Add(new Projectile(7, 5, 3, i));
+                //        projList[i].HitBox = new Rectangle(player1.HitBox.X - player1.HitBox.Width/4 - 4, player1.HitBox.Y - player1.HitBox.Height / 2,
+                //                    player1.HitBox.Width/2, player1.HitBox.Height/2);
+                //    }
+                //}
+                //else
+                //{
+                //    for (int i = 0; i < 8; i++)
+                //    {
+                //        projList.Add(new Projectile(7, 5, 3, i));
+                //        projList[i].HitBox = new Rectangle(player1.HitBox.X - player1.HitBox.Width / 4 - 4, player1.HitBox.Y - player1.HitBox.Height / 2,
+                //                    player1.HitBox.Width/2, player1.HitBox.Height/2);
+                //    }
+                //}
+                Projectile proj;
                 if (kbState.IsKeyDown(keyRight))
                 {
-                    proj = new Projectile(7, 5, 5, 1);
+                    proj = (new Projectile(7, 5, 3, 0));
+                }
+                else if (kbState.IsKeyDown(keyDown))
+                {
+                    proj = (new Projectile(7, 5, 3, 1));
                 }
                 else if (kbState.IsKeyDown(keyLeft))
                 {
-                    proj = new Projectile(7, 5, 5, 3);
-                }
-
-                else if (kbState.IsKeyDown(keyUp))
-                {
-                    proj = new Projectile(7, 5, 5, 0);
-                }
-
-                else if (kbState.IsKeyDown(keyDown))
-                {
-                    proj = new Projectile(7, 5, 5, 2);
-                }
-               
-                proj.Active = true;
-                proj.HitBox = new Rectangle(player1.HitBox.X - player1.HitBox.Width/4 - 4, player1.HitBox.Y - player1.HitBox.Height / 2,
-                                player1.HitBox.Width, player1.HitBox.Height);
-                //conditional to limit the amount of projectiles to four 
-                if(projList.Count >= 4)
-                {
-                    projList.RemoveAt(0);
-                    projList.Add(proj);
+                    proj = (new Projectile(7, 5, 3, 2));
                 }
                 else
                 {
-                    projList.Add(proj);
+                    proj = (new Projectile(7, 5, 3, 3));
                 }
+                if(projList.Count > 4)
+                {
+                    projList.RemoveAt(0);
+                }
+                proj.HitBox = new Rectangle(player1.HitBox.X + player1.HitBox.Width / 4, player1.HitBox.Y + player1.HitBox.Height / 2,
+                                        player1.HitBox.Width/2, player1.HitBox.Height/2);
+                projList.Add(proj);
 
             }
 
@@ -102,25 +114,14 @@ namespace Geometry_Bash
             {
                 Projectile temp = projList[i];
             
-                    if(temp.Active && temp.HitBox.Intersects(player2.HitBox))
-                    {
-                        player2.Health -= temp.Damage;
-                        projList.RemoveAt(i);
-                    }
-                if( i < projList.Count)
+                if(temp.Active && temp.HitBox.Intersects(player2.HitBox))
                 {
-                    if(projList[i] != null)
-                    {
-                        projList[i] = temp; 
-                    }
-
+                    projList[i].Active = false;
+                    player2.Health -= temp.Damage;
+                    projList.RemoveAt(i);
                 }
-            }
-            //if (proj1.Active)
-            //{
-                //proj1.Move();
-            //}
 
+            }
 
             prevKbState = kbState;
 
