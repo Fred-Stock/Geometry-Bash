@@ -1086,26 +1086,32 @@ namespace Geometry_Bash
                                 {
                                     player2.HitBox = prevPos2;
                                 }
-                                for (int k = 0; k < player1.ProjList.Count; k++)
+                                if(player1 is Diamond)
                                 {
+                                    for (int k = 0; k < player1.ProjList.Count; k++)
+                                    {
 
-                                    if (player1 is Diamond && player1.ProjList.Count != 0 &&
-                                        player1.ProjList[k].HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width / 2, 40 * j + player1.HitBox.Height / 2),
-                                        new Point(40, 40))))
-                                    {
-                                        player1.ProjList.RemoveAt(k);
-                                        k--;
+                                        if (player1 is Diamond && player1.ProjList.Count != 0 &&
+                                            player1.ProjList[k].HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width / 2, 40 * j + player1.HitBox.Height / 2),
+                                            new Point(40, 40))))
+                                        {
+                                            player1.ProjList.RemoveAt(k);
+                                            k--;
+                                        }
+                                        
                                     }
-                                    
                                 }
-                                for(int q = 0; q < player2.ProjList.Count; q++)
+                                if(player2 is Diamond)
                                 {
-                                    if (player2 is Diamond && player2.ProjList.Count != 0 &&
-                                        player2.ProjList[q].HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width / 2, 40 * j + player1.HitBox.Height / 2),
-                                        new Point(40, 40))))
+                                    for(int q = 0; q < player2.ProjList.Count; q++)
                                     {
-                                        player2.ProjList.RemoveAt(q);
-                                        q--;
+                                        if (player2 is Diamond && player2.ProjList.Count != 0 &&
+                                            player2.ProjList[q].HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width / 2, 40 * j + player1.HitBox.Height / 2),
+                                            new Point(40, 40))))
+                                        {
+                                            player2.ProjList.RemoveAt(q);
+                                            q--;
+                                        }
                                     }
                                 }
                             }
