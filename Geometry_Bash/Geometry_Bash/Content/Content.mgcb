@@ -410,30 +410,6 @@
 /processorParam:TextureFormat=Color
 /build:Screens/Pause Menu_p.png
 
-#begin CharSprites/circle_blue_ult.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:CharSprites/circle_blue_ult.png
-
-#begin CharSprites/circle_ult.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:CharSprites/circle_ult.png
-
 #begin CharSprites/diamond_blue_shards.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -481,4 +457,28 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:CharSprites/diamond_red_shard_45.png
+
+#begin CharSprites/circle_blue_ult.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CharSprites/circle_blue_ult.png
+
+#begin CharSprites/circle_ult.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:CharSprites/circle_ult.png
 
