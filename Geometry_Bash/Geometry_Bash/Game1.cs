@@ -1043,7 +1043,7 @@ namespace Geometry_Bash
                                 {
                                     player2.HitBox = prevPos2;
                                 }
-                                
+
                             }
                         }
                     }
