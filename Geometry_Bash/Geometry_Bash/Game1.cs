@@ -61,6 +61,8 @@ namespace Geometry_Bash
         Texture2D blueCircleAttackTexture;
         Texture2D redDiamondParticles;
         Texture2D blueDiamondParticles;
+        Texture2D redDiamondParticles_45;
+        Texture2D blueDiamondParticles_45;
         
         // button textures
         Texture2D yellowButton;
@@ -340,6 +342,8 @@ namespace Geometry_Bash
             blueCircleAttackTexture = Content.Load<Texture2D>("CharSprites//circle_blue_ult");
             redDiamondParticles = Content.Load<Texture2D>("CharSprites//diamond_red_shards");
             blueDiamondParticles = Content.Load<Texture2D>("CharSprites//diamond_blue_shards");
+            redDiamondParticles_45 = Content.Load<Texture2D>("CharSprites//diamond_red_shard_45");
+            blueDiamondParticles_45 = Content.Load<Texture2D>("CharSprites//diamond_blue_shard_45");
 
             // load button textures
             yellowButton = Content.Load<Texture2D>("Button Sprites//button_yellow");
