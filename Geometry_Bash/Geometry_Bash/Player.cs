@@ -28,7 +28,7 @@ namespace Geometry_Bash
         protected int moveSpeed;
         protected bool moveLocked;
 
-        protected Projectile proj1;
+        protected List<Projectile> projList;
 
         protected Texture2D sprite;
         protected Rectangle hitBox;
@@ -57,9 +57,10 @@ namespace Geometry_Bash
 
         }
 
-        public Projectile Proj1
+        public List<Projectile> ProjList
         {
-            get { return proj1; }
+            get { return projList; }
+            set { projList = value; }
         }
 
         public bool MoveLocked
@@ -67,6 +68,12 @@ namespace Geometry_Bash
             get { return moveLocked; }
             set { moveLocked = value; }
         }
+
+        public int MoveSpeed
+        {
+            get { return moveSpeed; }
+        }
+
 
         public Player(Texture2D texture,  Rectangle sAP, int windowWidth, int windowHeight) : base(texture, sAP)
         {

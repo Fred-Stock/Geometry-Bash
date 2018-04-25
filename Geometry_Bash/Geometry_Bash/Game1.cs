@@ -145,6 +145,9 @@ namespace Geometry_Bash
         int[] diamondStats = new int[3];
         #endregion
 
+
+
+
         //player objects
         Player player1;
         Player player2;
@@ -739,6 +742,7 @@ namespace Geometry_Bash
                     }
                 }
 
+                
 
                 // all other code for this state goes here
                 player1.Move(kbState);
@@ -752,6 +756,38 @@ namespace Geometry_Bash
 
                 player1.Step(player1, player2, kbState, gameTime.ElapsedGameTime.TotalSeconds);
                 player2.Step(player2, player1, kbState, gameTime.ElapsedGameTime.TotalSeconds);
+
+                if(player1 is Diamond)
+                {
+                    if (player1.ProjList.Count != 0)
+                    {
+                        for (int i = 0; i < player1.ProjList.Count; i++)
+                        {
+                            Rectangle temp = player1.ProjList[i].HitBox;
+                            if (player1.ProjList[i].Direction == 0)
+                            {
+                                temp.Y -= player1.ProjList[i].Speed;
+                            }
+                            else if (player1.ProjList[i].Direction == 1)
+                            {
+                                temp.X += player1.ProjList[i].Speed;
+                            }
+                            else if (player1.ProjList[i].Direction == 2)
+                            {
+                                temp.Y += player1.ProjList[i].Speed;
+                            }
+                            else if (player1.ProjList[i].Direction == 3)
+                            {
+                                temp.X -= player1.ProjList[i].Speed;
+                            }
+
+                            player1.ProjList[i].HitBox = temp;
+
+                        }
+                    }
+                }
+                
+            
 
                 // makes sure mouse is invisible during game
                 this.IsMouseVisible = false;
@@ -980,6 +1016,7 @@ namespace Geometry_Bash
                                 {
                                     player2.HitBox = prevPos2;
                                 }
+                                
                             }
                         }
                     }
@@ -1002,6 +1039,7 @@ namespace Geometry_Bash
                                 {
                                     player2.HitBox = prevPos2;
                                 }
+                                
                             }
                         }
                     }
@@ -1048,9 +1086,17 @@ namespace Geometry_Bash
                 #endregion
 
                 #region diamond attack sprites
-                if (player1 is Diamond && player1.Proj1.Active)
+                if (player1 is Diamond)
                 {
-                    spriteBatch.Draw(redDiamondParticles, player1.Proj1.HitBox, Color.White);
+                    for (int i = 0; i < player1.ProjList.Count; i++)
+                    {
+                       
+                       spriteBatch.Draw(redDiamondParticles, player1.ProjList[i].HitBox, Color.White);
+
+                    }
+
+                    //player1.Proj1.Move();
+
                 }
                 //if (player2 is Diamond && player2.Proj2.Active)
                 //{
@@ -1093,6 +1139,7 @@ namespace Geometry_Bash
                                     player2.HitBox = prevPos2;
                                 }
                             }
+                            
                         }
                     }
                 }
@@ -1115,6 +1162,7 @@ namespace Geometry_Bash
                                     player2.HitBox = prevPos2;
                                 }
                             }
+                            
                         }
                     }
                 }

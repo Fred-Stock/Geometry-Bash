@@ -129,7 +129,7 @@ namespace Geometry_Bash
                 {
                     temp.Y += moveSpeed * 3;
                 }
-                player1.HitBox = temp;
+                //player1.HitBox = temp;
                 hitBox = temp;
 
                 //check for collision with other player
