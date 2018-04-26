@@ -59,6 +59,8 @@ namespace Geometry_Bash
         //character special textures
         Texture2D redCircleAttackTexture;
         Texture2D blueCircleAttackTexture;
+        Texture2D redCircleAttackTexture_rot;
+        Texture2D blueCircleAttackTexture_rot;
         Texture2D redDiamondParticles;
         Texture2D blueDiamondParticles;
         Texture2D redDiamondParticles_45;
@@ -341,6 +343,8 @@ namespace Geometry_Bash
             //load character special textures
             redCircleAttackTexture = Content.Load<Texture2D>("CharSprites//circle_ult");
             blueCircleAttackTexture = Content.Load<Texture2D>("CharSprites//circle_blue_ult");
+            redCircleAttackTexture_rot = Content.Load<Texture2D>("CharSprites//circle_ult_rot");
+            blueCircleAttackTexture_rot = Content.Load<Texture2D>("CharSprites//circle_blue_ult_rot");
             redDiamondParticles = Content.Load<Texture2D>("CharSprites//diamond_red_shards");
             blueDiamondParticles = Content.Load<Texture2D>("CharSprites//diamond_blue_shards");
             redDiamondParticles_45 = Content.Load<Texture2D>("CharSprites//diamond_red_shard_45");
