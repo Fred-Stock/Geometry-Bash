@@ -12,14 +12,17 @@ namespace Geometry_Bash
 {
     class Circle : Player
     {
+        //boolean to control double hitting
+        bool hit;
 
 
         public Circle(int player, Rectangle sAP, Texture2D texture, int windowWidth, int windowHeight, int[] stats) : base(texture, sAP, windowWidth, windowHeight)
         {
             // stats loads in H/D/S
             health = stats[0];
+            damage = stats[1];
             moveSpeed = stats[2];
-
+            hit = false;
 
             //check if it is player one or two and then set the correct keybindings
             if (player == 1)
@@ -46,18 +49,29 @@ namespace Geometry_Bash
 
         }
 
-        /* commented out ~for later~
-        public override void Attack(Player player1, Player player2, KeyboardState kbState)
+
+        public override void Attack(Player player1, Player player2, KeyboardState kbState, double currenttime)
         {
             Circle player =  (Circle)player1;
 
             if (kbState.IsKeyDown(player.keyAttack1))
             {
+                if (!prevKbState.IsKeyDown(player.keyAttack1))
+                {
+                    hit = false;
+
+                }
                 
+                if(player1.HitBox.Intersects(player2.HitBox) && !hit)
+                {
+                    player2.Health -= damage;
+                    hit = true;
+
+                }
             }
 
             prevKbState = kbState;
         }
-        */
+        
     }
 }

@@ -34,6 +34,7 @@ namespace Geometry_Bash
         protected Rectangle hitBox;
 
         protected double health;
+        protected int damage;
 
         protected int windowWidth;
         protected int windowHeight;
@@ -72,6 +73,11 @@ namespace Geometry_Bash
         public int MoveSpeed
         {
             get { return moveSpeed; }
+        }
+
+        public int Damage
+        {
+            get { return damage; }
         }
 
 

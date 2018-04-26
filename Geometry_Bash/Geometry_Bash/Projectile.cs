@@ -48,16 +48,7 @@ namespace Geometry_Bash
             get { return speed; }
         }
 
-        public float Distance
-        {
-            get { return distance; }
-        }
-
-        public int Damage
-        {
-            get { return damage; }
-        }
-
+        
         public Rectangle HitBox
         {
             get { return hitBox;}
@@ -81,11 +72,10 @@ namespace Geometry_Bash
 
 
 
-        public Projectile(int speed, float distance, int damage, int direction)
+        public Projectile(int speed, int direction)
         {
             this.speed = speed;
-            this.distance = distance;
-            this.damage = damage;
+
             this.direction = direction;
             active = true;
             
@@ -128,15 +118,6 @@ namespace Geometry_Bash
 
                    
             }
-
-
-
         }
-
-
-        
-        
-
-
     }
 }

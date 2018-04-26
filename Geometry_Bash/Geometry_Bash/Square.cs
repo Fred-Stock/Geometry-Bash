@@ -27,6 +27,7 @@ namespace Geometry_Bash
         {
             // stats loads in H/D/S
             health = stats[0];
+            damage = stats[1];
             moveSpeed = stats[2];
             currentStats = stats;
 
@@ -135,7 +136,7 @@ namespace Geometry_Bash
                 //check for collision with other player
                 if (player1.Collision(player1, player2) && !hit)
                 {
-                    player2.Health -= player.currentStats[1];
+                    player2.Health -= damage; 
 
                     hit = true;
 

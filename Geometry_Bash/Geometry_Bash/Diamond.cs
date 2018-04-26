@@ -22,6 +22,7 @@ namespace Geometry_Bash
         {
             // stats loads in H/D/S
             health = stats[0];
+            damage = stats[1];
             moveSpeed = stats[2];
 
             rng = new Random();
@@ -86,25 +87,25 @@ namespace Geometry_Bash
                 Projectile proj;
                 if (kbState.IsKeyDown(keyRight))
                 {
-                    proj = (new Projectile(7, 5, 3, 0));
+                    proj = (new Projectile(7, 0));
                 }
                 else if (kbState.IsKeyDown(keyDown))
                 {
-                    proj = (new Projectile(7, 5, 3, 1));
+                    proj = (new Projectile(7, 1));
                 }
                 else if (kbState.IsKeyDown(keyLeft))
                 {
-                    proj = (new Projectile(7, 5, 3, 2));
+                    proj = (new Projectile(7, 2));
                 }
                 else
                 {
-                    proj = (new Projectile(7, 5, 3, 3));
+                    proj = (new Projectile(7, 3));
                 }
-                if(projList.Count > 4)
+                if(projList.Count >= 2)
                 {
                     projList.RemoveAt(0);
                 }
-                proj.HitBox = new Rectangle(player1.HitBox.X + player1.HitBox.Width / 4, player1.HitBox.Y + player1.HitBox.Height / 2,
+                proj.HitBox = new Rectangle(player1.HitBox.X + player1.HitBox.Width / 4, player1.HitBox.Y + player1.HitBox.Height / 4,
                                         player1.HitBox.Width/2, player1.HitBox.Height/2);
                 projList.Add(proj);
 
@@ -117,7 +118,7 @@ namespace Geometry_Bash
                 if(temp.Active && temp.HitBox.Intersects(player2.HitBox))
                 {
                     projList[i].Active = false;
-                    player2.Health -= temp.Damage;
+                    player2.Health -= damage;
                     projList.RemoveAt(i);
                 }
 

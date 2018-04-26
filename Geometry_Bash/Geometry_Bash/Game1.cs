@@ -173,6 +173,7 @@ namespace Geometry_Bash
 
         //Used for keeping track of passing frames
         private FrameCounter _frameCounter = new FrameCounter();
+        
 
         //music
         int playNum = 0;
@@ -1169,10 +1170,11 @@ namespace Geometry_Bash
                 Vector2 player2Origin = new Vector2(player2.Texture.Width / 2f, player2.Texture.Height / 2f);
                 Rectangle player2SourceRectangle = new Rectangle(0, 0, player2.Texture.Width, player2.Texture.Height);
 
-                spriteBatch.Draw(player1.Texture, player1.HitBox, player1SourceRectangle, Color.White * transparency1, player1.Rotation, player1Origin, SpriteEffects.None, 1);
+                //commented out because it messes up player1 hitbox so it does line up with the sprite 
+                //spriteBatch.Draw(player1.Texture, player1.HitBox, player1SourceRectangle, Color.White * transparency1, player1.Rotation, player1Origin, SpriteEffects.None, 1);
+                spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
                 spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
-                
-                
+
 
                 // float transparency1 = (float)player1.Health / 10;
                 // float transparency2 = (float)player2.Health / 10;
