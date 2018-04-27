@@ -1111,8 +1111,6 @@ namespace Geometry_Bash
                                 spriteBatch.Draw(wall, wallRect, Color.White);
 
                                 #region Wall Collision
-                                // NEW WAY
-
                                 // update wall check rectangles
                                 p1leftX = new Rectangle(new Point(player1.HitBox.X - 1, player1.HitBox.Y), new Point(1, player1.HitBox.Height));
                                 p1rightX = new Rectangle(new Point(player1.HitBox.X + player1.HitBox.Width, player1.HitBox.Y), new Point(1, player1.HitBox.Height));
@@ -1150,16 +1148,6 @@ namespace Geometry_Bash
                                     temp.Y = prevPos2.Y;
                                     player2.HitBox = temp;
                                 }
-
-                                // old way, keeping until done
-                                //if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
-                                //{
-                                //    player1.HitBox = prevPos1;
-                                //}
-                                //if (player2.HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
-                                //{
-                                //    player2.HitBox = prevPos2;
-                                //}
                                 #endregion
 
                                 #region Diamond Projectile Collision
@@ -1205,16 +1193,46 @@ namespace Geometry_Bash
                             if (level2[i, j] == 'x')
                             {
                                 // draw walls
+                                Rectangle wallRect = new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40));
                                 spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
 
                                 #region Wall Collision
-                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
+                                // update wall check rectangles
+                                p1leftX = new Rectangle(new Point(player1.HitBox.X - 1, player1.HitBox.Y), new Point(1, player1.HitBox.Height));
+                                p1rightX = new Rectangle(new Point(player1.HitBox.X + player1.HitBox.Width, player1.HitBox.Y), new Point(1, player1.HitBox.Height));
+                                p1topY = new Rectangle(new Point(player1.HitBox.X, player1.HitBox.Y - 1), new Point(player1.HitBox.Width, 1));
+                                p1bottomY = new Rectangle(new Point(player1.HitBox.X, player1.HitBox.Y + player1.HitBox.Height), new Point(player1.HitBox.Width, 1));
+                                p2leftX = new Rectangle(new Point(player2.HitBox.X - 1, player2.HitBox.Y), new Point(1, player2.HitBox.Height));
+                                p2rightX = new Rectangle(new Point(player2.HitBox.X + player2.HitBox.Width, player2.HitBox.Y), new Point(1, player2.HitBox.Height));
+                                p2topY = new Rectangle(new Point(player2.HitBox.X, player2.HitBox.Y - 1), new Point(player2.HitBox.Width, 1));
+                                p2bottomY = new Rectangle(new Point(player2.HitBox.X, player2.HitBox.Y + player2.HitBox.Height), new Point(player2.HitBox.Width, 1));
+
+                                // X Check
+                                if (p1leftX.Intersects(wallRect) || p1rightX.Intersects(wallRect))
                                 {
-                                    player1.HitBox = prevPos1;
+                                    Rectangle temp = player1.HitBox;
+                                    temp.X = prevPos1.X;
+                                    player1.HitBox = temp;
                                 }
-                                if (player2.HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
+                                if (p2leftX.Intersects(wallRect) || p2rightX.Intersects(wallRect))
                                 {
-                                    player2.HitBox = prevPos2;
+                                    Rectangle temp = player2.HitBox;
+                                    temp.X = prevPos2.X;
+                                    player2.HitBox = temp;
+                                }
+
+                                // Y check
+                                if (p1topY.Intersects(wallRect) || p1bottomY.Intersects(wallRect))
+                                {
+                                    Rectangle temp = player1.HitBox;
+                                    temp.Y = prevPos1.Y;
+                                    player1.HitBox = temp;
+                                }
+                                if (p2topY.Intersects(wallRect) || p2bottomY.Intersects(wallRect))
+                                {
+                                    Rectangle temp = player2.HitBox;
+                                    temp.Y = prevPos2.Y;
+                                    player2.HitBox = temp;
                                 }
                                 #endregion
 
