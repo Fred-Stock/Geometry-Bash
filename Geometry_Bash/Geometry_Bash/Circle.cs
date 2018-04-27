@@ -59,6 +59,7 @@ namespace Geometry_Bash
                 if (!prevKbState.IsKeyDown(player.keyAttack1))
                 {
                     hit = false;
+                    
 
                 }
                 
@@ -66,8 +67,12 @@ namespace Geometry_Bash
                 {
                     player2.Health -= damage;
                     hit = true;
-
                 }
+                else if(!player1.HitBox.Intersects(player2.HitBox))
+                {
+                    hit = false;
+                }
+                
             }
 
             prevKbState = kbState;
