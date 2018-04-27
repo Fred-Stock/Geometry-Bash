@@ -17,6 +17,8 @@ namespace Geometry_Bash
         //add a keyboard state refrence so key presses can be monitored
         protected KeyboardState prevKbState;
 
+        protected GamePadState gpState;
+
         protected Keys keyUp;      //key bindings
         protected Keys keyDown;
         protected Keys keyLeft;
@@ -24,6 +26,9 @@ namespace Geometry_Bash
 
         protected Keys keyAttack1;
         protected Keys keyAttack2;
+
+
+        protected Buttons up;
 
         protected int moveSpeed;
         protected bool moveLocked;
@@ -39,6 +44,12 @@ namespace Geometry_Bash
         protected int windowWidth;
         protected int windowHeight;
         protected float rotation;
+
+        public GamePadState GpState
+        {
+            get { return gpState; }
+        }
+
         public double Health
         {
             get { return health; }
@@ -95,10 +106,15 @@ namespace Geometry_Bash
         {
             if (!moveLocked)
             {
+                
                 //create a new temp rectangle to modify the position of the player
                 Rectangle temp = hitBox;
 
                 keys = Keyboard.GetState();
+
+                gpState = GamePad.GetState(PlayerIndex.One);
+
+                
 
                 if (keys.IsKeyDown(keyRight))
                 {

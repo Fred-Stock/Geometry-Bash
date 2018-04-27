@@ -1079,7 +1079,7 @@ namespace Geometry_Bash
                             if (level1[i, j] == 'x')
                             {
                                 spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
-                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width / 2, 40 * j + player1.HitBox.Height / 2), new Point(40, 40))))
+                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width / 2, 40 * j), new Point(40, 40))))
                                 {
                                     player1.HitBox = prevPos1;
                                 }
@@ -1129,7 +1129,7 @@ namespace Geometry_Bash
                             if (level2[i, j] == 'x')
                             {
                                 spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
-                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width/2, 40 * j + player1.HitBox.Height/2), new Point(40, 40))))
+                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
                                 {
                                     player1.HitBox = prevPos1;
                                 }
@@ -1137,23 +1137,31 @@ namespace Geometry_Bash
                                 {
                                     player2.HitBox = prevPos2;
                                 }
-                                if(player1 is Diamond || player2 is Diamond)
+                                if(player1 is Diamond)
                                 {
-                                for (int k = 0; k < player1.ProjList.Count; k++)
-                                {
-                                    
-                                    if (player1 is Diamond && player1.ProjList[k].HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width / 2, 40 * j + player1.HitBox.Height / 2), new Point(40, 40))))
+                                    for (int k = 0; k < player1.ProjList.Count; k++)
                                     {
-                                        player1.ProjList.RemoveAt(k);
-                                        k--;
-                                    }
-                                    if (player2 is Diamond && player2.ProjList[k].HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width / 2, 40 * j + player1.HitBox.Height / 2), new Point(40, 40))))
-                                    {
-                                        player2.ProjList.RemoveAt(k);
-                                        k--;
+                                        
+                                        if (player1 is Diamond && player1.ProjList[k].HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width / 2, 40 * j + player1.HitBox.Height / 2), new Point(40, 40))))
+                                        {
+                                            player1.ProjList.RemoveAt(k);
+                                            k--;
+                                        }
+                                        
                                     }
                                 }
+                                if(player2 is Diamond)
+                                {
+                                    for(int o = 0; o < player2.ProjList.Count; o++)
+                                    {
+                                        if (player2 is Diamond && player2.ProjList[o].HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width / 2, 40 * j + player1.HitBox.Height / 2), new Point(40, 40))))
+                                        {
+                                            player2.ProjList.RemoveAt(o);
+                                            o--;
+                                        }
+                                    }
                                 }
+
                             }
                         }
                     }
@@ -1253,7 +1261,7 @@ namespace Geometry_Bash
                             if (level1[i, j] == 'x')
                             {
                                 spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
-                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width / 2, 40 * j + player1.HitBox.Height / 2), new Point(40, 40))))
+                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Height/2, 40 * j), new Point(40, 40))))
                                 {
                                     player1.HitBox = prevPos1;
                                 }
@@ -1276,7 +1284,7 @@ namespace Geometry_Bash
                             if (level2[i, j] == 'x')
                             {
                                 spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
-                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Width / 2, 40 * j + player1.HitBox.Height / 2), new Point(40, 40))))
+                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Height / 2, 40 * j), new Point(40, 40))))
                                 {
                                     player1.HitBox = prevPos1;
                                 }

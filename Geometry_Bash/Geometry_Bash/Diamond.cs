@@ -36,6 +36,7 @@ namespace Geometry_Bash
                 keyDown = Keys.S;
                 keyLeft = Keys.A;
                 keyRight = Keys.D;
+                up = Buttons.DPadUp;
 
                 keyAttack1 = Keys.Q;
                 keyAttack2 = Keys.E;
@@ -47,6 +48,7 @@ namespace Geometry_Bash
                 keyDown = Keys.K;
                 keyLeft = Keys.J;
                 keyRight = Keys.L;
+                up = Buttons.A;
 
                 keyAttack1 = Keys.U;
                 keyAttack2 = Keys.O;
@@ -59,6 +61,7 @@ namespace Geometry_Bash
             //proj1.HitBox.X = player1.HitBox.X + player1.HitBox.Width / 2;
             Diamond player = (Diamond)player1;
 
+            
             //attack method
             if (kbState.IsKeyDown(player.keyAttack1) && !(prevKbState.IsKeyDown(player.keyAttack1)))
             {
@@ -111,6 +114,7 @@ namespace Geometry_Bash
 
             }
 
+
             for(int i = 0; i < projList.Count(); i++)
             {
                 Projectile temp = projList[i];
@@ -125,7 +129,6 @@ namespace Geometry_Bash
             }
 
             prevKbState = kbState;
-
         }
     }
 }
