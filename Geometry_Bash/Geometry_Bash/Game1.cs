@@ -777,8 +777,6 @@ namespace Geometry_Bash
                     }
                 }
 
-                
-
                 // all other code for this state goes here
                 player1.Move(kbState);
                 player2.Move(kbState);
@@ -792,7 +790,8 @@ namespace Geometry_Bash
                 player1.Step(player1, player2, kbState, gameTime.ElapsedGameTime.TotalSeconds);
                 player2.Step(player2, player1, kbState, gameTime.ElapsedGameTime.TotalSeconds);
 
-                if(player1 is Diamond)
+                #region Diamond Projectiles
+                if (player1 is Diamond)
                 {
                     if (player1.ProjList.Count != 0)
                     {
@@ -888,7 +887,7 @@ namespace Geometry_Bash
                         }
                     }
                 }
-
+                #endregion
 
                 // makes sure mouse is invisible during game
                 this.IsMouseVisible = false;
@@ -908,9 +907,6 @@ namespace Geometry_Bash
                 {
                     gamestate = GameState.EndGame;
                 }
-
-               
-
             }
 
             // Paused
@@ -948,8 +944,6 @@ namespace Geometry_Bash
 
             base.Update(gameTime);
         }
-
-        
 
 
         /// <summary>
