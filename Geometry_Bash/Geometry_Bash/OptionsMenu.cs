@@ -24,7 +24,7 @@ namespace Geometry_Bash
         private double diamondH = 10;
         private double squareD = 3;
         private double circleD = 3;
-        private double diamondD = 3;
+        private double diamondD = 4;
         private double squareS = 5;
         private double circleS = 5;
         private double diamondS = 5;

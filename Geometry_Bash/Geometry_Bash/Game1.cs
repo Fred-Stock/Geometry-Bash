@@ -323,7 +323,7 @@ namespace Geometry_Bash
             {
                 
                 writer = new StreamWriter("../../../../stats.txt");
-                string output = 10 + "," + 10 + "," + 10 + "," + 3 + "," + 3 + "," + 3 + "," + 5 + "," + 5 + "," + 5;
+                string output = 10 + "," + 10 + "," + 10 + "," + 3 + "," + 3 + "," + 4 + "," + 5 + "," + 5 + "," + 5;
                 writer.Write(output);
                 
             }
