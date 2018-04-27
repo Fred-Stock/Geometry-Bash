@@ -86,7 +86,7 @@ namespace Geometry_Bash
                 //                    player1.HitBox.Width/2, player1.HitBox.Height/2);
                 //    }
                 //}
-                if (count > 2)
+                if (count > 1)
                 {
 
                     Projectile proj;
@@ -110,10 +110,10 @@ namespace Geometry_Bash
                         proj = (new Projectile(7, 3));
                         count = 0;
                     }
-                    if(projList.Count >= 2)
-                    {
-                        projList.RemoveAt(0);
-                    }
+                    //if(projList.Count >= 2)
+                    //{
+                    //    projList.RemoveAt(0);
+                    //}
                     proj.HitBox = new Rectangle(player1.HitBox.X + player1.HitBox.Width / 4, player1.HitBox.Y + player1.HitBox.Height / 4,
                                             player1.HitBox.Width/2, player1.HitBox.Height/2);
                     projList.Add(proj);
