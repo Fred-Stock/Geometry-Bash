@@ -13,9 +13,9 @@ namespace Geometry_Bash
     class Diamond : Player
     {
 
-        Random rng;
 
 
+        int count;
 
 
         public Diamond(int player, Rectangle sAP, Texture2D texture, int windowWidth, int windowHeight, int[] stats) : base(texture, sAP, windowWidth, windowHeight)
@@ -24,11 +24,10 @@ namespace Geometry_Bash
             health = stats[0];
             damage = stats[1];
             moveSpeed = stats[2];
-
-            rng = new Random();
-
-            projList = new List<Projectile>();
             
+            //initilize the list and count variable
+            projList = new List<Projectile>();
+            count = 2;
             //check if it is player one or two and then set the correct keybindings
             if (player == 1)
             {
@@ -87,31 +86,40 @@ namespace Geometry_Bash
                 //                    player1.HitBox.Width/2, player1.HitBox.Height/2);
                 //    }
                 //}
-                Projectile proj;
-                if (kbState.IsKeyDown(keyRight))
+                if (count > 1)
                 {
-                    proj = (new Projectile(7, 0));
-                }
-                else if (kbState.IsKeyDown(keyDown))
-                {
-                    proj = (new Projectile(7, 1));
-                }
-                else if (kbState.IsKeyDown(keyLeft))
-                {
-                    proj = (new Projectile(7, 2));
-                }
-                else
-                {
-                    proj = (new Projectile(7, 3));
-                }
-                if(projList.Count >= 2)
-                {
-                    projList.RemoveAt(0);
-                }
-                proj.HitBox = new Rectangle(player1.HitBox.X + player1.HitBox.Width / 4, player1.HitBox.Y + player1.HitBox.Height / 4,
-                                        player1.HitBox.Width/2, player1.HitBox.Height/2);
-                projList.Add(proj);
 
+                    Projectile proj;
+                    if (kbState.IsKeyDown(keyRight))
+                    {
+                        proj = (new Projectile(7, 0));
+                        count = 0;
+                    }
+                    else if (kbState.IsKeyDown(keyDown))
+                    {
+                        proj = (new Projectile(7, 1));
+                        count = 0;
+                    }
+                    else if (kbState.IsKeyDown(keyLeft))
+                    {
+                        proj = (new Projectile(7, 2));
+                        count = 0;
+                    }
+                    else
+                    {
+                        proj = (new Projectile(7, 3));
+                        count = 0;
+                    }
+                    //if(projList.Count >= 2)
+                    //{
+                    //    projList.RemoveAt(0);
+                    //}
+                    proj.HitBox = new Rectangle(player1.HitBox.X + player1.HitBox.Width / 4, player1.HitBox.Y + player1.HitBox.Height / 4,
+                                            player1.HitBox.Width/2, player1.HitBox.Height/2);
+                    projList.Add(proj);
+
+                }
+                count++;
             }
 
 

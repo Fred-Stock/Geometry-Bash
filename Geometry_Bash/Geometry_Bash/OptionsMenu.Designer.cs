@@ -180,7 +180,7 @@
             this.DiamondDamageText.Name = "DiamondDamageText";
             this.DiamondDamageText.Size = new System.Drawing.Size(37, 20);
             this.DiamondDamageText.TabIndex = 11;
-            this.DiamondDamageText.Text = "3";
+            this.DiamondDamageText.Text = "4";
             // 
             // DiamondSpeed
             // 
