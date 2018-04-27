@@ -17,6 +17,8 @@ namespace Geometry_Bash
         //add a keyboard state refrence so key presses can be monitored
         protected KeyboardState prevKbState;
 
+        protected GamePadState gpState;
+
         protected Keys keyUp;      //key bindings
         protected Keys keyDown;
         protected Keys keyLeft;
@@ -25,19 +27,29 @@ namespace Geometry_Bash
         protected Keys keyAttack1;
         protected Keys keyAttack2;
 
+
+        protected Buttons up;
+
         protected int moveSpeed;
         protected bool moveLocked;
 
-        protected Projectile proj1;
+        protected List<Projectile> projList;
 
         protected Texture2D sprite;
         protected Rectangle hitBox;
 
         protected double health;
+        protected int damage;
 
         protected int windowWidth;
         protected int windowHeight;
         protected float rotation;
+
+        public GamePadState GpState
+        {
+            get { return gpState; }
+        }
+
         public double Health
         {
             get { return health; }
@@ -57,9 +69,10 @@ namespace Geometry_Bash
 
         }
 
-        public Projectile Proj1
+        public List<Projectile> ProjList
         {
-            get { return proj1; }
+            get { return projList; }
+            set { projList = value; }
         }
 
         public bool MoveLocked
@@ -67,6 +80,17 @@ namespace Geometry_Bash
             get { return moveLocked; }
             set { moveLocked = value; }
         }
+
+        public int MoveSpeed
+        {
+            get { return moveSpeed; }
+        }
+
+        public int Damage
+        {
+            get { return damage; }
+        }
+
 
         public Player(Texture2D texture,  Rectangle sAP, int windowWidth, int windowHeight) : base(texture, sAP)
         {
@@ -82,10 +106,15 @@ namespace Geometry_Bash
         {
             if (!moveLocked)
             {
+                
                 //create a new temp rectangle to modify the position of the player
                 Rectangle temp = hitBox;
 
                 keys = Keyboard.GetState();
+
+                gpState = GamePad.GetState(PlayerIndex.One);
+
+                
 
                 if (keys.IsKeyDown(keyRight))
                 {

@@ -14,7 +14,7 @@ namespace Geometry_Bash
         //fields
 
         //float to hold the speed of the object
-        private float speed;
+        private int speed;
 
         //float to hold the distance the projectile travels
         private float distance;
@@ -41,22 +41,14 @@ namespace Geometry_Bash
         //bool to keep track if the projectile is still active
         private bool active;
 
+
         //properties with get fucntions for some fields
-        public float Speed
+        public int Speed
         {
             get { return speed; }
         }
 
-        public float Distance
-        {
-            get { return distance; }
-        }
-
-        public int Damage
-        {
-            get { return damage; }
-        }
-
+        
         public Rectangle HitBox
         {
             get { return hitBox;}
@@ -69,17 +61,24 @@ namespace Geometry_Bash
             set { active = value; }
         }
 
+        public int Direction
+        {
+            get { return direction; }
+        }
 
 
 
 
-        public Projectile(float speed, float distance, int damage, int direction)
+
+
+
+        public Projectile(int speed, int direction)
         {
             this.speed = speed;
-            this.distance = distance;
-            this.damage = damage;
+
             this.direction = direction;
             active = true;
+            
             traveled = 0;
 
             timer = new GameTime();
@@ -87,44 +86,38 @@ namespace Geometry_Bash
 
         public void Move()
         {
-            Rectangle temp = HitBox;
-            currentTime += (float)timer.ElapsedGameTime.TotalSeconds; //Time passed since last Update()
-            if(currentTime > distance/speed)
+            Rectangle temp = hitBox;
+            //currentTime += (float)timer.ElapsedGameTime.TotalSeconds; //Time passed since last Update()
+            //if(currentTime > distance/speed)
             {
-                currentTime -= distance/speed;
-
+                //currentTime -= distance/speed;
+                
+                
                 if (direction == 0)
                 {
-                    temp.Y--;
+                    temp.Y -= speed;
                     traveled++;
                 }
                 else if (direction == 1)
                 {
-                    temp.X++;
+                    temp.X += speed;
                     traveled++;
                 }
                 else if (direction == 2)
                 {
-                    temp.Y++;
+                    temp.Y += speed;
                     traveled++;
                 }
                 else if (direction == 3)
                 {
-                    temp.X--;
+                    temp.X -= speed;
                     traveled++;
                 }
 
-                if(traveled == distance)
-                {
-                    active = false;
-                }
-                hitBox = temp;
+               hitBox = temp;
+
+                   
             }
         }
-
-        
-        
-
-
     }
 }
