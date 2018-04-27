@@ -1065,6 +1065,7 @@ namespace Geometry_Bash
                 if (mouseLocation.Intersects(backButton))
                 { spriteBatch.Draw(back, backButton, Color.White); }
 
+                #region Level Drawing
                 // level 1
                 for (int i = 0; i < level1.GetLength(0); i++)
                 {
@@ -1087,6 +1088,7 @@ namespace Geometry_Bash
                         }
                     }
                 }
+                #endregion
             }
 
             // Actual Gameplay
@@ -1096,6 +1098,7 @@ namespace Geometry_Bash
                 // background
                 spriteBatch.Draw(gameScreen, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
+                #region Wall Drawing
                 // Draws the right level choice
                 // walls if level 1
                 if (levelChoice == 1)
@@ -1266,8 +1269,7 @@ namespace Geometry_Bash
                         }
                     }
                 }
-
-
+                #endregion
 
                 // Draw Players
                 float transparency1 = (float)player1.Health / 10;
@@ -1366,8 +1368,7 @@ namespace Geometry_Bash
             // Paused
             if (gamestate == GameState.Pause)
             {
-                
-
+                #region Wall Drawing
                 // Draws the right level choice
                 // walls if level 1
                 if (levelChoice == 1)
@@ -1399,6 +1400,7 @@ namespace Geometry_Bash
                         }
                     }
                 }
+                #endregion
 
                 // Draw Players
                 float transparency1 = (float)player1.Health / 10;
