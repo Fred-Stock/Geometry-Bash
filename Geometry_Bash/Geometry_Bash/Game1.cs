@@ -777,18 +777,23 @@ namespace Geometry_Bash
                     }
                 }
 
-                // all other code for this state goes here
+                #region Player Methods
+                // player movement
                 player1.Move(kbState);
                 player2.Move(kbState);
-
+                
+                // collision with edge of screen
                 player1.OutsideCollision(player1);
                 player2.OutsideCollision(player2);
 
+                // attacking
                 player1.Attack(player1, player2, kbState, gameTime.ElapsedGameTime.TotalSeconds);
                 player2.Attack(player2, player1, kbState, gameTime.ElapsedGameTime.TotalSeconds);
 
+                // nothing yet
                 player1.Step(player1, player2, kbState, gameTime.ElapsedGameTime.TotalSeconds);
                 player2.Step(player2, player1, kbState, gameTime.ElapsedGameTime.TotalSeconds);
+                #endregion
 
                 #region Diamond Projectiles
                 if (player1 is Diamond)
