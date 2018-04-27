@@ -181,7 +181,10 @@ namespace Geometry_Bash
 
         //Used for keeping track of passing frames
         private FrameCounter _frameCounter = new FrameCounter();
-        
+
+        //int to count each frame one for both players
+        int count1;
+        int count2;
 
         //music
         int playNum = 0;
@@ -1220,7 +1223,19 @@ namespace Geometry_Bash
                 #region swap sprites for circle attack
                 if (player1 is Circle && kbState.IsKeyDown(Keys.Q))
                 {
-                    player1.Texture = redCircleAttackTexture;
+                    if(count1 % 12 == 0)
+                    {
+                        player1.Texture = redCircleAttackTexture;
+                    }
+                    else if(count1 % 12 == 4)
+                    {
+                        player1.Texture = redCircleAttackTexture_15;
+                    }
+                    else if(count1 % 12 == 8)
+                    {
+                        player1.Texture = redCircleAttackTexture_30;
+                    }
+                    count1++;
                 }
                 else if (player1 is Circle && kbState.IsKeyUp(Keys.Q))
                 {
@@ -1228,7 +1243,19 @@ namespace Geometry_Bash
                 }
                 if (player2 is Circle && kbState.IsKeyDown(Keys.U))
                 {
-                    player2.Texture = blueCircleAttackTexture;
+                    if (count2 % 12 == 0)
+                    {
+                        player2.Texture = blueCircleAttackTexture;
+                    }
+                    else if (count2 % 12 == 4)
+                    { 
+                        player2.Texture = blueCircleAttackTexture_15;
+                    }
+                    else if (count1 % 12 == 8)
+                    {
+                        player2.Texture = blueCircleAttackTexture_30;
+                    }
+                    count2++;
                 }
                 else if (player2 is Circle && kbState.IsKeyUp(Keys.U))
                 {
