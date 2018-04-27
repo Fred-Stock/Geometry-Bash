@@ -1264,14 +1264,6 @@ namespace Geometry_Bash
                             if (level1[i, j] == 'x')
                             {
                                 spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
-                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Height/2, 40 * j), new Point(40, 40))))
-                                {
-                                    player1.HitBox = prevPos1;
-                                }
-                                if (player2.HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
-                                {
-                                    player2.HitBox = prevPos2;
-                                }
                             }
                             
                         }
@@ -1287,16 +1279,6 @@ namespace Geometry_Bash
                             if (level2[i, j] == 'x')
                             {
                                 spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
-                                if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i + player1.HitBox.Height / 2, 40 * j), new Point(40, 40))))
-                                {
-                                    player1.HitBox = prevPos1;
-                                }
-                                if (player2.HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
-                                {
-                                    player2.HitBox = prevPos2;
-                                }
-
-                                
                             }
 
                         }
