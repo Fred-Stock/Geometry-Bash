@@ -185,6 +185,9 @@ namespace Geometry_Bash
         private Song gameMusic;
         private Song endMusic;
 
+        //UI
+        private Texture2D healthBar;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -387,6 +390,8 @@ namespace Geometry_Bash
             gameMusic = Content.Load<Song>("Sounds//gameTheme");
             endMusic = Content.Load<Song>("Sounds//endScreen");
 
+            //UI
+            healthBar = Content.Load<Texture2D>("whiteRect");
         }
 
         /// <summary>
@@ -1183,8 +1188,8 @@ namespace Geometry_Bash
 
                 //commented out because it messes up player1 hitbox so it does line up with the sprite 
                 //spriteBatch.Draw(player1.Texture, player1.HitBox, player1SourceRectangle, Color.White * transparency1, player1.Rotation, player1Origin, SpriteEffects.None, 1);
-                spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
-                spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
+                spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White);
+                spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White);
 
 
                 // float transparency1 = (float)player1.Health / 10;
@@ -1240,10 +1245,14 @@ namespace Geometry_Bash
 
                 prevPos1 = player1.HitBox;
                 prevPos2 = player2.HitBox;
+                // Health Bar
+                
 
-                // HEALTH BAR
+                
 
-                // SUPER METER
+                Color healthBarColor = new Color(0, 1.0f, 0);
+                spriteBatch.Draw(healthBar, new Rectangle(player1.HitBox.X, player1.HitBox.Y - 5, (int)player1.Health * 5, 10),Color.Green);
+                spriteBatch.Draw(healthBar,new Rectangle(player2.HitBox.X,player2.HitBox.Y-5, (int)player2.Health * 5,10),Color.Green);
 
                 // PAUSE BUTTON
             }
