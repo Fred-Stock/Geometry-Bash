@@ -59,8 +59,10 @@ namespace Geometry_Bash
         //character special textures
         Texture2D redCircleAttackTexture;
         Texture2D blueCircleAttackTexture;
-        Texture2D redCircleAttackTexture_rot;
-        Texture2D blueCircleAttackTexture_rot;
+        Texture2D redCircleAttackTexture_15;
+        Texture2D redCircleAttackTexture_30;
+        Texture2D blueCircleAttackTexture_15;
+        Texture2D blueCircleAttackTexture_30;
         Texture2D redDiamondParticles;
         Texture2D blueDiamondParticles;
         Texture2D redDiamondParticles_45;
@@ -305,9 +307,11 @@ namespace Geometry_Bash
             // set default stat values
             try
             {
+                
                 writer = new StreamWriter("../../../../stats.txt");
                 string output = 10 + "," + 10 + "," + 10 + "," + 3 + "," + 3 + "," + 3 + "," + 5 + "," + 5 + "," + 5;
                 writer.Write(output);
+                
             }
             catch (Exception ex)
             {
@@ -315,7 +319,9 @@ namespace Geometry_Bash
             }
             finally
             {
+                /*
                 writer.Close();
+                */
             }
 
             base.Initialize();
@@ -346,8 +352,10 @@ namespace Geometry_Bash
             //load character special textures
             redCircleAttackTexture = Content.Load<Texture2D>("CharSprites//circle_ult");
             blueCircleAttackTexture = Content.Load<Texture2D>("CharSprites//circle_blue_ult");
-            redCircleAttackTexture_rot = Content.Load<Texture2D>("CharSprites//circle_ult_rot");
-            blueCircleAttackTexture_rot = Content.Load<Texture2D>("CharSprites//circle_blue_ult_rot");
+            redCircleAttackTexture_15 = Content.Load<Texture2D>("CharSprites//circle_ult_15");
+            redCircleAttackTexture_30 = Content.Load<Texture2D>("CharSprites//circle_ult_30");
+            blueCircleAttackTexture_15 = Content.Load<Texture2D>("CharSprites//circle_blue_ult_15");
+            blueCircleAttackTexture_30 = Content.Load<Texture2D>("CharSprites//circle_blue_ult_30");
             redDiamondParticles = Content.Load<Texture2D>("CharSprites//diamond_red_shards");
             blueDiamondParticles = Content.Load<Texture2D>("CharSprites//diamond_blue_shards");
             redDiamondParticles_45 = Content.Load<Texture2D>("CharSprites//diamond_red_shard_45");

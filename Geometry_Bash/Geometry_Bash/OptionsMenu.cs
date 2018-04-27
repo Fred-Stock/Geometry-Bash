@@ -15,6 +15,10 @@ namespace Geometry_Bash
     {
         //fields
         // IF THESE ARE SWITCHED, SWITCH IN FORM TEXT BOXES TOO
+        StreamReader fileIn = new StreamReader("../../../../stats.txt");
+
+
+
         private double squareH = 10;
         private double circleH = 10;
         private double diamondH = 10;
