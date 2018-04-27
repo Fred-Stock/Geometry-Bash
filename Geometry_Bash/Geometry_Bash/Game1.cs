@@ -158,6 +158,10 @@ namespace Geometry_Bash
         Player player1;
         Player player2;
 
+        //create retangles to store the players previous position
+        Rectangle prevPos1 = new Rectangle();
+        Rectangle prevPos2 = new Rectangle();
+
         //create character enum refrences for the two players
         Character p1Char;
         Character p2Char;
@@ -931,9 +935,7 @@ namespace Geometry_Bash
             base.Update(gameTime);
         }
 
-        //create retangles to store the players previous position
-        Rectangle prevPos1 = new Rectangle();
-        Rectangle prevPos2 = new Rectangle();
+        
 
 
         /// <summary>
@@ -1094,6 +1096,8 @@ namespace Geometry_Bash
                                 spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
 
                                 #region Wall Collision
+                                // 
+
                                 if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
                                 {
                                     player1.HitBox = prevPos1;
@@ -1261,12 +1265,6 @@ namespace Geometry_Bash
 
                 prevPos1 = player1.HitBox;
                 prevPos2 = player2.HitBox;
-
-                // HEALTH BAR
-
-                // SUPER METER
-
-                // PAUSE BUTTON
             }
 
             // Paused
