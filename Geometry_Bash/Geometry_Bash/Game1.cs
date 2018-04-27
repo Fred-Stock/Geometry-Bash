@@ -324,7 +324,7 @@ namespace Geometry_Bash
             finally
             {
 
-                writer.Close();
+                //writer.Close();
 
             }
             
@@ -347,10 +347,10 @@ namespace Geometry_Bash
             text = Content.Load<SpriteFont>("text");
 
             // load character textures
-            redSquareTexture = Content.Load<Texture2D>("CharSprites//square");
+            redSquareTexture = Content.Load<Texture2D>("CharSprites//sqaure");
             redCircleTexture = Content.Load<Texture2D>("CharSprites//circle");
             redDiamondTexture = Content.Load<Texture2D>("CharSprites//diamond");
-            blueSquareTexture = Content.Load<Texture2D>("CharSprites//square_blue");
+            blueSquareTexture = Content.Load<Texture2D>("CharSprites//sqaure_blue");
             blueCircleTexture = Content.Load<Texture2D>("CharSprites//circle_blue");
             blueDiamondTexture = Content.Load<Texture2D>("CharSprites//diamond_blue");
 
