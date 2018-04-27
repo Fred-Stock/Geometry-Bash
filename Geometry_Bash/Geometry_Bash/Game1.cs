@@ -333,9 +333,9 @@ namespace Geometry_Bash
             }
             finally
             {
-
+                
                 //writer.Close();
-
+                
             }
             
 
@@ -691,7 +691,7 @@ namespace Geometry_Bash
                         // player 1
                         if(p1Char == Character.Square)
                         {
-                            player1 = new Square(1, p1rec, redSquareTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, squareStats);
+                            player1 = new Square(1, p1rec, redSquareTexture, GraphicsDevice.Viewport.Width - 2, GraphicsDevice.Viewport.Height - 2, squareStats);
                            
                         }
                         else if (p1Char == Character.Circle)
@@ -705,7 +705,7 @@ namespace Geometry_Bash
                         // player 2
                         if (p2Char == Character.Square)
                         {
-                            player2 = new Square(2, p2rec, blueSquareTexture, GraphicsDevice.Viewport.Width, GraphicsDevice.Viewport.Height, squareStats);
+                            player2 = new Square(2, p2rec, blueSquareTexture, GraphicsDevice.Viewport.Width - 2, GraphicsDevice.Viewport.Height - 2, squareStats);
                         }                                                          
                         else if (p2Char == Character.Circle)                       
                         {                                                          
