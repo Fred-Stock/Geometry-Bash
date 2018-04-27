@@ -1090,7 +1090,10 @@ namespace Geometry_Bash
                         {
                             if (level1[i, j] == 'x')
                             {
+                                // draw walls
                                 spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
+
+                                #region Wall Collision
                                 if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
                                 {
                                     player1.HitBox = prevPos1;
@@ -1099,7 +1102,10 @@ namespace Geometry_Bash
                                 {
                                     player2.HitBox = prevPos2;
                                 }
-                                if(player1 is Diamond)
+                                #endregion
+
+                                #region Diamond Projectile Collision
+                                if (player1 is Diamond)
                                 {
                                     for (int k = 0; k < player1.ProjList.Count; k++)
                                     {
@@ -1126,6 +1132,7 @@ namespace Geometry_Bash
                                         }
                                     }
                                 }
+                                #endregion
                             }
                         }
                     }
@@ -1139,7 +1146,10 @@ namespace Geometry_Bash
                         {
                             if (level2[i, j] == 'x')
                             {
+                                // draw walls
                                 spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
+
+                                #region Wall Collision
                                 if (player1.HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
                                 {
                                     player1.HitBox = prevPos1;
@@ -1148,7 +1158,10 @@ namespace Geometry_Bash
                                 {
                                     player2.HitBox = prevPos2;
                                 }
-                                if(player1 is Diamond)
+                                #endregion
+
+                                #region Diamond Projectile Collision
+                                if (player1 is Diamond)
                                 {
                                     for (int k = 0; k < player1.ProjList.Count; k++)
                                     {
@@ -1172,7 +1185,7 @@ namespace Geometry_Bash
                                         }
                                     }
                                 }
-
+                                #endregion
                             }
                         }
                     }
