@@ -309,13 +309,13 @@ namespace Geometry_Bash
             #endregion
 
             // set default stat values
+            
             try
             {
-                
                 writer = new StreamWriter("../../../../stats.txt");
                 string output = 10 + "," + 10 + "," + 10 + "," + 3 + "," + 3 + "," + 4 + "," + 5 + "," + 5 + "," + 5;
                 writer.Write(output);
-                
+               
             }
             catch (Exception ex)
             {
@@ -323,10 +323,11 @@ namespace Geometry_Bash
             }
             finally
             {
-                /*
+
                 writer.Close();
-                */
+
             }
+            
 
             base.Initialize();
         }
