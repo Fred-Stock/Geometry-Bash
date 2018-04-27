@@ -219,7 +219,7 @@ namespace Geometry_Bash
             player.HitBox = temp;
         }
 
-        public virtual void Step(Player player1, Player player2, KeyboardState kbState, double currentTime)
+        public virtual void Step(Player player1, Player player2, KeyboardState kbState, double currentTime)   //This is a method that can be used to keep track and update variables whilecode is running
         {
             return;
         }
