@@ -42,6 +42,7 @@ namespace Geometry_Bash
         SpriteBatch spriteBatch;
         SpriteFont text;
 
+
         //rectangle list to hold where walls are
         List<Rectangle> wallsList;
         
@@ -785,16 +786,16 @@ namespace Geometry_Bash
 
                 #region Player Methods
                 // player movement
-                player1.Move(kbState);
-                player2.Move(kbState);
+                player1.Move(kbState, gpState);
+                player2.Move(kbState, gpState);
                 
                 // collision with edge of screen
                 player1.OutsideCollision(player1);
                 player2.OutsideCollision(player2);
 
                 // attacking
-                player1.Attack(player1, player2, kbState, gameTime.ElapsedGameTime.TotalSeconds);
-                player2.Attack(player2, player1, kbState, gameTime.ElapsedGameTime.TotalSeconds);
+                player1.Attack(player1, player2, kbState, gpState, 1, gameTime.ElapsedGameTime.TotalSeconds);
+                player2.Attack(player2, player1, kbState, gpState, 2, gameTime.ElapsedGameTime.TotalSeconds);
 
                 // nothing yet
                 player1.Step(player1, player2, kbState, gameTime.ElapsedGameTime.TotalSeconds);
