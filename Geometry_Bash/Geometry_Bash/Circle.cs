@@ -15,16 +15,18 @@ namespace Geometry_Bash
         //boolean to control double hitting
         bool hit;
         int player;
-
+        int attackSpd;
+        bool attacking;
         public Circle(int player, Rectangle sAP, Texture2D texture, int windowWidth, int windowHeight, int[] stats) : base(texture, sAP, windowWidth, windowHeight)
         {
             // stats loads in H/D/S
             health = stats[0];
             damage = stats[1];
-            moveSpeed = stats[2];
+            moveSpeed = stats[2]*2;  //multiply by a scalar to change regular movement speed
             hit = false;
             this.player = player;
-
+            attackSpd = stats[2];  //multiply by a scalar to this value to change attack speed.
+            attacking = false;
             //check if it is player one or two and then set the correct keybindings
             if (player == 1)
             {
@@ -71,24 +73,27 @@ namespace Geometry_Bash
 
             if (kbState.IsKeyDown(player.keyAttack1))
             {
+
                 if (!prevKbState.IsKeyDown(player.keyAttack1))
                 {
                     hit = false;
-                    
+                    attacking = true;
 
                 }
-                
-                if(player1.HitBox.Intersects(player2.HitBox) && !hit)
+
+                if (player1.HitBox.Intersects(player2.HitBox) && !hit)
                 {
                     player2.Health -= damage;
                     hit = true;
                 }
-                else if(!player1.HitBox.Intersects(player2.HitBox))
+                else if (!player1.HitBox.Intersects(player2.HitBox))
                 {
                     hit = false;
                 }
-                
+
             }
+            else attacking = false;
+             
             if ((GamePad.GetState(PlayerIndex.One).IsConnected || GamePad.GetState(PlayerIndex.Two).IsConnected))
             {
                 //check which player has a controller connected
@@ -130,7 +135,13 @@ namespace Geometry_Bash
             Rectangle temp = hitBox;
 
             keys = Keyboard.GetState();
-
+            int tempMoveSpeed;
+            if (attacking)
+            {
+                tempMoveSpeed = attackSpd;
+            }
+            else
+                tempMoveSpeed = moveSpeed;
 
             //check if a controller is connected 
             if ((GamePad.GetState(PlayerIndex.One).IsConnected || GamePad.GetState(PlayerIndex.Two).IsConnected))
@@ -150,21 +161,21 @@ namespace Geometry_Bash
 
             if (gpState.IsButtonDown(right))
             {
-                temp.X += moveSpeed;
+                temp.X += tempMoveSpeed;
             }
             if (gpState.IsButtonDown(left))
             {
-                temp.X -= moveSpeed;
+                temp.X -= tempMoveSpeed;
             }
 
             if (gpState.IsButtonDown(up))
             {
-                temp.Y -= moveSpeed;
+                temp.Y -= tempMoveSpeed;
             }
 
             if (gpState.IsButtonDown(down))
             {
-                temp.Y += moveSpeed;
+                temp.Y += tempMoveSpeed;
             }
 
 
@@ -174,21 +185,21 @@ namespace Geometry_Bash
 
             if (keys.IsKeyDown(keyRight))
             {
-                temp.X += moveSpeed;
+                temp.X += tempMoveSpeed;
             }
             if (keys.IsKeyDown(keyLeft))
             {
-                temp.X -= moveSpeed;
+                temp.X -= tempMoveSpeed;
             }
 
             if (keys.IsKeyDown(keyUp))
             {
-                temp.Y -= moveSpeed;
+                temp.Y -= tempMoveSpeed;
             }
 
             if (keys.IsKeyDown(keyDown))
             {
-                temp.Y += moveSpeed;
+                temp.Y += tempMoveSpeed;
             }
             hitBox = temp;
         }
