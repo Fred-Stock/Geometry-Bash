@@ -802,102 +802,18 @@ namespace Geometry_Bash
                 player2.Step(player2, player1, kbState, gameTime.ElapsedGameTime.TotalSeconds);
                 #endregion
 
+
+
                 #region Diamond Projectiles
+
+                
                 if (player1 is Diamond)
                 {
-                    if (player1.ProjList.Count != 0)
-                    {
-                        for (int i = 0; i < player1.ProjList.Count; i++)
-                        {
-                            Rectangle temp = player1.ProjList[i].HitBox;
-                            if (player1.ProjList[i].Direction == 0)
-                            {
-                                temp.X += player1.ProjList[i].Speed;
-                            }
-                            else if (player1.ProjList[i].Direction == 1)
-                            {
-                                temp.Y += player1.ProjList[i].Speed;
-
-                            }
-                            else if (player1.ProjList[i].Direction == 2)
-                            {
-                                temp.X -= player1.ProjList[i].Speed;
-                            }
-                            else if (player1.ProjList[i].Direction == 3)
-                            {
-                                temp.Y -= player1.ProjList[i].Speed;
-                            }
-                            //else if (player1.ProjList[i].Direction == 4)
-                            //{
-                            //    temp.Y += player1.ProjList[i].Speed;
-                            //}
-                            //else if (player1.ProjList[i].Direction == 5)
-                            //{
-                            //    temp.X -= player1.ProjList[i].Speed;
-                            //    temp.Y += player1.ProjList[i].Speed;
-                            //}
-                            //else if (player1.ProjList[i].Direction == 6)
-                            //{
-                            //    temp.X -= player1.ProjList[i].Speed;
-                            //}
-                            //else if (player1.ProjList[i].Direction == 7)
-                            //{
-                            //    temp.X -= player1.ProjList[i].Speed;
-                            //    temp.Y -= player1.ProjList[i].Speed;
-                            //}
-
-                            player1.ProjList[i].HitBox = temp;
-
-                        }
-                    }
+                    ProjMove(player1.ProjList);
                 }
                 if (player2 is Diamond)
-                {
-                    if (player2.ProjList.Count != 0)
-                    {
-                        for (int i = 0; i < player2.ProjList.Count; i++)
-                        {
-                            Rectangle temp = player2.ProjList[i].HitBox;
-                            if (player2.ProjList[i].Direction == 0)
-                            {
-                                temp.X += player2.ProjList[i].Speed;
-                            }
-                            else if (player2.ProjList[i].Direction == 1)
-                            {
-                                 temp.Y += player2.ProjList[i].Speed;
-                            }
-                            else if (player2.ProjList[i].Direction == 2)
-                            {
-                                temp.X -= player2.ProjList[i].Speed;
-                            }
-                            else if (player2.ProjList[i].Direction == 3)
-                            {
-
-                                temp.Y -= player2.ProjList[i].Speed;
-                            }
-                            //else if (player2.ProjList[i].Direction == 4)
-                            //{
-                            //    temp.Y += player2.ProjList[i].Speed;
-                            //}
-                            //else if (player2.ProjList[i].Direction == 5)
-                            //{
-                            //    temp.X -= player2.ProjList[i].Speed;
-                            //    temp.Y += player2.ProjList[i].Speed;
-                            //}
-                            //else if (player2.ProjList[i].Direction == 6)
-                            //{
-                            //    temp.X -= player2.ProjList[i].Speed;
-                            //}
-                            //else if (player2.ProjList[i].Direction == 7)
-                            //{
-                            //    temp.X -= player2.ProjList[i].Speed;
-                            //    temp.Y -= player2.ProjList[i].Speed;
-                            //}
-
-                            player2.ProjList[i].HitBox = temp;
-
-                        }
-                    }
+                {                  
+                    ProjMove(player2.ProjList);
                 }
                 #endregion
 
@@ -957,6 +873,37 @@ namespace Geometry_Bash
             base.Update(gameTime);
         }
 
+        //helper method for projectiles
+        private void ProjMove(List<Projectile> projList)
+        {
+            if (projList.Count != 0)
+            {
+
+                for (int i = 0; i < projList.Count; i++)
+                {
+                    Rectangle temp = projList[i].HitBox;
+                    if (projList[i].Direction == 0)
+                    {
+                        temp.X += projList[i].Speed;
+                    }
+                    else if (projList[i].Direction == 1)
+                    {
+                        temp.Y += projList[i].Speed;
+                    }
+                    else if (projList[i].Direction == 2)
+                    {
+                        temp.X -= projList[i].Speed;
+                    }
+                    else if (projList[i].Direction == 3)
+                    {
+                        temp.Y -= projList[i].Speed;
+                    }
+                    projList[i].HitBox = temp;
+                }
+                
+            }
+        }
+        
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -1109,172 +1056,15 @@ namespace Geometry_Bash
                 // walls if level 1
                 if (levelChoice == 1)
                 {
-                    for (int i = 0; i < level1.GetLength(0); i++)
-                    {
-                        for (int j = 0; j < level1.GetLength(1); j++)
-                        {
-                            if (level1[i, j] == 'x')
-                            {
-                                // draw walls
-                                Rectangle wallRect = new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40));
-                                spriteBatch.Draw(wall, wallRect, Color.White);
-
-                                #region Wall Collision
-                                // update wall check rectangles
-                                p1leftX = new Rectangle(new Point(player1.HitBox.X - 1, player1.HitBox.Y), new Point(1, player1.HitBox.Height));
-                                p1rightX = new Rectangle(new Point(player1.HitBox.X + player1.HitBox.Width, player1.HitBox.Y), new Point(1, player1.HitBox.Height));
-                                p1topY = new Rectangle(new Point(player1.HitBox.X, player1.HitBox.Y - 1), new Point(player1.HitBox.Width, 1));
-                                p1bottomY = new Rectangle(new Point(player1.HitBox.X, player1.HitBox.Y + player1.HitBox.Height), new Point(player1.HitBox.Width, 1));
-                                p2leftX = new Rectangle(new Point(player2.HitBox.X - 1, player2.HitBox.Y), new Point(1, player2.HitBox.Height));
-                                p2rightX = new Rectangle(new Point(player2.HitBox.X + player2.HitBox.Width, player2.HitBox.Y), new Point(1, player2.HitBox.Height));
-                                p2topY = new Rectangle(new Point(player2.HitBox.X, player2.HitBox.Y - 1), new Point(player2.HitBox.Width, 1));
-                                p2bottomY = new Rectangle(new Point(player2.HitBox.X, player2.HitBox.Y + player2.HitBox.Height), new Point(player2.HitBox.Width, 1));
-
-                                // X Check
-                                if (p1leftX.Intersects(wallRect) || p1rightX.Intersects(wallRect))
-                                {
-                                    Rectangle temp = player1.HitBox;
-                                    temp.X = prevPos1.X;
-                                    player1.HitBox = temp;
-                                }
-                                if (p2leftX.Intersects(wallRect) || p2rightX.Intersects(wallRect))
-                                {
-                                    Rectangle temp = player2.HitBox;
-                                    temp.X = prevPos2.X;
-                                    player2.HitBox = temp;
-                                }
-
-                                // Y check
-                                if (p1topY.Intersects(wallRect) || p1bottomY.Intersects(wallRect))
-                                {
-                                    Rectangle temp = player1.HitBox;
-                                    temp.Y = prevPos1.Y;
-                                    player1.HitBox = temp;
-                                }
-                                if (p2topY.Intersects(wallRect) || p2bottomY.Intersects(wallRect))
-                                {
-                                    Rectangle temp = player2.HitBox;
-                                    temp.Y = prevPos2.Y;
-                                    player2.HitBox = temp;
-                                }
-                                #endregion
-
-                                #region Diamond Projectile Collision
-                                if (player1 is Diamond)
-                                {
-                                    for (int k = 0; k < player1.ProjList.Count; k++)
-                                    {
-
-                                        if (player1 is Diamond && player1.ProjList.Count != 0 &&
-                                            player1.ProjList[k].HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j),
-                                            new Point(40, 40))))
-                                        {
-                                            player1.ProjList.RemoveAt(k);
-                                            k--;
-                                        }
-                                        
-                                    }
-                                }
-                                if(player2 is Diamond)
-                                {
-                                    for(int q = 0; q < player2.ProjList.Count; q++)
-                                    {
-                                        if (player2 is Diamond && player2.ProjList.Count != 0 &&
-                                            player2.ProjList[q].HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j),new Point(40, 40))))
-                                        {
-                                            player2.ProjList.RemoveAt(q);
-                                            q--;
-                                        }
-                                    }
-                                }
-                                #endregion
-                            }
-                        }
-                    }
+                    DrawWall(level1);
                 }
                 // walls if level 2
                 else if (levelChoice == 2)
                 {
-                    for (int i = 0; i < level2.GetLength(0); i++)
-                    {
-                        for (int j = 0; j < level2.GetLength(1); j++)
-                        {
-                            if (level2[i, j] == 'x')
-                            {
-                                // draw walls
-                                Rectangle wallRect = new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40));
-                                spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
-
-                                #region Wall Collision
-                                // update wall check rectangles
-                                p1leftX = new Rectangle(new Point(player1.HitBox.X - 1, player1.HitBox.Y), new Point(1, player1.HitBox.Height));
-                                p1rightX = new Rectangle(new Point(player1.HitBox.X + player1.HitBox.Width, player1.HitBox.Y), new Point(1, player1.HitBox.Height));
-                                p1topY = new Rectangle(new Point(player1.HitBox.X, player1.HitBox.Y - 1), new Point(player1.HitBox.Width, 1));
-                                p1bottomY = new Rectangle(new Point(player1.HitBox.X, player1.HitBox.Y + player1.HitBox.Height), new Point(player1.HitBox.Width, 1));
-                                p2leftX = new Rectangle(new Point(player2.HitBox.X - 1, player2.HitBox.Y), new Point(1, player2.HitBox.Height));
-                                p2rightX = new Rectangle(new Point(player2.HitBox.X + player2.HitBox.Width, player2.HitBox.Y), new Point(1, player2.HitBox.Height));
-                                p2topY = new Rectangle(new Point(player2.HitBox.X, player2.HitBox.Y - 1), new Point(player2.HitBox.Width, 1));
-                                p2bottomY = new Rectangle(new Point(player2.HitBox.X, player2.HitBox.Y + player2.HitBox.Height), new Point(player2.HitBox.Width, 1));
-
-                                // X Check
-                                if (p1leftX.Intersects(wallRect) || p1rightX.Intersects(wallRect))
-                                {
-                                    Rectangle temp = player1.HitBox;
-                                    temp.X = prevPos1.X;
-                                    player1.HitBox = temp;
-                                }
-                                if (p2leftX.Intersects(wallRect) || p2rightX.Intersects(wallRect))
-                                {
-                                    Rectangle temp = player2.HitBox;
-                                    temp.X = prevPos2.X;
-                                    player2.HitBox = temp;
-                                }
-
-                                // Y check
-                                if (p1topY.Intersects(wallRect) || p1bottomY.Intersects(wallRect))
-                                {
-                                    Rectangle temp = player1.HitBox;
-                                    temp.Y = prevPos1.Y;
-                                    player1.HitBox = temp;
-                                }
-                                if (p2topY.Intersects(wallRect) || p2bottomY.Intersects(wallRect))
-                                {
-                                    Rectangle temp = player2.HitBox;
-                                    temp.Y = prevPos2.Y;
-                                    player2.HitBox = temp;
-                                }
-                                #endregion
-
-                                #region Diamond Projectile Collision
-                                if (player1 is Diamond)
-                                {
-                                    for (int k = 0; k < player1.ProjList.Count; k++)
-                                    {
-                                        
-                                        if (player1 is Diamond && player1.ProjList[k].HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
-                                        {
-                                            player1.ProjList.RemoveAt(k);
-                                            k--;
-                                        }
-                                        
-                                    }
-                                }
-                                if(player2 is Diamond)
-                                {
-                                    for(int o = 0; o < player2.ProjList.Count; o++)
-                                    {
-                                        if (player2 is Diamond && player2.ProjList[o].HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
-                                        {
-                                            player2.ProjList.RemoveAt(o);
-                                            o--;
-                                        }
-                                    }
-                                }
-                                #endregion
-                            }
-                        }
-                    }
+                    DrawWall(level2);
+                    
                 }
+
                 #endregion
 
                 // Draw Players
@@ -1478,6 +1268,85 @@ namespace Geometry_Bash
             
             spriteBatch.End();
             base.Draw(gameTime);
+        }
+        //helper method to draw levels
+        public void DrawWall(char[,] levelMatrix)
+        {
+            for (int i = 0; i < levelMatrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < levelMatrix.GetLength(1); j++)
+                {
+                    if (levelMatrix[i, j] == 'x')
+                    {
+                        spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
+                        Rectangle wallRect = new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40));
+                        p1leftX = new Rectangle(new Point(player1.HitBox.X - 1, player1.HitBox.Y), new Point(1, player1.HitBox.Height));
+                        p1rightX = new Rectangle(new Point(player1.HitBox.X + player1.HitBox.Width, player1.HitBox.Y), new Point(1, player1.HitBox.Height));
+                        p1topY = new Rectangle(new Point(player1.HitBox.X, player1.HitBox.Y - 1), new Point(player1.HitBox.Width, 1));
+                        p1bottomY = new Rectangle(new Point(player1.HitBox.X, player1.HitBox.Y + player1.HitBox.Height), new Point(player1.HitBox.Width, 1));
+                        p2leftX = new Rectangle(new Point(player2.HitBox.X - 1, player2.HitBox.Y), new Point(1, player2.HitBox.Height));
+                        p2rightX = new Rectangle(new Point(player2.HitBox.X + player2.HitBox.Width, player2.HitBox.Y), new Point(1, player2.HitBox.Height));
+                        p2topY = new Rectangle(new Point(player2.HitBox.X, player2.HitBox.Y - 1), new Point(player2.HitBox.Width, 1));
+                        p2bottomY = new Rectangle(new Point(player2.HitBox.X, player2.HitBox.Y + player2.HitBox.Height), new Point(player2.HitBox.Width, 1));
+
+                        // X Check
+                        if (p1leftX.Intersects(wallRect) || p1rightX.Intersects(wallRect))
+                        {
+                            Rectangle temp = player1.HitBox;
+                            temp.X = prevPos1.X;
+                            player1.HitBox = temp;
+                        }
+                        if (p2leftX.Intersects(wallRect) || p2rightX.Intersects(wallRect))
+                        {
+                            Rectangle temp = player2.HitBox;
+                            temp.X = prevPos2.X;
+                            player2.HitBox = temp;
+                        }
+
+                        // Y check
+                        if (p1topY.Intersects(wallRect) || p1bottomY.Intersects(wallRect))
+                        {
+                            Rectangle temp = player1.HitBox;
+                            temp.Y = prevPos1.Y;
+                            player1.HitBox = temp;
+                        }
+                        if (p2topY.Intersects(wallRect) || p2bottomY.Intersects(wallRect))
+                        {
+                            Rectangle temp = player2.HitBox;
+                            temp.Y = prevPos2.Y;
+                            player2.HitBox = temp;
+                        }
+
+
+                        #region Diamond Projectile Collision
+                        if (player1 is Diamond)
+                        {
+                            for (int k = 0; k < player1.ProjList.Count; k++)
+                            {
+
+                                if (player1 is Diamond && player1.ProjList[k].HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
+                                {
+                                    player1.ProjList.RemoveAt(k);
+                                    k--;
+                                }
+
+                            }
+                        }
+                        if (player2 is Diamond)
+                        {
+                            for (int o = 0; o < player2.ProjList.Count; o++)
+                            {
+                                if (player2 is Diamond && player2.ProjList[o].HitBox.Intersects(new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40))))
+                                {
+                                    player2.ProjList.RemoveAt(o);
+                                    o--;
+                                }
+                            }
+                        }
+                        #endregion
+                    }
+                }
+            }
         }
 
         /// <summary>
