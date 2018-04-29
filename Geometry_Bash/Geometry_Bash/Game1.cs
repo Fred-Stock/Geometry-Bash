@@ -811,7 +811,7 @@ namespace Geometry_Bash
 
                 //collectibles
                 BoostType temp;
-                if(timer >= rng.Next(300, 600))
+                if(timer >= rng.Next(300, 600) && collectables.Count == 0)
                 {
                        collectables.Add(new Collectable(BoostType.health, redCircleAttackTexture,
                            new Rectangle(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2, 20, 20)));
