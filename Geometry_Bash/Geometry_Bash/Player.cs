@@ -90,11 +90,13 @@ namespace Geometry_Bash
         public int MoveSpeed
         {
             get { return moveSpeed; }
+            set { moveSpeed = value; }
         }
 
         public int Damage
         {
             get { return damage; }
+            set { damage = value; }
         }
 
 

@@ -21,6 +21,12 @@ namespace Geometry_Bash
             set { texture = value; }
         }
 
+        public Rectangle SAP
+        {
+            get { return sizeAndPosition; }
+            set { sizeAndPosition = value; }
+        }
+
 
         public GameObject(Texture2D texture, Rectangle sAP)
         {

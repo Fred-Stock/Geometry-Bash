@@ -45,9 +45,12 @@ namespace Geometry_Bash
 
         //rectangle list to hold where walls are
         List<Rectangle> wallsList;
-        
 
+        //collectible list to hold what collectibles are on the stage
+        List<Collectable> collectables;
 
+        //timer int
+        int timer;
         #region Textures
         //Character Textures
         Texture2D redSquareTexture;
@@ -153,7 +156,8 @@ namespace Geometry_Bash
         #endregion
 
 
-
+        //random variable to control random events\
+        Random rng;
 
         //player objects
         Player player1;
@@ -217,6 +221,9 @@ namespace Geometry_Bash
             graphics.PreferredBackBufferHeight = 720;   // set this value to the desired height of your window
             graphics.ApplyChanges();
             gameTime = new GameTime();
+            timer = 0;
+            rng = new Random();
+            collectables = new List<Collectable>();
         }
 
         /// <summary>
@@ -802,8 +809,28 @@ namespace Geometry_Bash
                 player2.Step(player2, player1, kbState, gameTime.ElapsedGameTime.TotalSeconds);
                 #endregion
 
-
-
+                //collectibles
+                BoostType temp;
+                if(timer >= rng.Next(300, 600))
+                {
+                       collectables.Add(new Collectable(BoostType.health, redCircleAttackTexture,
+                           new Rectangle(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2, 20, 20)));
+                    timer = 0;
+                }
+                for (int i = 0; i < collectables.Count; i++)
+                {
+                    if (collectables[i].PickedUp(player1))
+                    {
+                        collectables.RemoveAt(i);
+                        i--;
+                    }
+                    else if (collectables[i].PickedUp(player2))
+                    { 
+                        collectables.RemoveAt(i);
+                        i--;
+                    }
+                }
+                timer++;
                 #region Diamond Projectiles
 
                 
@@ -1047,6 +1074,12 @@ namespace Geometry_Bash
                 }
 
                 #endregion
+
+                //draw collectibles
+                for(int i = 0; i < collectables.Count; i++)
+                {
+                    spriteBatch.Draw(collectables[i].Texture, collectables[i].SAP, collectables[i].Color);
+                }
 
                 // Draw Players
                 float transparency1 = (float)player1.Health / 10;

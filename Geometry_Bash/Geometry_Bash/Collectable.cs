@@ -16,13 +16,19 @@ namespace Geometry_Bash
         speed
     }
 
-    class Collectable
+    class Collectable : GameObject
     {
         BoostType type;
         Color color;
+        bool pickedUp;
+
+        public Color Color
+        {
+            get { return color; }
+        }
 
 
-        public Collectable(BoostType type)
+        public Collectable(BoostType type, Texture2D texture, Rectangle sAP) : base(texture, sAP)
         {
             switch (type)
             {
@@ -40,6 +46,29 @@ namespace Geometry_Bash
                     break;
 
             }
+            pickedUp = false;
+        }
+
+        public bool PickedUp(Player player)
+        {
+            if (player.HitBox.Intersects(sizeAndPosition))
+            {
+                switch (type)
+                {
+                    case BoostType.attack:
+                        player.Damage += 1;
+                        break;
+                    case BoostType.health:
+                        player.Health += 3;
+                        break;
+                    case BoostType.speed:
+                        player.MoveSpeed += 1;
+                        break;
+
+                }
+                pickedUp = true;
+            }
+            return pickedUp;
         }
 
 
