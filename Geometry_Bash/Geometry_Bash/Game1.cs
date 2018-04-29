@@ -1019,28 +1019,9 @@ namespace Geometry_Bash
                 { spriteBatch.Draw(back, backButton, Color.White); }
 
                 #region Level Drawing
-                // level 1
-                for (int i = 0; i < level1.GetLength(0); i++)
-                {
-                    for (int j = 0; j < level1.GetLength(1); j++)
-                    {
-                        if (level1[i, j] == 'x')
-                        {
-                            spriteBatch.Draw(wall, new Rectangle(new Point(162 + 10 * i, 266 + 10 * j), new Point(10, 10)), Color.Black);
-                        }
-                    }
-                }
-                // level 2
-                for (int i = 0; i < level2.GetLength(0); i++)
-                {
-                    for (int j = 0; j < level2.GetLength(1); j++)
-                    {
-                        if (level2[i, j] == 'x')
-                        {
-                            spriteBatch.Draw(wall, new Rectangle(new Point(800 + 10 * i, 266 + 10 * j), new Point(10, 10)), Color.Black);
-                        }
-                    }
-                }
+                LevelDrawWall(level1, 162, 266);
+                LevelDrawWall(level2, 800, 266);
+                
                 #endregion
             }
 
@@ -1056,12 +1037,12 @@ namespace Geometry_Bash
                 // walls if level 1
                 if (levelChoice == 1)
                 {
-                    DrawWall(level1);
+                    GameDrawWall(level1);
                 }
                 // walls if level 2
                 else if (levelChoice == 2)
                 {
-                    DrawWall(level2);
+                    GameDrawWall(level2);
                     
                 }
 
@@ -1181,34 +1162,17 @@ namespace Geometry_Bash
                 #region Wall Drawing
                 // Draws the right level choice
                 // walls if level 1
+                
                 if (levelChoice == 1)
                 {
-                    for (int i = 0; i < level1.GetLength(0); i++)
-                    {
-                        for (int j = 0; j < level1.GetLength(1); j++)
-                        {
-                            if (level1[i, j] == 'x')
-                            {
-                                spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
-                            }
-                            
-                        }
-                    }
+                    PauseDrawWall(level1);
+                    
                 }
                 // walls if level 2
                 else if (levelChoice == 2)
                 {
-                    for (int i = 0; i < level2.GetLength(0); i++)
-                    {
-                        for (int j = 0; j < level2.GetLength(1); j++)
-                        {
-                            if (level2[i, j] == 'x')
-                            {
-                                spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.White);
-                            }
-
-                        }
-                    }
+                    PauseDrawWall(level2);
+                   
                 }
                 #endregion
 
@@ -1269,8 +1233,43 @@ namespace Geometry_Bash
             spriteBatch.End();
             base.Draw(gameTime);
         }
-        //helper method to draw levels
-        public void DrawWall(char[,] levelMatrix)
+
+        /// <summary>
+        /// method to draw levels during level select
+        /// </summary>
+        /// <param name="levelMatrix">level to draw</param>
+        /// <param name="offsetX">offset in the x direction</param>
+        /// <param name="offsetY">offset in the y direction</param>
+        public void LevelDrawWall(char[,] levelMatrix, int offsetX, int offsetY)
+        {
+            for (int i = 0; i < levelMatrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < levelMatrix.GetLength(1); j++)
+                {
+                    if (levelMatrix[i, j] == 'x')
+                    {
+                        spriteBatch.Draw(wall, new Rectangle(new Point(offsetX + 10 * i, offsetY + 10 * j), new Point(10, 10)), Color.Black);
+                    }
+                }
+            }
+        }
+
+        public void PauseDrawWall(Char[,] levelMatrix)
+        {
+            for (int i = 0; i < levelMatrix.GetLength(0); i++)
+            {
+                for (int j = 0; j < levelMatrix.GetLength(1); j++)
+                {
+                    if (levelMatrix[i, j] == 'x')
+                    {
+                        spriteBatch.Draw(wall, new Rectangle(new Point(40 * i, 40 * j), new Point(40, 40)), Color.Black);
+                    }
+                }
+            }
+        }
+
+        //helper method to draw levels and do wall collision during game
+        public void GameDrawWall(char[,] levelMatrix)
         {
             for (int i = 0; i < levelMatrix.GetLength(0); i++)
             {
