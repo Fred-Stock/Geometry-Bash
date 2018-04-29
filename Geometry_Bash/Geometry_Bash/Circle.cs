@@ -22,10 +22,10 @@ namespace Geometry_Bash
             // stats loads in H/D/S
             health = stats[0];
             damage = stats[1];
-            moveSpeed = stats[2]*2;  //multiply by a scalar to change regular movement speed
+            moveSpeed = stats[2]; 
             hit = false;
             this.player = player;
-            attackSpd = stats[2];  //multiply by a scalar to this value to change attack speed.
+            attackSpd = (int)stats[2]/2; 
             attacking = false;
             //check if it is player one or two and then set the correct keybindings
             if (player == 1)
@@ -110,7 +110,7 @@ namespace Geometry_Bash
                     if (!prevGpState.IsButtonDown(attack))
                     {
                         hit = false;
-
+                        attacking = true;
 
                     }
 
