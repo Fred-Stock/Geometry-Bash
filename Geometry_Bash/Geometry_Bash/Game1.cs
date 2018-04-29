@@ -349,7 +349,7 @@ namespace Geometry_Bash
                 //writer.Close();
                 
             }
-            
+            writer.Close();
 
             base.Initialize();
         }
