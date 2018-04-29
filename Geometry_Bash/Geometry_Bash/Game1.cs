@@ -205,6 +205,9 @@ namespace Geometry_Bash
         private Song gameMusic;
         private Song endMusic;
 
+        //UI
+        private Texture2D healthBar;
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -414,6 +417,8 @@ namespace Geometry_Bash
             gameMusic = Content.Load<Song>("Sounds//gameTheme");
             endMusic = Content.Load<Song>("Sounds//endScreen");
 
+            //UI
+            healthBar = Content.Load<Texture2D>("whiteRect");
         }
 
         /// <summary>
@@ -778,23 +783,26 @@ namespace Geometry_Bash
                     }
                 }
 
+                #region Player Methods
+                // player movement
+                player1.Move(kbState);
+                player2.Move(kbState);
                 
-
-                // all other code for this state goes here
-
-                player1.Move(kbState, gpState);
-                player2.Move(kbState, gpState);
-
+                // collision with edge of screen
                 player1.OutsideCollision(player1);
                 player2.OutsideCollision(player2);
 
-                player1.Attack(player1, player2, kbState, gpState, 1, gameTime.ElapsedGameTime.TotalSeconds);
-                player2.Attack(player2, player1, kbState, gpState, 2, gameTime.ElapsedGameTime.TotalSeconds);
+                // attacking
+                player1.Attack(player1, player2, kbState, gameTime.ElapsedGameTime.TotalSeconds);
+                player2.Attack(player2, player1, kbState, gameTime.ElapsedGameTime.TotalSeconds);
 
+                // nothing yet
                 player1.Step(player1, player2, kbState, gameTime.ElapsedGameTime.TotalSeconds);
                 player2.Step(player2, player1, kbState, gameTime.ElapsedGameTime.TotalSeconds);
+                #endregion
 
-                if(player1 is Diamond)
+                #region Diamond Projectiles
+                if (player1 is Diamond)
                 {
                     if (player1.ProjList.Count != 0)
                     {
@@ -890,7 +898,7 @@ namespace Geometry_Bash
                         }
                     }
                 }
-
+                #endregion
 
                 // makes sure mouse is invisible during game
                 this.IsMouseVisible = false;
@@ -910,9 +918,6 @@ namespace Geometry_Bash
                 {
                     gamestate = GameState.EndGame;
                 }
-
-               
-
             }
 
             // Paused
@@ -950,8 +955,6 @@ namespace Geometry_Bash
 
             base.Update(gameTime);
         }
-
-        
 
 
         /// <summary>
@@ -1067,6 +1070,7 @@ namespace Geometry_Bash
                 if (mouseLocation.Intersects(backButton))
                 { spriteBatch.Draw(back, backButton, Color.White); }
 
+                #region Level Drawing
                 // level 1
                 for (int i = 0; i < level1.GetLength(0); i++)
                 {
@@ -1089,6 +1093,7 @@ namespace Geometry_Bash
                         }
                     }
                 }
+                #endregion
             }
 
             // Actual Gameplay
@@ -1098,6 +1103,7 @@ namespace Geometry_Bash
                 // background
                 spriteBatch.Draw(gameScreen, new Rectangle(new Point(0, 0), new Point(windowWidth, windowHeight)), Color.White);
 
+                #region Wall Drawing
                 // Draws the right level choice
                 // walls if level 1
                 if (levelChoice == 1)
@@ -1268,8 +1274,7 @@ namespace Geometry_Bash
                         }
                     }
                 }
-
-
+                #endregion
 
                 // Draw Players
                 float transparency1 = (float)player1.Health / 10;
@@ -1282,8 +1287,8 @@ namespace Geometry_Bash
 
                 //commented out because it messes up player1 hitbox so it does line up with the sprite 
                 //spriteBatch.Draw(player1.Texture, player1.HitBox, player1SourceRectangle, Color.White * transparency1, player1.Rotation, player1Origin, SpriteEffects.None, 1);
-                spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White * transparency1);
-                spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
+                spriteBatch.Draw(player1.Texture, player1.HitBox, Color.White);
+                spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White);
 
 
                 // float transparency1 = (float)player1.Health / 10;
@@ -1367,13 +1372,22 @@ namespace Geometry_Bash
 
                 prevPos1 = player1.HitBox;
                 prevPos2 = player2.HitBox;
+                // Health Bar
+                
+
+                
+
+                Color healthBarColor = new Color(0, 1.0f, 0);
+                spriteBatch.Draw(healthBar, new Rectangle(player1.HitBox.X, player1.HitBox.Y - 5, (int)player1.Health * 5, 10),Color.Green);
+                spriteBatch.Draw(healthBar,new Rectangle(player2.HitBox.X,player2.HitBox.Y-5, (int)player2.Health * 5,10),Color.Green);
+
+                // PAUSE BUTTON
             }
 
             // Paused
             if (gamestate == GameState.Pause)
             {
-                
-
+                #region Wall Drawing
                 // Draws the right level choice
                 // walls if level 1
                 if (levelChoice == 1)
@@ -1405,6 +1419,7 @@ namespace Geometry_Bash
                         }
                     }
                 }
+                #endregion
 
                 // Draw Players
                 float transparency1 = (float)player1.Health / 10;
@@ -1489,8 +1504,5 @@ namespace Geometry_Bash
             else
             { return false; }
         }
-
-       // testing webhook
-        
     }
 }

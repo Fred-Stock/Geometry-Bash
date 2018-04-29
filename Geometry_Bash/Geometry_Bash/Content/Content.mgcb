@@ -482,6 +482,18 @@
 /processorParam:TextureFormat=Color
 /build:CharSprites/circle_ult_rot.png
 
+#begin whiteRect.jpg
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:whiteRect.jpg
+
 #begin CharSprites/circle_blue_ult_15.png
 /importer:TextureImporter
 /processor:TextureProcessor
