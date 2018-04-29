@@ -14,10 +14,11 @@ namespace Geometry_Bash
     {
 
 
-        //add a keyboard state refrence so key presses can be monitored
+        //add a keyboard and gamePad state refrence so key presses can be monitored
         protected KeyboardState prevKbState;
 
-        protected GamePadState gpState;
+        
+        protected GamePadState prevGpState;
 
         protected Keys keyUp;      //key bindings
         protected Keys keyDown;
@@ -29,6 +30,11 @@ namespace Geometry_Bash
 
 
         protected Buttons up;
+        protected Buttons down;
+        protected Buttons left;
+        protected Buttons right;
+
+        protected Buttons attack;
 
         protected int moveSpeed;
         protected bool moveLocked;
@@ -45,9 +51,9 @@ namespace Geometry_Bash
         protected int windowHeight;
         protected float rotation;
 
-        public GamePadState GpState
+        public GamePadState PrevGpState
         {
-            get { return gpState; }
+            get { return prevGpState; }
         }
 
         public double Health
@@ -102,7 +108,7 @@ namespace Geometry_Bash
 
         
 
-        public void Move(KeyboardState keys)
+        public virtual void Move(KeyboardState keys, GamePadState gpState)
         {
             if (!moveLocked)
             {
@@ -164,7 +170,7 @@ namespace Geometry_Bash
         }
 
 
-        public virtual void Attack(Player player1, Player player2, KeyboardState kbState, double currentTime)
+        public virtual void Attack(Player player1, Player player2, KeyboardState kbState, GamePadState gpState, int player, double currentTime)
         {
            
             if (kbState.IsKeyDown(player1.keyAttack1) && prevKbState.IsKeyUp(player1.keyAttack1))

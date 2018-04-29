@@ -177,11 +177,12 @@ namespace Geometry_Bash
         Character p2Char;
         GameState gamestate = GameState.Menu;
 
-        // keyboard and mouse states for "one click"
+        // keyboard, gamepad, and mouse states for "one click"
         MouseState ms;
         MouseState previousMs;
         KeyboardState kbState;
         KeyboardState previousKbState;
+        GamePadState gpState;
 
         // used for player select tiles
         int redPlayerTileHighlight = 0;
@@ -780,14 +781,15 @@ namespace Geometry_Bash
                 
 
                 // all other code for this state goes here
-                player1.Move(kbState);
-                player2.Move(kbState);
+
+                player1.Move(kbState, gpState);
+                player2.Move(kbState, gpState);
 
                 player1.OutsideCollision(player1);
                 player2.OutsideCollision(player2);
 
-                player1.Attack(player1, player2, kbState, gameTime.ElapsedGameTime.TotalSeconds);
-                player2.Attack(player2, player1, kbState, gameTime.ElapsedGameTime.TotalSeconds);
+                player1.Attack(player1, player2, kbState, gpState, 1, gameTime.ElapsedGameTime.TotalSeconds);
+                player2.Attack(player2, player1, kbState, gpState, 2, gameTime.ElapsedGameTime.TotalSeconds);
 
                 player1.Step(player1, player2, kbState, gameTime.ElapsedGameTime.TotalSeconds);
                 player2.Step(player2, player1, kbState, gameTime.ElapsedGameTime.TotalSeconds);
@@ -1290,7 +1292,9 @@ namespace Geometry_Bash
                 // spriteBatch.Draw(player2.Texture, player2.HitBox, Color.White * transparency2);
 
                 #region swap sprites for circle attack
-                if (player1 is Circle && kbState.IsKeyDown(Keys.Q))
+                //set gamepade to first players controller
+                gpState = GamePad.GetState(PlayerIndex.One);
+                if (player1 is Circle && (kbState.IsKeyDown(Keys.Q) || gpState.IsButtonDown(Buttons.X)))
                 {
                     if(count1 % 12 == 0)
                     {
@@ -1306,11 +1310,13 @@ namespace Geometry_Bash
                     }
                     count1++;
                 }
-                else if (player1 is Circle && kbState.IsKeyUp(Keys.Q))
+                else if (player1 is Circle && (kbState.IsKeyUp(Keys.Q) || gpState.IsButtonUp(Buttons.X)))
                 {
                     player1.Texture = redCircleTexture;
                 }
-                if (player2 is Circle && kbState.IsKeyDown(Keys.U))
+                //set gpstate to the second players controller
+                gpState = GamePad.GetState(PlayerIndex.Two);
+                if (player2 is Circle && (kbState.IsKeyDown(Keys.U) || gpState.IsButtonDown(Buttons.X)))
                 {
                     if (count2 % 12 == 0)
                     {
@@ -1326,7 +1332,7 @@ namespace Geometry_Bash
                     }
                     count2++;
                 }
-                else if (player2 is Circle && kbState.IsKeyUp(Keys.U))
+                else if (player2 is Circle && (kbState.IsKeyUp(Keys.U) || gpState.IsButtonUp(Buttons.X)))
                 {
                     player2.Texture = blueCircleTexture;
                 }
