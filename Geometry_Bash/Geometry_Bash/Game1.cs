@@ -71,6 +71,7 @@ namespace Geometry_Bash
         Texture2D blueDiamondParticles;
         Texture2D redDiamondParticles_45;
         Texture2D blueDiamondParticles_45;
+        Texture2D collectible;
         
         // button textures
         Texture2D yellowButton;
@@ -388,6 +389,7 @@ namespace Geometry_Bash
             blueDiamondParticles = Content.Load<Texture2D>("CharSprites//diamond_blue_shards");
             redDiamondParticles_45 = Content.Load<Texture2D>("CharSprites//diamond_red_shard_45");
             blueDiamondParticles_45 = Content.Load<Texture2D>("CharSprites//diamond_blue_shard_45");
+            collectible = Content.Load<Texture2D>("CharSprites//collectable");
 
             // load button textures
             yellowButton = Content.Load<Texture2D>("Button Sprites//button_yellow");
@@ -814,10 +816,9 @@ namespace Geometry_Bash
                 #endregion
 
                 //collectibles
-                BoostType temp;
                 if(timer >= rng.Next(300, 600) && collectables.Count == 0)
                 {
-                       collectables.Add(new Collectable(BoostType.health, redCircleAttackTexture,
+                       collectables.Add(new Collectable(BoostType.health, collectable,
                            new Rectangle(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2, 20, 20)));
                     timer = 0;
                 }
