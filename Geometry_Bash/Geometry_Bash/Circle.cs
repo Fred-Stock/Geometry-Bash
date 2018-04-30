@@ -78,7 +78,6 @@ namespace Geometry_Bash
                 {
                     hit = false;
                     attacking = true;
-
                 }
 
                 if (player1.HitBox.Intersects(player2.HitBox) && !hit)
@@ -107,10 +106,10 @@ namespace Geometry_Bash
                 }
                 if (gpState.IsButtonDown(attack))
                 {
+                    attacking = true;
                     if (!prevGpState.IsButtonDown(attack))
                     {
                         hit = false;
-                        attacking = true;
 
                     }
 
@@ -124,6 +123,7 @@ namespace Geometry_Bash
                         hit = false;
                     }
                 }
+                else { attacking = false; }
             }
             prevKbState = kbState;
             prevGpState = gpState;

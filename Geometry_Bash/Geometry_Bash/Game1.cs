@@ -1251,19 +1251,19 @@ namespace Geometry_Bash
             #region Debug Drawing
 
             //Drawing mouse coordinates
-            spriteBatch.DrawString(text, Mouse.GetState().X + "," + Mouse.GetState().Y, new Vector2(5,5), Color.Wheat);
-            
-            //drawing fps
-            var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            _frameCounter.Update(deltaTime);
-            var fps = string.Format("FPS: {0}", _frameCounter.AverageFramesPerSecond);
-            spriteBatch.DrawString(text, fps, new Vector2(5, 20), Color.Wheat);
-           
-            //drawing movelocked
-            if (gamestate == GameState.Game) { 
-            spriteBatch.DrawString(text, "Player 1 Movelocked: "  + player1.MoveLocked, new Vector2(5, 30), Color.Wheat);
-            spriteBatch.DrawString(text, "Player 2 Movelocked: "  + player2.MoveLocked, new Vector2(5, 40), Color.Wheat);
-            }
+            //spriteBatch.DrawString(text, Mouse.GetState().X + "," + Mouse.GetState().Y, new Vector2(5,5), Color.Wheat);
+            //
+            ////drawing fps
+            //var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            //_frameCounter.Update(deltaTime);
+            //var fps = string.Format("FPS: {0}", _frameCounter.AverageFramesPerSecond);
+            //spriteBatch.DrawString(text, fps, new Vector2(5, 20), Color.Wheat);
+            //
+            ////drawing movelocked
+            //if (gamestate == GameState.Game) { 
+            //spriteBatch.DrawString(text, "Player 1 Movelocked: "  + player1.MoveLocked, new Vector2(5, 30), Color.Wheat);
+            //spriteBatch.DrawString(text, "Player 2 Movelocked: "  + player2.MoveLocked, new Vector2(5, 40), Color.Wheat);
+            //}
 
 
             #endregion
