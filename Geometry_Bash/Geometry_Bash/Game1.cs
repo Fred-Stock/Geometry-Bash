@@ -102,6 +102,7 @@ namespace Geometry_Bash
         Texture2D pauseMenu;
 
         Texture2D wall;
+        Texture2D collectable;
         #endregion
 
         #region Rectangles
@@ -419,6 +420,9 @@ namespace Geometry_Bash
 
             // walls
             wall = Content.Load<Texture2D>("TopBarrier");
+
+            //collectable
+            collectable = Content.Load<Texture2D>("CharSprites//collectable");
 
             //music and sounds
             menuMusic = Content.Load<Song>("Sounds//menuTheme");
