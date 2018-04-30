@@ -55,14 +55,18 @@ namespace Geometry_Bash
             {
                 switch (type)
                 {
-                    case BoostType.attack:
-                        player.Damage += 1;
-                        break;
                     case BoostType.health:
-                        player.Health += 3;
-                        break;
-                    case BoostType.speed:
-                        player.MoveSpeed += 1;
+                        if(player.Health < 10)
+                        {
+                           if(player.Health == 9 || player.Health == 8)
+                            {
+                                player.Health = 10;
+                            }
+                            else
+                            {
+                                player.Health += 3;
+                            }
+                        }
                         break;
 
                 }
